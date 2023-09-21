@@ -1,1 +1,1 @@
-Ceci est le readme de notre projet intitulé : TEXTEDITOR
+Ceci est le readme de notre projet intitulé : TEXTEDITOR V2
