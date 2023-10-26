@@ -11,7 +11,8 @@ class EngineTest {
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
-        engine = new EngineImpl();
+        Invoker invoker = new Invoker();
+        engine = new EngineImpl(invoker);
     }
 
     @Test

@@ -61,4 +61,15 @@ public interface Engine {
      * Removes the contents of the selection in the buffer
      */
     void delete();
+
+    /**
+     * Updates the clipboard content
+     */
+    void setClipboardContents(String contents);
+
+    /**
+     * Returns the contents of the buffer
+     */
+    StringBuilder getBuffer();
+
 }

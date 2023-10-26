@@ -3,7 +3,8 @@ package com.fane;
 public class MainTest {
     public static void main(String[] args) {
         // Crée une instance de EngineImpl
-        Engine engine = new EngineImpl();
+        Invoker invoker = new Invoker();
+        Engine engine = new EngineImpl(invoker);
 
         // Insère du texte dans le buffer
         engine.insert("Hello, World!");
@@ -11,7 +12,7 @@ public class MainTest {
 
         // Sélectionne une partie du texte
         Selection selection = engine.getSelection();
-        selection.setBeginIndex(0);
+        selection.setBeginIndex(1);
         selection.setEndIndex(5);
 
         // Copie le texte sélectionné dans le clipboard
@@ -37,7 +38,21 @@ public class MainTest {
          */
 
         // Crée une 2è instance de EngineImpl
-        Engine engine2 = new EngineImpl();
+        Invoker invoker2 = new Invoker();
+        Engine engine2 = new EngineImpl(invoker2);
+
+        // Créez une instance de CutCommand et ajoutez-la à l'invocateur
+        String textToInsert = "";
+        CutCommand cutCommand = new CutCommand(engine);
+        CopyCommand copyCommand = new CopyCommand(engine);
+        PasteCommand pasteCommand = new PasteCommand(engine);
+        DeleteCommand deleteCommand = new DeleteCommand(engine);
+        InsertCommand insertCommand = new InsertCommand(engine, textToInsert);
+        invoker.addCommand("cut", cutCommand);
+        invoker.addCommand("copy", copyCommand);
+        invoker.addCommand("paste", pasteCommand);
+        invoker.addCommand("delete", deleteCommand);
+        invoker.addCommand("insert", insertCommand);
 
         // Insère du texte dans le buffer
         engine2.insert("Hello, World!");
@@ -46,7 +61,7 @@ public class MainTest {
         // Sélectionne une partie du texte
         Selection selection2 = engine2.getSelection();
         selection2.setBeginIndex(6);
-        selection2.setEndIndex(3);
+        selection2.setEndIndex(9);
 
         // Copie le texte sélectionné dans le clipboard
         engine2.copySelectedText();

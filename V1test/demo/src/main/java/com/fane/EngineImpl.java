@@ -5,11 +5,13 @@ public class EngineImpl implements Engine {
     private Selection selection;
     private String clipboard;
     private StringBuilder buffer = new StringBuilder();
+    private Invoker invoker;
 
     // Constructors
-    public EngineImpl() {
+    public EngineImpl(Invoker invoker) {
         this.selection = new SelectionImpl(buffer);
         this.clipboard = "";
+        this.invoker = invoker;
     }
 
     /**
@@ -42,6 +44,18 @@ public class EngineImpl implements Engine {
         return clipboard;
     }
 
+    // Implémentez la méthode setClipboardContents
+    @Override
+    public void setClipboardContents(String contents) {
+        clipboard = contents;
+    }
+
+    // Implémentez la méthode getBuffer
+    @Override
+    public StringBuilder getBuffer() {
+        return buffer;
+    }
+
     /**
      * Removes the text within the interval
      * specified by the selection control object,
@@ -49,12 +63,8 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void cutSelectedText() {
-        int beginIndex = selection.getBeginIndex();
-        int endIndex = selection.getEndIndex();
-        // valid
-        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard
-        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer
-        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
+        // Utilisez l'invoker pour exécuter la commande CutCommand
+        invoker.executeCommand(new CutCommand(this));
     }
 
     /**
@@ -64,10 +74,8 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void copySelectedText() {
-        int beginIndex = selection.getBeginIndex();
-        int endIndex = selection.getEndIndex();
-        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard
-
+        // Utilisez l'invocateur pour exécuter la commande CopyCommand
+        invoker.executeCommand(new CopyCommand(this));
     }
 
     /**
@@ -76,13 +84,8 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void pasteClipboard() {
-        int beginIndex = selection.getBeginIndex();
-        int endIndex = selection.getEndIndex();
-
-        buffer.delete(beginIndex, endIndex); // Remove the selected text from buffer
-        buffer.insert(beginIndex, clipboard); // Insert clipboard contents
-        selection.setEndIndex(beginIndex + clipboard.length()); // Move selection to the end of the pasted text
-
+        // Utilisez l'invocateur pour exécuter la commande CopyCommand
+        invoker.executeCommand(new PasteCommand(this));
     }
 
     /**
@@ -92,10 +95,8 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void insert(String s) {
-        int beginIndex = selection.getBeginIndex();
-        buffer.delete(beginIndex, selection.getEndIndex()); // Remove the selected text from buffer
-        buffer.insert(beginIndex, s); // Insert string at the selection
-        selection.setEndIndex(beginIndex + s.length()); // Move selection to the end of the inserted text
+        // Utilisez l'invocateur pour exécuter la commande InsertCommand
+        invoker.executeCommand(new InsertCommand(this, s));
     }
 
     /**
@@ -103,10 +104,7 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void delete() {
-        int beginIndex = selection.getBeginIndex();
-        int endIndex = selection.getEndIndex();
-        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer
-        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
-
+        // Utilisez l'invocateur pour exécuter la commande DeleteCommand
+        invoker.executeCommand(new DeleteCommand(this));
     }
 }
