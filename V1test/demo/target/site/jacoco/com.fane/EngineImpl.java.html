@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EngineImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane</a> &gt; <span class="el_source">EngineImpl.java</span></div><h1>EngineImpl.java</h1><pre class="source lang-java linenums">package com.fane;
+
+public class EngineImpl implements Engine {
+
+    private Selection selection;
+    private String clipboard;
+<span class="fc" id="L7">    private StringBuilder buffer = new StringBuilder();</span>
+
+    // Constructors
+<span class="fc" id="L10">    public EngineImpl() {</span>
+<span class="fc" id="L11">        this.selection = new SelectionImpl(buffer);</span>
+<span class="fc" id="L12">        this.clipboard = &quot;&quot;;</span>
+<span class="fc" id="L13">    }</span>
+
+    /**
+     * Provides access to the selection control object
+     *
+     * @return the selection object
+     */
+    @Override
+    public Selection getSelection() {
+<span class="fc" id="L22">        return selection;</span>
+    }
+
+    /**
+     * Provides the whole contents of the buffer, as a string
+     *
+     * @return a copy of the buffer's contents
+     */
+    @Override
+    public String getBufferContents() {
+<span class="fc" id="L32">        return buffer.toString();</span>
+    }
+
+    /**
+     * Provides the clipboard contents
+     *
+     * @return a copy of the clipboard's contents
+     */
+    @Override
+    public String getClipboardContents() {
+<span class="fc" id="L42">        return clipboard;</span>
+    }
+
+    /**
+     * Removes the text within the interval
+     * specified by the selection control object,
+     * from the buffer.
+     */
+    @Override
+    public void cutSelectedText() {
+<span class="fc" id="L52">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L53">        int endIndex = selection.getEndIndex();</span>
+        // valid
+<span class="fc" id="L55">        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard</span>
+<span class="fc" id="L56">        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
+<span class="fc" id="L57">        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Copies the text within the interval
+     * specified by the selection control object
+     * into the clipboard.
+     */
+    @Override
+    public void copySelectedText() {
+<span class="fc" id="L67">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L68">        int endIndex = selection.getEndIndex();</span>
+<span class="fc" id="L69">        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard</span>
+
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * Replaces the text within the interval specified by the selection object with
+     * the contents of the clipboard.
+     */
+    @Override
+    public void pasteClipboard() {
+<span class="fc" id="L79">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L80">        int endIndex = selection.getEndIndex();</span>
+
+<span class="fc" id="L82">        buffer.delete(beginIndex, endIndex); // Remove the selected text from buffer</span>
+<span class="fc" id="L83">        buffer.insert(beginIndex, clipboard); // Insert clipboard contents</span>
+<span class="fc" id="L84">        selection.setEndIndex(beginIndex + clipboard.length()); // Move selection to the end of the pasted text</span>
+
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * Inserts a string in the buffer, which replaces the contents of the selection
+     *
+     * @param s the text to insert
+     */
+    @Override
+    public void insert(String s) {
+<span class="fc" id="L95">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L96">        buffer.delete(beginIndex, selection.getEndIndex()); // Remove the selected text from buffer</span>
+<span class="fc" id="L97">        buffer.insert(beginIndex, s); // Insert string at the selection</span>
+<span class="fc" id="L98">        selection.setEndIndex(beginIndex + s.length()); // Move selection to the end of the inserted text</span>
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Removes the contents of the selection in the buffer
+     */
+    @Override
+    public void delete() {
+<span class="fc" id="L106">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L107">        int endIndex = selection.getEndIndex();</span>
+<span class="fc" id="L108">        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
+<span class="fc" id="L109">        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
+
+<span class="fc" id="L111">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
