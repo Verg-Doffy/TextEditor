@@ -19,9 +19,9 @@ public class MainTestCommand {
         invoker.addCommand("delete", deleteCommand);
 
         // Testez les commandes
-        engine.getBuffer().append("This is a test string.");
-        engine.getSelection().setBeginIndex(5);
-        engine.getSelection().setEndIndex(8);
+        engine.insert("This is a test string.");
+        engine.getSelection().setBeginIndex(0);
+        engine.getSelection().setEndIndex(9);
 
         engine.cutSelectedText();;
         System.out.println("Clipboard contents: " + engine.getClipboardContents());
