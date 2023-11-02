@@ -1,62 +1,76 @@
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 import com.fane.*;
 
-class CommandTest {
-
-    private TextEditor editor;
-    private Command copyCommand;
-    private Command cutCommand;
-    private Command deleteCommand;
-    private Command insertCommand;
-    private Command pasteCommand;
+public class CommandTest {
+    private EngineImpl engine;
+    private Invoker invoker;
 
     @BeforeEach
-    void setUp() {
-        editor = new TextEditor(); // Assuming a TextEditor class that these commands operate on
-        copyCommand = new CopyCommand(editor);
-        cutCommand = new CutCommand(editor);
-        deleteCommand = new DeleteCommand(editor);
-        insertCommand = new InsertCommand(editor, "InsertedText"); // Assuming InsertCommand takes text to insert as
-                                                                   // argument
-        pasteCommand = new PasteCommand(editor);
+    public void setUp() {
+        engine = new EngineImpl();
+        invoker = new Invoker();
+
+        // Add commands to invoker
+        invoker.addCommand("copy", new CopyCommand(engine));
+        invoker.addCommand("paste", new PasteCommand(engine));
+        invoker.addCommand("insert", new InsertCommand(engine, "Bonjour, Comment ça va?"));
+        invoker.addCommand("delete", new DeleteCommand(engine));
+        invoker.addCommand("cut", new CutCommand(engine));
     }
 
     @Test
-    void testCopyCommand() {
-        editor.setText("Hello, World!");
-        copyCommand.execute();
-        assertEquals("Hello, World!", editor.getClipboard());
+    public void testCopyCommand() {
+        engine.insert("Hello World");
+        engine.changeSelection(0, 5);
+        invoker.executeCommand("copy");
+        assertEquals("Hello", engine.getClipboardContents());
+        assertEquals("Hello World", engine.getBufferContents());
     }
 
     @Test
-    void testCutCommand() {
-        editor.setText("Hello, World!");
-        cutCommand.execute();
-        assertEquals("Hello, World!", editor.getClipboard());
-        assertEquals("", editor.getText());
+    public void testPasteCommand1() {
+        engine.insert("Hello World");
+        engine.changeSelection(6, 11);
+        invoker.executeCommand("cut");
+        engine.changeSelection(0, 0);
+        invoker.executeCommand("paste");
+        assertEquals("WorldHello ", engine.getBufferContents());
     }
 
     @Test
-    void testDeleteCommand() {
-        editor.setText("Hello, World!");
-        deleteCommand.execute();
-        assertEquals("", editor.getText());
+    public void testPasteCommand2() {
+        invoker.executeCommand("insert");
+        engine.changeSelection(9, engine.getBufferContents().length());
+        invoker.executeCommand("cut");
+        engine.changeSelection(0, 0);
+        invoker.executeCommand("paste");
+        assertEquals("Comment ça va?Bonjour, ", engine.getBufferContents());
     }
 
     @Test
-    void testInsertCommand() {
-        editor.setText("Hello, ");
-        insertCommand.execute();
-        assertEquals("Hello, InsertedText", editor.getText());
+    public void testInsertCommand() {
+        engine.changeSelection(0, 0);
+        invoker.executeCommand("insert");
+        assertEquals("Bonjour, Comment ça va?", engine.getBufferContents());
     }
 
     @Test
-    void testPasteCommand() {
-        editor.setClipboard("PastedText"); // Assuming a method to set clipboard content directly
-        pasteCommand.execute();
-        assertEquals("PastedText", editor.getText());
+    public void testDeleteCommand() {
+        invoker.executeCommand("insert");
+        engine.changeSelection(0, 9);
+        invoker.executeCommand("delete");
+        assertEquals("Comment ça va?", engine.getBufferContents());
+    }
+
+    @Test
+    public void testCutCommand() {
+        invoker.executeCommand("insert");
+        engine.changeSelection(9, 16);
+        invoker.executeCommand("cut");
+        assertEquals("Bonjour,  ça va?", engine.getBufferContents());
+        assertEquals("Comment", engine.getClipboardContents());
     }
 }

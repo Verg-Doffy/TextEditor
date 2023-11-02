@@ -107,7 +107,19 @@ public class EngineImpl implements Engine {
 <span class="fc" id="L107">        int endIndex = selection.getEndIndex();</span>
 <span class="fc" id="L108">        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
 <span class="fc" id="L109">        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
+<span class="fc" id="L110">    }</span>
 
-<span class="fc" id="L111">    }</span>
+    public void changeSelection(int begin, int end) {
+<span class="fc" id="L113">        selection.setEndIndex(end); // Définir d'abord endIndex</span>
+<span class="fc" id="L114">        selection.setBeginIndex(begin); // Ensuite, définir beginIndex</span>
+<span class="fc" id="L115">    }</span>
+
+    /**
+     * Reset beginIndex and endIndex to 0
+     */
+    public void resetSelection() {
+<span class="fc" id="L121">        selection.resetSelection();</span>
+<span class="fc" id="L122">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

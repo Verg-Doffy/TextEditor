@@ -50,5 +50,15 @@ public class SelectionImpl implements Selection {
 <span class="fc" id="L50">            this.endIndex = endIndex;</span>
 <span class="fc" id="L51">    }</span>
 
+    public void changeSelection(int beginIndex, int endIndex) {
+<span class="nc" id="L54">        setEndIndex(endIndex); // Définir d'abord endIndex</span>
+<span class="nc" id="L55">        setBeginIndex(beginIndex); // Ensuite, définir beginIndex</span>
+<span class="nc" id="L56">    }</span>
+
+    public void resetSelection() {
+<span class="fc" id="L59">        this.beginIndex = 0;</span>
+<span class="fc" id="L60">        this.endIndex = 0;</span>
+<span class="fc" id="L61">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
