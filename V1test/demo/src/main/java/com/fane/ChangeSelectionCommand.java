@@ -2,17 +2,16 @@ package com.fane;
 
 public class ChangeSelectionCommand implements Command {
     private Engine engine;
-    private int newBeginIndex;
-    private int newEndIndex;
+    private Invoker inv;
 
-    public ChangeSelectionCommand(Engine engine, int newBeginIndex, int newEndIndex) {
+    public ChangeSelectionCommand(Engine engine, Invoker inv) {
         this.engine = engine;
-        this.newBeginIndex = newBeginIndex;
-        this.newEndIndex = newEndIndex;
+        this.inv = inv;
     }
 
     @Override
     public void execute() {
-        engine.changeSelection(newBeginIndex, newEndIndex); // update the selection in the Engine
+        engine.getSelection().setBeginIndex(inv.getBeginIndex());
+        engine.getSelection().setEndIndex(inv.getEndIndex());
     }
 }
