@@ -2,16 +2,17 @@ package com.fane;
 
 public class InsertCommand implements Command {
     private Engine engine;
-    private String textToInsert;
+    private Invoker inv;
+    // private String textToInsert;
 
-    public InsertCommand(Engine engine, String text) {
+    public InsertCommand(Engine engine, Invoker inv) {
         this.engine = engine;
-        this.textToInsert = text;
+        this.inv = inv;
     }
 
     @Override
     public void execute() {
-        engine.insert(textToInsert);
+        engine.insert(inv.getText());
         engine.resetSelection();
     }
 }

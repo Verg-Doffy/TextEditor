@@ -13,7 +13,7 @@ public class DpMain {
         invoker.addCommand("cut", new CutCommand(engine));
         invoker.addCommand("paste", new PasteCommand(engine));
         invoker.addCommand("copy", new CopyCommand(engine));
-        invoker.addCommand("insert", new InsertCommand(engine, text));
+        invoker.addCommand("insert", new InsertCommand(engine, invoker));
         invoker.addCommand("delete", new DeleteCommand(engine));
         invoker.addCommand("changeSelection", new ChangeSelectionCommand(engine, newBeginIndex, newEndIndex));
 
@@ -22,6 +22,7 @@ public class DpMain {
         // Simulons quelques opérations
 
         // Insérer un texte initial
+        invoker.setText("abcd");
         invoker.executeCommand("insert");
         System.out.println(engine.getBufferContents()); // Devrait afficher "Bonjour, Comment ça va?"
 
