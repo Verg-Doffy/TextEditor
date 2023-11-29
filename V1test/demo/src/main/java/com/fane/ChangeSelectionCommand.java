@@ -11,7 +11,15 @@ public class ChangeSelectionCommand implements Command {
 
     @Override
     public void execute() {
-        engine.getSelection().setBeginIndex(inv.getBeginIndex());
-        engine.getSelection().setEndIndex(inv.getEndIndex());
+
+        if (inv.getEndIndex() >= engine.getSelection().getBeginIndex()) {
+            engine.getSelection().setEndIndex(inv.getEndIndex());
+            engine.getSelection().setBeginIndex(inv.getBeginIndex());
+        } else {
+            engine.getSelection().setBeginIndex(inv.getBeginIndex());
+            engine.getSelection().setEndIndex(inv.getEndIndex());
+        }
+
     }
+
 }

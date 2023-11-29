@@ -109,16 +109,4 @@ public class EngineImpl implements Engine {
         selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
     }
 
-    public void changeSelection(int begin, int end) {
-        selection.setEndIndex(end); // Définir d'abord endIndex
-        selection.setBeginIndex(begin); // Ensuite, définir beginIndex
-    }
-
-    /**
-     * Reset beginIndex and endIndex to 0
-     */
-    public void resetSelection() {
-        selection.resetSelection();
-    }
-
 }

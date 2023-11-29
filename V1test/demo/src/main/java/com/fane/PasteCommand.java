@@ -10,6 +10,6 @@ public class PasteCommand implements Command {
     @Override
     public void execute() {
         engine.pasteClipboard();
-        engine.resetSelection();
+
     }
 }

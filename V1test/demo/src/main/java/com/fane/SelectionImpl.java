@@ -50,14 +50,4 @@ public class SelectionImpl implements Selection {
             this.endIndex = endIndex;
     }
 
-    public void changeSelection(int beginIndex, int endIndex) {
-        setEndIndex(endIndex); // Définir d'abord endIndex
-        setBeginIndex(beginIndex); // Ensuite, définir beginIndex
-    }
-
-    public void resetSelection() {
-        this.beginIndex = 0;
-        this.endIndex = 0;
-    }
-
 }

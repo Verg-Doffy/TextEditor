@@ -24,6 +24,10 @@ public class MainTest {
         System.out.println("Clipboard Contents after Cut: " + engine.getClipboardContents());
 
         // Insère du texte depuis le clipboard
+        System.out.println(selection.getBeginIndex());
+        System.out.println(selection.getEndIndex());
+        selection.setEndIndex(1);
+        selection.setBeginIndex(1);
         engine.pasteClipboard();
         System.out.println("Buffer Contents after Paste: " + engine.getBufferContents());
 
@@ -36,21 +40,16 @@ public class MainTest {
          **************************************************** *
          */
 
-        // Crée une 2è instance de EngineImpl
-        Engine engine2 = new EngineImpl();
-
-        // Insère du texte dans le buffer
-        engine2.insert("Hello, World!");
         System.out.println("Buffer Contents: " + engine.getBufferContents());
 
         // Sélectionne une partie du texte
-        Selection selection2 = engine2.getSelection();
+        Selection selection2 = engine.getSelection();
         selection2.setBeginIndex(6);
         selection2.setEndIndex(3);
 
         // Copie le texte sélectionné dans le clipboard
-        engine2.copySelectedText();
-        System.out.println("Clipboard Contents: " + engine2.getClipboardContents());
+        engine.copySelectedText();
+        System.out.println("Clipboard Contents: " + engine.getClipboardContents());
 
     }
 

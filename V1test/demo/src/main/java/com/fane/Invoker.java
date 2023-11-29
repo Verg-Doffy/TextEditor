@@ -6,8 +6,8 @@ import java.util.Map;
 public class Invoker {
     private Map<String, Command> commands = new HashMap<>();
     private String text;
-    private int beginIndex;
-    private int endIndex;
+    private int newBeginIndex;
+    private int newEndIndex;
 
     public void addCommand(String key, Command command) {
         commands.put(key, command);
@@ -29,18 +29,18 @@ public class Invoker {
     }
 
     public int getBeginIndex() {
-        return this.beginIndex;
+        return newBeginIndex;
     }
 
     public int getEndIndex() {
-        return this.endIndex;
+        return newEndIndex;
     }
 
     public void setBeginIndex(int beginIndex) {
-        this.beginIndex = beginIndex;
+        this.newBeginIndex = beginIndex;
     }
 
     public void setEndIndex(int endIndex) {
-        this.endIndex = endIndex;
+        this.newEndIndex = endIndex;
     }
 }

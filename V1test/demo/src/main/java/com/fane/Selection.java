@@ -56,12 +56,4 @@ public interface Selection {
      */
     void setEndIndex(int endIndex);
 
-    // Changes the selection's begin index and the selection's end Index
-    public void changeSelection(int beginIndex, int endIndex);
-
-    /**
-     * Reset beginIndex and endIndex to 0
-     */
-    public void resetSelection();
-
 }

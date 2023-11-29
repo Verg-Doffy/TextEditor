@@ -10,6 +10,5 @@ public class DeleteCommand implements Command {
     @Override
     public void execute() {
         engine.delete();
-        engine.resetSelection();
     }
 }

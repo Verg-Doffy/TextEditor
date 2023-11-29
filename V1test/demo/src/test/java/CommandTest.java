@@ -14,17 +14,28 @@ public class CommandTest {
         invoker = new Invoker();
 
         // Add commands to invoker
-        invoker.addCommand("copy", new CopyCommand(engine));
-        invoker.addCommand("paste", new PasteCommand(engine));
-        invoker.addCommand("insert", new InsertCommand(engine, "Bonjour, Comment ça va?"));
-        invoker.addCommand("delete", new DeleteCommand(engine));
         invoker.addCommand("cut", new CutCommand(engine));
+        invoker.addCommand("paste", new PasteCommand(engine));
+        invoker.addCommand("copy", new CopyCommand(engine));
+        invoker.addCommand("insert", new InsertCommand(engine, invoker));
+        invoker.addCommand("delete", new DeleteCommand(engine));
+        invoker.addCommand("changeSelection", new ChangeSelectionCommand(engine, invoker));
+    }
+
+    @Test
+    public void testInsertCommand() {
+        invoker.setText("Bonjour, Comment ça va?");
+        invoker.executeCommand("insert");
+        assertEquals("Bonjour, Comment ça va?", engine.getBufferContents());
     }
 
     @Test
     public void testCopyCommand() {
-        engine.insert("Hello World");
-        engine.changeSelection(0, 5);
+        invoker.setText("Hello World");
+        invoker.executeCommand("insert");
+        invoker.setBeginIndex(0);
+        invoker.setEndIndex(5);
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("copy");
         assertEquals("Hello", engine.getClipboardContents());
         assertEquals("Hello World", engine.getBufferContents());
@@ -32,43 +43,52 @@ public class CommandTest {
 
     @Test
     public void testPasteCommand1() {
-        engine.insert("Hello World");
-        engine.changeSelection(6, 11);
+        invoker.setText("Hello World");
+        invoker.executeCommand("insert");
+        invoker.setBeginIndex(6);
+        invoker.setEndIndex(11);
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("cut");
-        engine.changeSelection(0, 0);
+        invoker.setBeginIndex(0);
+        invoker.setEndIndex(0);
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("paste");
         assertEquals("WorldHello ", engine.getBufferContents());
     }
 
     @Test
     public void testPasteCommand2() {
+        invoker.setText("Bonjour, Comment ça va?");
         invoker.executeCommand("insert");
-        engine.changeSelection(9, engine.getBufferContents().length());
+        invoker.setBeginIndex(9);
+        invoker.setEndIndex(engine.getBufferContents().length());
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("cut");
-        engine.changeSelection(0, 0);
+        invoker.setBeginIndex(0);
+        invoker.setEndIndex(0);
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("paste");
         assertEquals("Comment ça va?Bonjour, ", engine.getBufferContents());
     }
 
     @Test
-    public void testInsertCommand() {
-        engine.changeSelection(0, 0);
-        invoker.executeCommand("insert");
-        assertEquals("Bonjour, Comment ça va?", engine.getBufferContents());
-    }
-
-    @Test
     public void testDeleteCommand() {
+        invoker.setText("Bonjour, Comment ça va?");
         invoker.executeCommand("insert");
-        engine.changeSelection(0, 9);
+        invoker.setBeginIndex(0);
+        invoker.setEndIndex(9);
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("delete");
         assertEquals("Comment ça va?", engine.getBufferContents());
     }
 
     @Test
     public void testCutCommand() {
+        invoker.setText("Bonjour, Comment ça va?");
         invoker.executeCommand("insert");
-        engine.changeSelection(9, 16);
+        invoker.setBeginIndex(9);
+        invoker.setEndIndex(16);
+        invoker.executeCommand("changeSelection");
         invoker.executeCommand("cut");
         assertEquals("Bonjour,  ça va?", engine.getBufferContents());
         assertEquals("Comment", engine.getClipboardContents());

@@ -10,6 +10,5 @@ public class CopyCommand implements Command {
     @Override
     public void execute() {
         engine.copySelectedText();
-        engine.resetSelection();
     }
 }
