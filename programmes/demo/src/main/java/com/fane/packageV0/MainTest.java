@@ -1,4 +1,4 @@
-package com.fane;
+package com.fane.packageV0;
 
 public class MainTest {
     public static void main(String[] args) {

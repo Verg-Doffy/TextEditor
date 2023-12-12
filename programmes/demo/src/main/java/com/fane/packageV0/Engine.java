@@ -1,4 +1,4 @@
-package com.fane;
+package com.fane.packageV0;
 
 /**
  * Main API for the text editing engine
