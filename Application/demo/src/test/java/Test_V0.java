@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import com.fane.packageV0.*;
 
-class TestV0 {
+class Test_V0 {
 
     private Engine engine;
 
