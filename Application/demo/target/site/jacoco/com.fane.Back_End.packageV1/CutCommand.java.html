@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CutCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">CutCommand.java</span></div><h1>CutCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1; 
+import com.fane.Back_End.packageV0.*;
+import com.fane.Back_End.packageV2.*;
+
+public class CutCommand implements Recordable {
+    private Engine engine;
+    private Recorder recorder;
+    private ChangeSelectionMemento memento;
+
+<span class="fc" id="L10">    public CutCommand(Engine engine, Recorder recorder) {</span>
+<span class="fc" id="L11">        this.engine = engine;</span>
+<span class="fc" id="L12">        this.recorder = recorder;</span>
+<span class="fc" id="L13">    }</span>
+
+    @Override
+    public void execute() {
+
+<span class="fc" id="L18">        engine.cutSelectedText();</span>
+<span class="fc" id="L19">        recorder.save(this);</span>
+<span class="fc" id="L20">    }</span>
+
+    @Override
+    public Memento getMemento() {
+        // Return the stored memento
+<span class="fc" id="L25">        return this.memento;</span>
+    }
+
+    @Override
+    public void setMemento(Memento memento) {
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
+<span class="nc" id="L31">            this.memento = (ChangeSelectionMemento) memento;</span>
+<span class="nc" id="L32">            int currentBufferLength = engine.getBufferContents().length();</span>
+
+            // Use the memento's begin and end indices to set the selection in the engine
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            if ((this.memento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                    &amp;&amp; (this.memento.getEndIndex() &lt;= currentBufferLength)) {</span>
+<span class="nc" id="L37">                engine.getSelection().setEndIndex(this.memento.getEndIndex());</span>
+<span class="nc" id="L38">                engine.getSelection().setBeginIndex(this.memento.getBeginIndex());</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            } else if (this.memento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
+<span class="nc" id="L40">                engine.getSelection().setBeginIndex(this.memento.getBeginIndex());</span>
+<span class="nc" id="L41">                engine.getSelection().setEndIndex(this.memento.getEndIndex());</span>
+            }
+        }
+<span class="fc" id="L44">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainTest_V1.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageMain</a> &gt; <span class="el_source">MainTest_V1.java</span></div><h1>MainTest_V1.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageMain;
+
+import com.fane.Back_End.packageV0.*;
+import com.fane.Back_End.packageV0.*;
+import com.fane.Back_End.packageV0.*;
+
+
+<span class="nc" id="L8">public class MainTest_V1 {</span>
+        /**
+         * public static void main(String[] args) {
+         * // Création de l'engine et de l'invocateur
+         * Engine engine = new EngineImpl();
+         * Invoker invoker = new Invoker();
+         * 
+         * // Ajout de quelques commandes à l'invocateur
+         * invoker.addCommand(&quot;cut&quot;, new CutCommand(engine));
+         * invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine));
+         * invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine));
+         * invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker));
+         * invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine));
+         * invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine,
+         * invoker));
+         * 
+         * // Simulons quelques opérations
+         * 
+         * // Insérer un texte initial
+         * invoker.setText(&quot;Bonjour, Comment ça va?&quot;);
+         * invoker.executeCommand(&quot;insert&quot;);
+         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
+         * Comment ça va?&quot;
+         * 
+         * // Couper du texte
+         * invoker.setBeginIndex(9);
+         * invoker.setEndIndex(16);
+         * invoker.executeCommand(&quot;changeSelection&quot;);
+         * invoker.executeCommand(&quot;cut&quot;);
+         * 
+         * // Vérification
+         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
+         * ça va?&quot;
+         * 
+         * // Coller le texte précédemment coupé à la fin
+         * invoker.setBeginIndex(engine.getBufferContents().length());
+         * invoker.setEndIndex(engine.getBufferContents().length());
+         * invoker.executeCommand(&quot;changeSelection&quot;);
+         * invoker.executeCommand(&quot;paste&quot;);
+         * 
+         * // Vérification
+         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
+         * ça va?Comment&quot;
+         * 
+         * // Test pour CopyCommand
+         * invoker.setBeginIndex(0);
+         * invoker.setEndIndex(7);
+         * invoker.executeCommand(&quot;changeSelection&quot;);
+         * invoker.executeCommand(&quot;copy&quot;);
+         * System.out.println(engine.getClipboardContents()); // Devrait afficher
+         * &quot;Bonjour&quot;
+         * 
+         * // Test pour PasteCommand
+         * invoker.setBeginIndex(engine.getBufferContents().length());
+         * invoker.setEndIndex(engine.getBufferContents().length());
+         * invoker.executeCommand(&quot;changeSelection&quot;);
+         * invoker.executeCommand(&quot;paste&quot;);
+         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
+         * ça va?CommentBonjour&quot;
+         * 
+         * // Test pour DeleteCommand
+         * invoker.setBeginIndex(16);
+         * invoker.setEndIndex(engine.getBufferContents().length());
+         * invoker.executeCommand(&quot;changeSelection&quot;);
+         * invoker.executeCommand(&quot;delete&quot;);
+         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
+         * ça va?&quot;
+         * 
+         * }
+         */
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

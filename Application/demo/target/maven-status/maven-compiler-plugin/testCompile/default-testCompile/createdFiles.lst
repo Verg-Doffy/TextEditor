@@ -1,0 +1,8 @@
+V0Test.class
+V2_InsertCommandReplayingTest.class
+V2_ChangeSelectionCommandReplayingTest.class
+V1Test.class
+V2_CutCommandReplayingTest.class
+V2_PasteCommandReplayingTest.class
+V2_CopyCommandReplayingTest.class
+V2_DeleteCommandReplayingTest.class
