@@ -2,96 +2,76 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import com.fane.packageV0.*; 
-import com.fane.packageV1.*; 
+import com.fane.Back_End.packageV0.*; 
+import com.fane.Back_End.packageV1.*; 
+import com.fane.Back_End.packageV2.*; 
 
 public class Test_V1 {
-    private EngineImpl engine;
+
+    private Engine engine;
+    private Recorder recorder;
     private Invoker invoker;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
+
+        // Create the main components
         engine = new EngineImpl();
-        invoker = new Invoker();
+        recorder = new Recorder(engine);
+        invoker = new Invoker(recorder);
 
-        // Add commands to invoker
-        invoker.addCommand("cut", new CutCommand(engine));
-        invoker.addCommand("paste", new PasteCommand(engine));
-        invoker.addCommand("copy", new CopyCommand(engine));
-        invoker.addCommand("insert", new InsertCommand(engine, invoker));
-        invoker.addCommand("delete", new DeleteCommand(engine));
-        invoker.addCommand("changeSelection", new ChangeSelectionCommand(engine, invoker));
+        // Add commands to the invoker
+        invoker.addCommand("insert", new InsertCommand(engine, invoker, recorder));
+        invoker.addCommand("changeSelection", new ChangeSelectionCommand(engine, invoker, recorder));
+        invoker.addCommand("copy", new CopyCommand(engine, recorder));
+        invoker.addCommand("cut", new CutCommand(engine, recorder));
+        invoker.addCommand("paste", new PasteCommand(engine, recorder));
+        invoker.addCommand("delete", new DeleteCommand(engine, recorder));
+        invoker.addCommand("start", new StartCommand(recorder));
+        invoker.addCommand("stop", new StopCommand(recorder));
+        invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
     @Test
-    public void testInsertCommand() {
-        invoker.setText("Bonjour, Comment ça va?");
-        invoker.executeCommand("insert");
-        assertEquals("Bonjour, Comment ça va?", engine.getBufferContents());
-    }
+    public void testMainCommandsV2() {
+        invoker.executeCommand("start");
 
-    @Test
-    public void testCopyCommand() {
-        invoker.setText("Hello World");
+        invoker.setText("Helloworld");
         invoker.executeCommand("insert");
+        assertEquals("Helloworld", engine.getBufferContents(), "Buffer should contain 'Helloworld'");
+
         invoker.setBeginIndex(0);
         invoker.setEndIndex(5);
         invoker.executeCommand("changeSelection");
-        invoker.executeCommand("copy");
-        assertEquals("Hello", engine.getClipboardContents());
-        assertEquals("Hello World", engine.getBufferContents());
-    }
-
-    @Test
-    public void testPasteCommand1() {
-        invoker.setText("Hello World");
-        invoker.executeCommand("insert");
-        invoker.setBeginIndex(6);
-        invoker.setEndIndex(11);
-        invoker.executeCommand("changeSelection");
         invoker.executeCommand("cut");
-        invoker.setBeginIndex(0);
-        invoker.setEndIndex(0);
+        assertEquals("world", engine.getBufferContents(), "Buffer should contain 'world'");
+        assertEquals("Hello", engine.getClipboardContents(), "clipboard should contain 'Hello'");
+
+        invoker.setBeginIndex(5);
+        invoker.setEndIndex(5);
         invoker.executeCommand("changeSelection");
         invoker.executeCommand("paste");
-        assertEquals("WorldHello ", engine.getBufferContents());
-    }
+        assertEquals("worldHello", engine.getBufferContents(), "Buffer should contain 'worldHello'");
+        assertEquals("Hello", engine.getClipboardContents(), "clipboard should contain 'Hello'");
 
-    @Test
-    public void testPasteCommand2() {
-        invoker.setText("Bonjour, Comment ça va?");
-        invoker.executeCommand("insert");
-        invoker.setBeginIndex(9);
-        invoker.setEndIndex(engine.getBufferContents().length());
-        invoker.executeCommand("changeSelection");
-        invoker.executeCommand("cut");
         invoker.setBeginIndex(0);
-        invoker.setEndIndex(0);
-        invoker.executeCommand("changeSelection");
-        invoker.executeCommand("paste");
-        assertEquals("Comment ça va?Bonjour, ", engine.getBufferContents());
-    }
-
-    @Test
-    public void testDeleteCommand() {
-        invoker.setText("Bonjour, Comment ça va?");
-        invoker.executeCommand("insert");
-        invoker.setBeginIndex(0);
-        invoker.setEndIndex(9);
+        invoker.setEndIndex(5);
         invoker.executeCommand("changeSelection");
         invoker.executeCommand("delete");
-        assertEquals("Comment ça va?", engine.getBufferContents());
+        assertEquals("Hello", engine.getBufferContents(), "Buffer should contain 'Hello'");
+        assertEquals("Hello", engine.getClipboardContents(), "clipboard should contain 'Hello'");
+
+        invoker.executeCommand("stop");
+
+        assertEquals("Hello", engine.getBufferContents(), "Buffer should contain 'Hello' before replaying");
+        assertEquals("Hello", engine.getClipboardContents(), "clipboard should contain 'Hello' before replaying");
+
+        invoker.executeCommand("replay");
+
+        // After replay, the buffer should contain "HelloHello"
+        assertEquals("HelloHello", engine.getBufferContents(), "Buffer should contain 'HelloHello' after replaying");
+        assertEquals("Hello", engine.getClipboardContents(), "clipboard should contain 'Hello' after replaying");
+
     }
 
-    @Test
-    public void testCutCommand() {
-        invoker.setText("Bonjour, Comment ça va?");
-        invoker.executeCommand("insert");
-        invoker.setBeginIndex(9);
-        invoker.setEndIndex(16);
-        invoker.executeCommand("changeSelection");
-        invoker.executeCommand("cut");
-        assertEquals("Bonjour,  ça va?", engine.getBufferContents());
-        assertEquals("Comment", engine.getClipboardContents());
-    }
 }

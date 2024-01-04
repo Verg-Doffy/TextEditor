@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fane.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fane.Front_End.SceneController">
    <children>
       <Text fill="WHITE" layoutX="196.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT-EDITOR" textAlignment="CENTER" wrappingWidth="203.169921875">
          <font>
@@ -19,22 +19,22 @@
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="142.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="SELECT">
+      <Button layoutY="142.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="COPY">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="COPY">
+      <Button layoutY="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="PASTE">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="271.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="PASTE">
+      <Button layoutY="271.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="CUT">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="335.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="CUT">
+      <Button layoutY="335.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="DELETE">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="206.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="SAVE">
+      <Button layoutX="484.0" layoutY="206.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REPLAY">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>

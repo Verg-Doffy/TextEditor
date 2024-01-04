@@ -48,6 +48,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!--  dependence pour Apache Commons Lang (Pour avoir accès à la classe Pair fournie par Apache ) -->
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version> <!-- Use the latest version -->
+        </dependency>
+
         <!-- Dépendance pour Assertions avec JavaFX -->
         
         <dependency>
@@ -143,7 +151,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>com.fane.Text_Editor</mainClass>
+                    <mainClass>com.fane.Front_End.Text_Editor</mainClass>
                 </configuration>
             </plugin>
 
