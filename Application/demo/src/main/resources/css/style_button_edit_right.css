@@ -5,8 +5,6 @@
     -fx-border-radius: 30 0 0 30; /* Également pour assurer des coins arrondis uniformes */
     -fx-text-fill: white; /* Couleur du texte */
     -fx-padding: 10 15; /* Ajustement de la marge intérieure pour un meilleur aspect */
-
-    
 }
 
 /* Style pour le bouton lorsqu'il est survolé */
