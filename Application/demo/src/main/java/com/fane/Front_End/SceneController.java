@@ -345,13 +345,13 @@ public class SceneController {
         }
     }
 
-    public void ReplyAction(ActionEvent event) {
+    public void ReplayAction(ActionEvent event) {
 
         addCommand();
 
         // Traiter les valeurs
         try {
-            invoker.executeCommand("reply");
+            invoker.executeCommand("replay");
             ConfirmationPopup("The save is replayed");
             updateTextField(engine.getBufferContents());
 

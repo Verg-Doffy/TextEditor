@@ -49,7 +49,7 @@
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="206.0" mnemonicParsing="false" onAction="#ReplyAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REPLAY">
+      <Button layoutX="484.0" layoutY="206.0" mnemonicParsing="false" onAction="#ReplayAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REPLAY">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
