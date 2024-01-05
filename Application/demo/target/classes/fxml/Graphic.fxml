@@ -3,53 +3,53 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fane.Front_End.SceneController">
    <children>
-      <Text fill="WHITE" layoutX="196.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT-EDITOR" textAlignment="CENTER" wrappingWidth="203.169921875">
+      <Text fill="WHITE" layoutX="199.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT-EDITOR" textAlignment="CENTER" wrappingWidth="203.169921875">
          <font>
             <Font name="Agency FB" size="35.0" />
          </font>
       </Text>
-      <TextArea layoutX="131.0" layoutY="95.0" prefHeight="222.0" prefWidth="338.0" />
-      <Button layoutY="78.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="INSERT">
+      <Button layoutY="78.0" mnemonicParsing="false" onAction="#InsertAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="INSERT">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="142.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="COPY">
+      <Button layoutY="142.0" mnemonicParsing="false" onAction="#CopyAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="COPY">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="PASTE">
+      <Button layoutY="207.0" mnemonicParsing="false" onAction="#PasteAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="PASTE">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="271.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="CUT">
+      <Button layoutY="271.0" mnemonicParsing="false" onAction="#CutAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="CUT">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutY="335.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="DELETE">
+      <Button layoutY="335.0" mnemonicParsing="false" onAction="#DeleteAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_left.css" text="DELETE">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="79.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="START">
+      <Button layoutX="484.0" layoutY="79.0" mnemonicParsing="false" onAction="#StartAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="START">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="141.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="STOP">
+      <Button layoutX="484.0" layoutY="141.0" mnemonicParsing="false" onAction="#StopAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="STOP">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="206.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REPLAY">
+      <Button layoutX="484.0" layoutY="206.0" mnemonicParsing="false" onAction="#ReplyAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REPLAY">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
@@ -69,5 +69,11 @@
             <Font name="Agency FB" size="20.0" />
          </font>
       </Button>
+      <Line endX="166.20001220703125" endY="-1.52587890625E-5" layoutX="297.0" layoutY="96.0" startX="-157.79998779296875" startY="-1.52587890625E-5" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="166.20001220703125" endY="-1.52587890625E-5" layoutX="295.0" layoutY="318.0" startX="-157.79998779296875" startY="-1.52587890625E-5" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="157.20001220703125" endY="-9.000015258789062" layoutX="307.0" layoutY="106.0" startX="155.20001220703125" startY="212.0" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="-170.79998779296875" endY="211.0" layoutX="307.0" layoutY="106.0" startX="-168.79998779296875" startY="-10.000015258789062" stroke="WHITE" strokeWidth="2.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <TextArea fx:id="textArea" editable="false" layoutX="150.0" layoutY="110.0" prefHeight="195.0" prefWidth="302.0" stylesheets="@../css/style_textArea.css" />
    </children>
 </AnchorPane>

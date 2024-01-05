@@ -1,32 +1,32 @@
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\ReplayCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_InsertCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\Invoker.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\CutCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\StopCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\ChangeSelectionMemento.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\ChangeSelectionCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_PasteCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\Engine.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\DeleteCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_DeleteCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\Selection.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\SelectionImpl.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\Command.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Originator.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Front_End\Text_Editor.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Recorder.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Memento.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\InsertCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_Command.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_CutCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\PasteCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Front_End\SceneController.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Recordable.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V0.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_CopyCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\CopyCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V1.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\StartCommand.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\EngineImpl.java
-C:\Users\faned\OneDrive\Bureau\TextEditorFinal\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\InsertMemento.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\PasteCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\ChangeSelectionCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\Command.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_CutCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\SelectionImpl.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Recordable.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\StartCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\InsertMemento.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_Command.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_InsertCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\Selection.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\Invoker.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\StopCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V1.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_PasteCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\CopyCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V0.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\CutCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Recorder.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Front_End\SceneController.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_DeleteCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\Engine.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Originator.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\EngineImpl.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\InsertCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Memento.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Front_End\Text_Editor.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\DeleteCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\ReplayCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_CopyCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\ChangeSelectionMemento.java

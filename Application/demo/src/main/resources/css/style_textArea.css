@@ -1,0 +1,17 @@
+/* Styles pour le TextArea */
+.text-area {
+    -fx-font-family: "Agency";
+    -fx-font-size: 14px;
+    -fx-text-fill: grey; /* Couleur du texte */
+    -fx-border-width: 1px; /* Largeur de la bordure */
+}
+
+/* Style pour la zone de texte lorsqu'elle a le focus */
+.text-area:focused {
+    -fx-border-color: #590aeb; /* Couleur de la bordure lorsqu'elle a le focus */
+}
+
+/* Style pour la zone de texte lorsqu'elle est désactivée */
+.text-area:disabled {
+    -fx-opacity: 0.5; /* Opacité réduite pour indiquer qu'elle est désactivée */
+}
