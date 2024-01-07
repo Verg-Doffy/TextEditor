@@ -16,13 +16,8 @@ import java.util.Map;
  * The class supports integration with a {@link Recorder} for recording and saving commands that
  * implement the {@link Recordable} interface.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV2
- * @see Command
- * @see Recorder
- * @see Recordable
  */
 public class Invoker {
 

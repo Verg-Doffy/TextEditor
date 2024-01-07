@@ -10,11 +10,8 @@ import com.fane.Back_End.packageV1.*;
  * Implementations of this interface should provide methods for getting and setting the
  * memento, allowing the object to capture and restore its internal state as needed.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see Memento
  */
 public interface Originator {
 

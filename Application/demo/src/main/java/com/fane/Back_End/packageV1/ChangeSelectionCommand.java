@@ -12,16 +12,8 @@ import com.fane.Back_End.packageV2.*;
  * It also supports memento functionality to store and retrieve the state of the selection indices during the execution
  * of the selection change command.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV2
- * @see Engine
- * @see Invoker
- * @see Recorder
- * @see Recordable
- * @see Memento
- * @see ChangeSelectionMemento
  */
 public class ChangeSelectionCommand implements Recordable {
 

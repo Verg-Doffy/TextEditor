@@ -16,14 +16,8 @@ import javafx.stage.Stage;
  * The Text Editor application provides a graphical user interface for editing and manipulating text.
  * It initializes the main menu GUI using JavaFX and sets up the application window with specified properties.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see javafx.application.Application
- * @see javafx.fxml.FXMLLoader
- * @see javafx.scene.Parent
- * @see javafx.scene.Scene
- * @see javafx.scene.image.Image
- * @see javafx.stage.Stage
  */
 public class Text_Editor extends Application {
 

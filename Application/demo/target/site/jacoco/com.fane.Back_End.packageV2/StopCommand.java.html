@@ -2,17 +2,39 @@
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 
+/**
+ * The {@code StopCommand} class represents a command that triggers the stop of recording
+ * using a provided {@link Recorder}. It implements the {@link Command} interface.
+ *
+ * The stop command executes the stop recording operation on the associated recorder,
+ * indicating that recording should cease, and subsequent commands will not be captured.
+ *
+ * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0.Recordable
+ * @see com.fane.Back_End.packageV0.Recorder
+ * @see com.fane.Back_End.packageV2.Command
+ */
 public class StopCommand implements Command {
+
     private final Recorder recorder;
 
-<span class="fc" id="L8">    public StopCommand(Recorder recorder) {</span>
-<span class="fc" id="L9">        this.recorder = recorder;</span>
-<span class="fc" id="L10">    }</span>
+    /**
+     * Constructs a {@code StopCommand} with the specified recorder.
+     *
+     * @param recorder The recorder associated with this stop command.
+     */
+<span class="fc" id="L27">    public StopCommand(Recorder recorder) {</span>
+<span class="fc" id="L28">        this.recorder = recorder;</span>
+<span class="fc" id="L29">    }</span>
 
+    /**
+     * Executes the stop recording operation on the associated recorder,
+     * indicating that recording should cease, and subsequent commands will not be captured.
+     */
     @Override
     public void execute() {
-<span class="fc" id="L14">        recorder.stop();</span>
-<span class="fc" id="L15">    }</span>
+<span class="fc" id="L37">        recorder.stop();</span>
+<span class="fc" id="L38">    }</span>
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

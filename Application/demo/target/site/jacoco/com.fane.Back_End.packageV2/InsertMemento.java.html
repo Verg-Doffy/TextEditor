@@ -2,15 +2,39 @@
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 
+/**
+ * The {@code InsertMemento} class represents a memento object specifically designed
+ * for capturing the state related to an insert operation. It implements the {@link Memento} interface.
+ *
+ *
+ * The memento stores information about the text to be inserted during an insert operation.
+ *
+ * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see Memento
+ */
 public class InsertMemento implements Memento {
+
     private final String textToInsert;
 
-<span class="fc" id="L8">    public InsertMemento(String textToInsert) {</span>
-<span class="fc" id="L9">        this.textToInsert = textToInsert;</span>
-<span class="fc" id="L10">    }</span>
+    /**
+     * Constructs an {@code InsertMemento} with the specified text to be inserted.
+     *
+     * @param textToInsert The text to be inserted.
+     */
+<span class="fc" id="L27">    public InsertMemento(String textToInsert) {</span>
+<span class="fc" id="L28">        this.textToInsert = textToInsert;</span>
+<span class="fc" id="L29">    }</span>
 
+    /**
+     * Retrieves the text that was stored for insertion in this memento.
+     *
+     * @return The text to be inserted.
+     */
     public String getTextToInsert() {
-<span class="fc" id="L13">        return textToInsert;</span>
+<span class="fc" id="L37">        return textToInsert;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

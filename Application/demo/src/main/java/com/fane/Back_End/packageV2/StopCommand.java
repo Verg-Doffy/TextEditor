@@ -9,11 +9,8 @@ import com.fane.Back_End.packageV1.*;
  * The stop command executes the stop recording operation on the associated recorder,
  * indicating that recording should cease, and subsequent commands will not be captured.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.Recordable
- * @see com.fane.Back_End.packageV0.Recorder
- * @see com.fane.Back_End.packageV2.Command
  */
 public class StopCommand implements Command {
 

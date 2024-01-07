@@ -32,21 +32,8 @@ import com.fane.Back_End.packageV2.*;
  *
  * This class is part of the Front_End package and serves as the controller for the GUI scenes.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see javafx.event.ActionEvent
- * @see javafx.fxml.FXML
- * @see javafx.fxml.FXMLLoader
- * @see javafx.scene.Parent
- * @see javafx.scene.Scene
- * @see javafx.scene.control.Alert
- * @see javafx.scene.control.TextArea
- * @see javafx.scene.image.Image
- * @see javafx.stage.Stage
- * @see com.fane.Back_End.packageV0.Engine
- * @see com.fane.Back_End.packageV0.Recordable
- * @see com.fane.Back_End.packageV1.Recorder
- * @see com.fane.Back_End.packageV2.Invoker
  */
 
 public class SceneController {

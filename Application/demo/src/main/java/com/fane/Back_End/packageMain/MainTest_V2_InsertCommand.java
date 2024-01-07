@@ -13,11 +13,8 @@ import com.fane.Back_End.packageV2.*;
  * recording, stopping recording, and performing another insertion after recording stops. The program outputs
  * the buffer contents at different stages to verify the effectiveness of the InsertCommand.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see com.fane.Back_End.packageV2
  */
 
 public class MainTest_V2_InsertCommand {

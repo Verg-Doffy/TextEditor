@@ -14,11 +14,8 @@ import com.fane.Back_End.packageV2.*;
  * Additionally, it includes a section for testing exceptions by attempting to perform operations
  * with invalid selection indices.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.EngineImpl
- * @see com.fane.Back_End.packageV0.Engine
- * @see com.fane.Back_End.packageV0.Selection
  */
 
 public class MainTest_V0 {

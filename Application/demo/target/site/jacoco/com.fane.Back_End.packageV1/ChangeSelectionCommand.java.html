@@ -1,48 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChangeSelectionCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">ChangeSelectionCommand.java</span></div><h1>ChangeSelectionCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1; 
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChangeSelectionCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">ChangeSelectionCommand.java</span></div><h1>ChangeSelectionCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The {@code ChangeSelectionCommand} class represents a command for changing the text selection indices in an {@link Engine}.
+ * It implements the {@link Recordable} interface to support recording of its execution.
+ *
+ * The {@code ChangeSelectionCommand} class adjusts the selection indices in the engine based on the indices provided
+ * by an associated {@link Invoker}, performs the selection change operation, and saves itself using a {@link Recorder}.
+ * It also supports memento functionality to store and retrieve the state of the selection indices during the execution
+ * of the selection change command.
+ *
+ * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV2
+ * @see Engine
+ * @see Invoker
+ * @see Recorder
+ * @see Recordable
+ * @see Memento
+ * @see ChangeSelectionMemento
+ */
 public class ChangeSelectionCommand implements Recordable {
+
     private Engine engine;
     private Invoker inv;
     private Recorder recorder;
 
-<span class="fc" id="L10">    public ChangeSelectionCommand(Engine engine, Invoker inv, Recorder recorder) {</span>
-<span class="fc" id="L11">        this.engine = engine;</span>
-<span class="fc" id="L12">        this.inv = inv;</span>
-<span class="fc" id="L13">        this.recorder = recorder;</span>
-<span class="fc" id="L14">    }</span>
+    /**
+     * Constructs a {@code ChangeSelectionCommand} with references to the specified {@link Engine}, {@link Invoker},
+     * and {@link Recorder}.
+     *
+     * @param engine   The engine responsible for text operations.
+     * @param inv      The invoker providing the new selection indices.
+     * @param recorder The recorder used to save the command execution.
+     */
+<span class="fc" id="L40">    public ChangeSelectionCommand(Engine engine, Invoker inv, Recorder recorder) {</span>
+<span class="fc" id="L41">        this.engine = engine;</span>
+<span class="fc" id="L42">        this.inv = inv;</span>
+<span class="fc" id="L43">        this.recorder = recorder;</span>
+<span class="fc" id="L44">    }</span>
 
+    /**
+     * Executes the selection change operation by adjusting the selection indices in the engine
+     * based on the indices provided by the invoker. Additionally, saves the command using the recorder
+     * to support recording functionality.
+     */
     @Override
     public void execute() {
+<span class="fc" id="L53">        int currentBufferLength = engine.getBufferContents().length();</span>
 
-<span class="fc" id="L19">        int currentBufferLength = engine.getBufferContents().length();</span>
-
-<span class="fc bfc" id="L21" title="All 2 branches covered.">        if ((inv.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
-<span class="pc bpc" id="L22" title="1 of 2 branches missed.">                &amp;&amp; (inv.getEndIndex() &lt;= currentBufferLength)) {</span>
-<span class="fc" id="L23">            engine.getSelection().setEndIndex(inv.getEndIndex());</span>
-<span class="fc" id="L24">            engine.getSelection().setBeginIndex(inv.getBeginIndex());</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        } else if (inv.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
-<span class="fc" id="L26">            engine.getSelection().setBeginIndex(inv.getBeginIndex());</span>
-<span class="fc" id="L27">            engine.getSelection().setEndIndex(inv.getEndIndex());</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if ((inv.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">                &amp;&amp; (inv.getEndIndex() &lt;= currentBufferLength)) {</span>
+<span class="fc" id="L57">            engine.getSelection().setEndIndex(inv.getEndIndex());</span>
+<span class="fc" id="L58">            engine.getSelection().setBeginIndex(inv.getBeginIndex());</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        } else if (inv.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
+<span class="fc" id="L60">            engine.getSelection().setBeginIndex(inv.getBeginIndex());</span>
+<span class="fc" id="L61">            engine.getSelection().setEndIndex(inv.getEndIndex());</span>
         }
 
-<span class="fc" id="L30">        recorder.save(this);</span>
+<span class="fc" id="L64">        recorder.save(this);</span>
+<span class="fc" id="L65">    }</span>
 
-<span class="fc" id="L32">    }</span>
-
+    /**
+     * Retrieves a memento representing the state of the selection indices in the associated invoker.
+     *
+     * @return A memento capturing the current selection state.
+     */
     @Override
     public Memento getMemento() {
-<span class="fc" id="L36">        return new ChangeSelectionMemento(inv.getBeginIndex(), inv.getEndIndex());</span>
+<span class="fc" id="L74">        return new ChangeSelectionMemento(inv.getBeginIndex(), inv.getEndIndex());</span>
     }
 
+    /**
+     * Sets the state of the associated invoker based on the provided memento.
+     * Specifically, updates the selection indices based on the information stored in the memento.
+     *
+     * @param memento The memento containing information about the selection state.
+     */
     @Override
     public void setMemento(Memento memento) {
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
-<span class="fc" id="L42">            ChangeSelectionMemento changeSelectionMemento = (ChangeSelectionMemento) memento;</span>
-<span class="fc" id="L43">            inv.setBeginIndex(changeSelectionMemento.getBeginIndex());</span>
-<span class="fc" id="L44">            inv.setEndIndex(changeSelectionMemento.getEndIndex());</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
+<span class="fc" id="L86">            ChangeSelectionMemento changeSelectionMemento = (ChangeSelectionMemento) memento;</span>
+<span class="fc" id="L87">            inv.setBeginIndex(changeSelectionMemento.getBeginIndex());</span>
+<span class="fc" id="L88">            inv.setEndIndex(changeSelectionMemento.getEndIndex());</span>
         }
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L90">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

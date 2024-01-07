@@ -12,16 +12,8 @@ import com.fane.Back_End.packageV2.*;
  * functionality to store and retrieve the state of the text to be inserted during the execution
  * of the insert command.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV2
- * @see Engine
- * @see Invoker
- * @see Recorder
- * @see Recordable
- * @see Memento
- * @see InsertMemento
  */
 public class InsertCommand implements Recordable {
 

@@ -9,10 +9,8 @@ import com.fane.Back_End.packageV1.*;
  * Implementations of this interface may include methods for storing and retrieving state information,
  * allowing objects to capture and restore their internal state as needed.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
  */
 public interface Memento {
     // This could contain methods for storing and retrieving state,

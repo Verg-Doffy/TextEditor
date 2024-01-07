@@ -9,11 +9,8 @@ import com.fane.Back_End.packageV1.*;
  * The start command executes the start recording operation on the associated recorder,
  * allowing the recorder to capture and store subsequent commands in its history.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.Recordable
- * @see com.fane.Back_End.packageV0.Recorder
- * @see com.fane.Back_End.packageV2.Command
  */
 public class StartCommand implements Command {
 

@@ -9,11 +9,8 @@ import com.fane.Back_End.packageV1.*;
  *
  * The memento stores information about the text to be inserted during an insert operation.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see Memento
  */
 public class InsertMemento implements Memento {
 

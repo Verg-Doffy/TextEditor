@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EngineImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV0</a> &gt; <span class="el_source">EngineImpl.java</span></div><h1>EngineImpl.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV0;
 
+/**
+ * Main API for the text editing engine
+ *
+ * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @version 1.0
+ */
+
 public class EngineImpl implements Engine {
 
     private Selection selection;
     private String clipboard;
-<span class="fc" id="L7">    private StringBuilder buffer = new StringBuilder();</span>
+<span class="fc" id="L14">    private StringBuilder buffer = new StringBuilder();</span>
 
-    // Constructors
-<span class="fc" id="L10">    public EngineImpl() {</span>
-<span class="fc" id="L11">        this.selection = new SelectionImpl(buffer);</span>
-<span class="fc" id="L12">        this.clipboard = &quot;&quot;;</span>
-<span class="fc" id="L13">    }</span>
+    /**
+     * Constructor method of the class EngineImpl
+     */
+<span class="fc" id="L19">    public EngineImpl() {</span>
+<span class="fc" id="L20">        this.selection = new SelectionImpl(buffer);</span>
+<span class="fc" id="L21">        this.clipboard = &quot;&quot;;</span>
+<span class="fc" id="L22">    }</span>
 
     /**
      * Provides access to the selection control object
@@ -19,7 +28,7 @@ public class EngineImpl implements Engine {
      */
     @Override
     public Selection getSelection() {
-<span class="fc" id="L22">        return selection;</span>
+<span class="fc" id="L31">        return selection;</span>
     }
 
     /**
@@ -29,7 +38,7 @@ public class EngineImpl implements Engine {
      */
     @Override
     public String getBufferContents() {
-<span class="fc" id="L32">        return buffer.toString();</span>
+<span class="fc" id="L41">        return buffer.toString();</span>
     }
 
     /**
@@ -39,7 +48,7 @@ public class EngineImpl implements Engine {
      */
     @Override
     public String getClipboardContents() {
-<span class="fc" id="L42">        return clipboard;</span>
+<span class="fc" id="L51">        return clipboard;</span>
     }
 
     /**
@@ -49,14 +58,14 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void cutSelectedText() {
-<span class="fc" id="L52">        int beginIndex = selection.getBeginIndex();</span>
-<span class="fc" id="L53">        int endIndex = selection.getEndIndex();</span>
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (beginIndex != endIndex) {</span>
-<span class="fc" id="L55">            clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard</span>
-<span class="fc" id="L56">            buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
-<span class="fc" id="L57">            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
+<span class="fc" id="L61">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L62">        int endIndex = selection.getEndIndex();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (beginIndex != endIndex) {</span>
+<span class="fc" id="L64">            clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard</span>
+<span class="fc" id="L65">            buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
+<span class="fc" id="L66">            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
         }
-<span class="fc" id="L59">    }</span>
+<span class="fc" id="L68">    }</span>
 
     /**
      * Copies the text within the interval
@@ -65,11 +74,11 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void copySelectedText() {
-<span class="fc" id="L68">        int beginIndex = selection.getBeginIndex();</span>
-<span class="fc" id="L69">        int endIndex = selection.getEndIndex();</span>
-<span class="fc" id="L70">        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard</span>
+<span class="fc" id="L77">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L78">        int endIndex = selection.getEndIndex();</span>
+<span class="fc" id="L79">        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard</span>
 
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L81">    }</span>
 
     /**
      * Replaces the text within the interval specified by the selection object with
@@ -77,14 +86,14 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void pasteClipboard() {
-<span class="fc" id="L80">        int beginIndex = selection.getBeginIndex();</span>
-<span class="fc" id="L81">        int endIndex = selection.getEndIndex();</span>
+<span class="fc" id="L89">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L90">        int endIndex = selection.getEndIndex();</span>
 
-<span class="fc" id="L83">        buffer.delete(beginIndex, endIndex); // Remove the selected text from buffer</span>
-<span class="fc" id="L84">        buffer.insert(beginIndex, clipboard); // Insert clipboard contents</span>
-<span class="fc" id="L85">        selection.setEndIndex(beginIndex + clipboard.length()); // Move selection to the end of the pasted text</span>
+<span class="fc" id="L92">        buffer.delete(beginIndex, endIndex); // Remove the selected text from buffer</span>
+<span class="fc" id="L93">        buffer.insert(beginIndex, clipboard); // Insert clipboard contents</span>
+<span class="fc" id="L94">        selection.setEndIndex(beginIndex + clipboard.length()); // Move selection to the end of the pasted text</span>
 
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L96">    }</span>
 
     /**
      * Inserts a string in the buffer, which replaces the contents of the selection
@@ -93,24 +102,24 @@ public class EngineImpl implements Engine {
      */
     @Override
     public void insert(String s) {
-<span class="fc" id="L96">        int beginIndex = selection.getBeginIndex();</span>
-<span class="fc" id="L97">        buffer.delete(beginIndex, selection.getEndIndex()); // Remove the selected text from buffer</span>
-<span class="fc" id="L98">        buffer.insert(beginIndex, s); // Insert string at the selection</span>
-<span class="fc" id="L99">        selection.setEndIndex(beginIndex + s.length()); // Move selection to the end of the inserted text</span>
-<span class="fc" id="L100">    }</span>
+<span class="fc" id="L105">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L106">        buffer.delete(beginIndex, selection.getEndIndex()); // Remove the selected text from buffer</span>
+<span class="fc" id="L107">        buffer.insert(beginIndex, s); // Insert string at the selection</span>
+<span class="fc" id="L108">        selection.setEndIndex(beginIndex + s.length()); // Move selection to the end of the inserted text</span>
+<span class="fc" id="L109">    }</span>
 
     /**
      * Removes the contents of the selection in the buffer
      */
     @Override
     public void delete() {
-<span class="fc" id="L107">        int beginIndex = selection.getBeginIndex();</span>
-<span class="fc" id="L108">        int endIndex = selection.getEndIndex();</span>
-<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (beginIndex != endIndex) {</span>
-<span class="fc" id="L110">            buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
-<span class="fc" id="L111">            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
+<span class="fc" id="L116">        int beginIndex = selection.getBeginIndex();</span>
+<span class="fc" id="L117">        int endIndex = selection.getEndIndex();</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (beginIndex != endIndex) {</span>
+<span class="fc" id="L119">            buffer.delete(beginIndex, endIndex); // Remove selected text from buffer</span>
+<span class="fc" id="L120">            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
         }
-<span class="fc" id="L113">    }</span>
+<span class="fc" id="L122">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

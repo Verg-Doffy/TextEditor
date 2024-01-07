@@ -3,7 +3,7 @@ package com.fane.Back_End.packageV0;
 /**
  * Provides access to selection control operations
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
  */
 public interface Selection {

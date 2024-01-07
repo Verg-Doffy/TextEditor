@@ -10,15 +10,8 @@ import com.fane.Back_End.packageV2.*;
  * The {@code CopyCommand} class captures the current selection in the engine, performs the copy operation,
  * and saves itself using a {@link Recorder}.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV2
- * @see Engine
- * @see Recorder
- * @see Recordable
- * @see Memento
- * @see ChangeSelectionMemento
  */
 public class CopyCommand implements Recordable {
 

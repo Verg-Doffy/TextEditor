@@ -11,15 +11,8 @@ import com.fane.Back_End.packageV2.*;
  * and saves itself using a {@link Recorder}. It also supports memento functionality to store and retrieve
  * the state of the selection during the execution of the delete command.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV2
- * @see Engine
- * @see Recorder
- * @see Recordable
- * @see Memento
- * @see ChangeSelectionMemento
  */
 public class DeleteCommand implements Recordable {
 

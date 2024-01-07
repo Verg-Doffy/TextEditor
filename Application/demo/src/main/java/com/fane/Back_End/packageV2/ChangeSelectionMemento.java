@@ -9,11 +9,8 @@ import com.fane.Back_End.packageV1.*;
  * The memento captures the beginning and ending indices of a selection in an engine at a specific point in time.
  * It is typically used in the context of the command pattern to support undo and redo operations.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.Engine
- * @see com.fane.Back_End.packageV0.Memento
- * @see com.fane.Back_End.packageV2.Memento
  */
 public class ChangeSelectionMemento implements Memento {
 

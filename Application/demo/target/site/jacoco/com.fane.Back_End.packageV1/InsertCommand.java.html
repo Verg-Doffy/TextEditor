@@ -1,35 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InsertCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">InsertCommand.java</span></div><h1>InsertCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1; 
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InsertCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">InsertCommand.java</span></div><h1>InsertCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The {@code InsertCommand} class represents a command for inserting text into an {@link Engine}.
+ * It implements the {@link Recordable} interface to support recording of its execution.
+ *
+ * The {@code InsertCommand} class inserts text from an associated {@link Invoker} into the engine,
+ * performs the insert operation, and saves itself using a {@link Recorder}. It also supports memento
+ * functionality to store and retrieve the state of the text to be inserted during the execution
+ * of the insert command.
+ *
+ * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV2
+ * @see Engine
+ * @see Invoker
+ * @see Recorder
+ * @see Recordable
+ * @see Memento
+ * @see InsertMemento
+ */
 public class InsertCommand implements Recordable {
+
     private Engine engine;
     private Invoker inv;
     private Recorder recorder;
 
-<span class="fc" id="L10">    public InsertCommand(Engine engine, Invoker inv, Recorder recorder) {</span>
-<span class="fc" id="L11">        this.engine = engine;</span>
-<span class="fc" id="L12">        this.inv = inv;</span>
-<span class="fc" id="L13">        this.recorder = recorder;</span>
-<span class="fc" id="L14">    }</span>
+    /**
+     * Constructs an {@code InsertCommand} with references to the specified {@link Engine}, {@link Invoker},
+     * and {@link Recorder}.
+     *
+     * @param engine   The engine responsible for text operations.
+     * @param inv      The invoker providing the text to be inserted.
+     * @param recorder The recorder used to save the command execution.
+     */
+<span class="fc" id="L40">    public InsertCommand(Engine engine, Invoker inv, Recorder recorder) {</span>
+<span class="fc" id="L41">        this.engine = engine;</span>
+<span class="fc" id="L42">        this.inv = inv;</span>
+<span class="fc" id="L43">        this.recorder = recorder;</span>
+<span class="fc" id="L44">    }</span>
 
+    /**
+     * Executes the insert operation by invoking the {@code insert()} method on the associated engine
+     * with the text provided by the invoker. Additionally, saves the command using the recorder
+     * to support recording functionality.
+     */
     @Override
     public void execute() {
-<span class="fc" id="L18">        engine.insert(inv.getText());</span>
-<span class="fc" id="L19">        recorder.save(this);</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L53">        engine.insert(inv.getText());</span>
+<span class="fc" id="L54">        recorder.save(this);</span>
+<span class="fc" id="L55">    }</span>
 
+    /**
+     * Retrieves a memento representing the state of the text to be inserted.
+     *
+     * @return A memento capturing the text to be inserted during the insert operation.
+     */
     @Override
     public Memento getMemento() {
-<span class="fc" id="L24">        return new InsertMemento(inv.getText());</span>
+<span class="fc" id="L64">        return new InsertMemento(inv.getText());</span>
     }
 
+    /**
+     * Sets the state of the associated invoker based on the provided memento.
+     * Specifically, updates the text to be inserted based on the information stored in the memento.
+     *
+     * @param memento The memento containing information about the text to be inserted.
+     */
     @Override
     public void setMemento(Memento memento) {
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (memento instanceof InsertMemento) {</span>
-<span class="fc" id="L30">            InsertMemento insertMemento = (InsertMemento) memento;</span>
-<span class="fc" id="L31">            inv.setText(insertMemento.getTextToInsert());</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (memento instanceof InsertMemento) {</span>
+<span class="fc" id="L76">            InsertMemento insertMemento = (InsertMemento) memento;</span>
+<span class="fc" id="L77">            inv.setText(insertMemento.getTextToInsert());</span>
         }
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L79">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

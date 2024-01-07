@@ -9,11 +9,8 @@ import com.fane.Back_End.packageV1.*;
  * The replay command executes the replay operation on the associated recorder, updating the state of the engine
  * based on the recorded history of commands.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.Recordable
- * @see com.fane.Back_End.packageV0.Recorder
- * @see com.fane.Back_End.packageV2.Command
  */
 public class ReplayCommand implements Command {
 

@@ -1,45 +1,85 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PasteCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">PasteCommand.java</span></div><h1>PasteCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1; 
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PasteCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">PasteCommand.java</span></div><h1>PasteCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The {@code PasteCommand} class represents a command for pasting content from the clipboard into an {@link Engine}.
+ * It implements the {@link Recordable} interface to support recording of its execution.
+ *
+ * The {@code PasteCommand} class pastes content from the clipboard into the engine, performs the paste operation,
+ * and saves itself using a {@link Recorder}. It also supports memento functionality to store and retrieve
+ * the state of the selection during the execution of the paste command.
+ *
+ * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV2
+ * @see Engine
+ * @see Recorder
+ * @see Recordable
+ * @see Memento
+ * @see ChangeSelectionMemento
+ */
 public class PasteCommand implements Recordable {
+
     private Engine engine;
     private Recorder recorder;
 
-<span class="fc" id="L9">    public PasteCommand(Engine engine, Recorder recorder) {</span>
-<span class="fc" id="L10">        this.engine = engine;</span>
-<span class="fc" id="L11">        this.recorder = recorder;</span>
-<span class="fc" id="L12">    }</span>
+    /**
+     * Constructs a {@code PasteCommand} with references to the specified {@link Engine} and {@link Recorder}.
+     *
+     * @param engine   The engine responsible for text operations.
+     * @param recorder The recorder used to save the command execution.
+     */
+<span class="fc" id="L35">    public PasteCommand(Engine engine, Recorder recorder) {</span>
+<span class="fc" id="L36">        this.engine = engine;</span>
+<span class="fc" id="L37">        this.recorder = recorder;</span>
+<span class="fc" id="L38">    }</span>
 
+    /**
+     * Executes the paste operation by invoking the {@code pasteClipboard()} method on the associated engine.
+     * Additionally, saves the command using the recorder to support recording functionality.
+     */
     @Override
     public void execute() {
-<span class="fc" id="L16">        engine.pasteClipboard();</span>
-<span class="fc" id="L17">        recorder.save(this);</span>
+<span class="fc" id="L46">        engine.pasteClipboard();</span>
+<span class="fc" id="L47">        recorder.save(this);</span>
+<span class="fc" id="L48">    }</span>
 
-<span class="fc" id="L19">    }</span>
-
+    /**
+     * Retrieves a memento representing the state of the selection in the associated engine.
+     *
+     * @return A memento capturing the current selection state.
+     */
     @Override
     public Memento getMemento() {
-<span class="fc" id="L23">        Selection selection = engine.getSelection();</span>
-<span class="fc" id="L24">        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());</span>
+<span class="fc" id="L57">        Selection selection = engine.getSelection();</span>
+<span class="fc" id="L58">        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());</span>
     }
 
+    /**
+     * Sets the state of the associated engine based on the provided memento.
+     * Specifically, adjusts the selection indices based on the information stored in the memento.
+     *
+     * @param memento The memento containing information about the selection state.
+     */
     @Override
     public void setMemento(Memento memento) {
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
-<span class="fc" id="L30">            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;</span>
-<span class="fc" id="L31">            int currentBufferLength = engine.getBufferContents().length();</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
+<span class="fc" id="L70">            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;</span>
+<span class="fc" id="L71">            int currentBufferLength = engine.getBufferContents().length();</span>
 
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">            if ((selectionMemento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                    &amp;&amp; (selectionMemento.getEndIndex() &lt;= currentBufferLength)) {</span>
-<span class="fc" id="L35">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
-<span class="fc" id="L36">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">            } else if (selectionMemento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
-<span class="nc" id="L38">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
-<span class="nc" id="L39">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
+            // Use the memento's begin and end indices to set the selection in the engine
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">            if ((selectionMemento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">                    &amp;&amp; (selectionMemento.getEndIndex() &lt;= currentBufferLength)) {</span>
+<span class="fc" id="L76">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
+<span class="fc" id="L77">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            } else if (selectionMemento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
+<span class="nc" id="L79">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
+<span class="nc" id="L80">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
             }
         }
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L83">    }</span>
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -14,11 +14,8 @@ import com.fane.Back_End.packageV2.*;
  * and pasting after recording stops. The program outputs the buffer contents and clipboard contents at different stages
  * to verify the effectiveness of the PasteCommand.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see com.fane.Back_End.packageV2
  */
 
 public class MainTest_V2_PasteCommand {

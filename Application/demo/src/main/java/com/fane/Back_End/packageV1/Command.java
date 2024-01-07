@@ -8,10 +8,8 @@ import com.fane.Back_End.packageV2.*;
  * Implementing classes should provide specific behavior in the {@link #execute()} method.
  * So that for each action of our text editor, it is called by the {@link #execute()} method.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV2
  */
 public interface Command {
 

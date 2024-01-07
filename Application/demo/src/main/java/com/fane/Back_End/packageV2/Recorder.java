@@ -15,11 +15,8 @@ import java.util.List;
  * The recorder maintains a history of executed commands along with their corresponding mementos during recording.
  * It also provides functionality to start and stop recording, replay the recorded commands, and save commands during recording.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.Engine
- * @see com.fane.Back_End.packageV0.Recordable
- * @see com.fane.Back_End.packageV0.Memento
  */
 public class Recorder {
 

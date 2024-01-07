@@ -12,11 +12,8 @@ import com.fane.Back_End.packageV2.*;
  * The example showcases the functionality of the implemented classes in the
  * The expected output of each action is also provided in comments for reference.
  * 
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see com.fane.Back_End.packageV2
  */
 
 public class MainTest_V2 {

@@ -14,11 +14,8 @@ import com.fane.Back_End.packageV2.*;
  * copy, and finally replaying the recorded actions. The program outputs the clipboard contents
  * at different stages to verify the effectiveness of the CopyCommand.
  *
- * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see com.fane.Back_End.packageV2
  */
 
 public class MainTest_V2_CopyCommand {
