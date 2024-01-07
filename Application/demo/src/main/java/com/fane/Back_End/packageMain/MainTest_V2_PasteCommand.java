@@ -4,8 +4,29 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The MainTest_V2_PasteCommand class serves as a test program for evaluating the functionality
+ * of the PasteCommand in the back-end text editing application using the command pattern.
+ * It demonstrates the usage of the paste command, including copying, pasting, and replaying recorded actions.
+ *
+ * The test scenario includes inserting initial text, copying a selection, pasting the copied text,
+ * starting recording, copying and pasting while recording, stopping recording, and performing additional insertions
+ * and pasting after recording stops. The program outputs the buffer contents and clipboard contents at different stages
+ * to verify the effectiveness of the PasteCommand.
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see com.fane.Back_End.packageV2
+ */
 
 public class MainTest_V2_PasteCommand {
+    /**
+     * The main method that serves as the entry point for the test program.
+     *
+     * @param args The command-line arguments (unused in this context).
+     */
     public static void main(String[] args) {
         // Create the main components
 

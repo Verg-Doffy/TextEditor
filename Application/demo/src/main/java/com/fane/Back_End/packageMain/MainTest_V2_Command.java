@@ -4,8 +4,30 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The MainTest_V2_Command class serves as a test program for evaluating the functionality
+ * of the command pattern implementation in the back-end text editing application.
+ * It demonstrates the usage of various commands such as insert, changeSelection, copy,
+ * cut, paste, delete, start, stop, and replay.
+ * 
+ * The test scenario includes initializing the engine, recorder, and invoker components,
+ * adding commands to the invoker, and performing actions like text insertion, cutting,
+ * pasting, copying, and deletion. The program outputs the buffer contents at different
+ * stages to verify the effectiveness of the commands.
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see com.fane.Back_End.packageV2
+ */
 
 public class MainTest_V2_Command {
+    /**
+     * The main method that serves as the entry point for the test program.
+     *
+     * @param args The command-line arguments (unused in this context).
+     */
     public static void main(String[] args) {
         // Create the main components
 

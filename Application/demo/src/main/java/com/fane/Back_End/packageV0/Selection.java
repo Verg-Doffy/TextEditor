@@ -3,7 +3,7 @@ package com.fane.Back_End.packageV0;
 /**
  * Provides access to selection control operations
  *
- * @author plouzeau
+ * @author Mohamed AL AFTAN & Djakaridja FANE
  * @version 1.0
  */
 public interface Selection {
@@ -12,7 +12,7 @@ public interface Selection {
      * Provides the index of the first character designated
      * by the selection.
      *
-     * @return
+     * @return the start index
      */
     int getBeginIndex();
 

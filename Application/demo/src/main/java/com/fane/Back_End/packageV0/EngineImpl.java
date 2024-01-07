@@ -1,12 +1,21 @@
 package com.fane.Back_End.packageV0;
 
+/**
+ * Main API for the text editing engine
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ */
+
 public class EngineImpl implements Engine {
 
     private Selection selection;
     private String clipboard;
     private StringBuilder buffer = new StringBuilder();
 
-    // Constructors
+    /**
+     * Constructor method of the class EngineImpl
+     */
     public EngineImpl() {
         this.selection = new SelectionImpl(buffer);
         this.clipboard = "";

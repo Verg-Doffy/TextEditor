@@ -4,8 +4,28 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The MainTest_V2_DeleteCommand class serves as a test program for evaluating the functionality
+ * of the DeleteCommand in the back-end text editing application using the command pattern.
+ * It demonstrates the usage of the delete command, recording actions, and replaying them.
+ *
+ * The test scenario includes inserting initial text, starting recording, performing a delete operation,
+ * stopping recording, and replaying the recorded actions. The program outputs the buffer contents at
+ * different stages to verify the effectiveness of the DeleteCommand.
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see com.fane.Back_End.packageV2
+ */
 
 public class MainTest_V2_DeleteCommand {
+    /**
+     * The main method that serves as the entry point for the test program.
+     *
+     * @param args The command-line arguments (unused in this context).
+     */
     public static void main(String[] args) {
 
         // Create the main components

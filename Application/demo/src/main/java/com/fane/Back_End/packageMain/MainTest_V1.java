@@ -1,11 +1,38 @@
 package com.fane.Back_End.packageMain;
 
 import com.fane.Back_End.packageV0.*;
-import com.fane.Back_End.packageV0.*;
-import com.fane.Back_End.packageV0.*;
+import com.fane.Back_End.packageV1.*;
+import com.fane.Back_End.packageV2.*;
+
+/**
+ * The {@code MainTest_V1} class serves as a commented-out test program for the functionality
+ * of the Back_End module, including the use of {@link EngineImpl},
+ * {@link Invoker}, and various command implementations (e.g., {@link CutCommand}, {@link PasteCommand}).
+ *
+ * This class demonstrates the setup of an engine, invoker, and several commands, followed by simulated
+ * operations such as text insertion, cutting, pasting, copying, and deleting.
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0.EngineImpl
+ * @see com.fane.Back_End.packageV0.Engine
+ * @see com.fane.Back_End.packageV0.Invoker
+ * @see com.fane.Back_End.packageV0.CutCommand
+ * @see com.fane.Back_End.packageV0.PasteCommand
+ * @see com.fane.Back_End.packageV0.CopyCommand
+ * @see com.fane.Back_End.packageV0.InsertCommand
+ * @see com.fane.Back_End.packageV0.DeleteCommand
+ * @see com.fane.Back_End.packageV0.ChangeSelectionCommand
+ */
 
 
 public class MainTest_V1 {
+
+        /**
+         * The main method that serves as a test program for the functionality of the Version 1 of the project.
+         *         *
+         * @param args The command-line arguments (unused in this context).
+         */
         /**
          * public static void main(String[] args) {
          * // Création de l'engine et de l'invocateur

@@ -4,6 +4,20 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The code {@code MainTest_V2} demonstrates the usage of Engine, Recorder, and Invoker
+ * components with various commands in a simulated text editor environment.
+ * It includes a sequence of actions such as inserting, cutting, pasting, and
+ * deleting text, along with starting, stopping, and replaying recording sessions.
+ * The example showcases the functionality of the implemented classes in the
+ * The expected output of each action is also provided in comments for reference.
+ * 
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see com.fane.Back_End.packageV2
+ */
 
 public class MainTest_V2 {
     public static void main(String[] args) {

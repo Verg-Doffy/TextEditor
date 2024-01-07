@@ -4,8 +4,29 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The MainTest_V2_CopyCommand class serves as a test program for evaluating the functionality
+ * of the CopyCommand in the back-end text editing application using the command pattern.
+ * It demonstrates the usage of the copy command, recording actions, and replaying them.
+ *
+ * The test scenario includes putting initial text in the buffer, performing a non-recorded copy,
+ * starting recording, performing a recorded copy, stopping recording, performing another non-recorded
+ * copy, and finally replaying the recorded actions. The program outputs the clipboard contents
+ * at different stages to verify the effectiveness of the CopyCommand.
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see com.fane.Back_End.packageV2
+ */
 
 public class MainTest_V2_CopyCommand {
+        /**
+         * The main method that serves as the entry point for the test program.
+         *
+         * @param args The command-line arguments (unused in this context).
+         */
         public static void main(String[] args) {
 
                 // Create the main components

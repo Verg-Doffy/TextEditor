@@ -4,8 +4,28 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * The MainTest_V2_InsertCommand class serves as a test program for evaluating the functionality
+ * of the InsertCommand in the back-end text editing application using the command pattern.
+ * It demonstrates the usage of the insert command, recording actions, and replaying them.
+ *
+ * The test scenario includes inserting initial text, starting recording, performing an insertion while
+ * recording, stopping recording, and performing another insertion after recording stops. The program outputs
+ * the buffer contents at different stages to verify the effectiveness of the InsertCommand.
+ *
+ * @author Mohamed AL AFTAN & Djakaridja FANE
+ * @version 1.0
+ * @see com.fane.Back_End.packageV0
+ * @see com.fane.Back_End.packageV1
+ * @see com.fane.Back_End.packageV2
+ */
 
 public class MainTest_V2_InsertCommand {
+    /**
+     * The main method that serves as the entry point for the test program.
+     *
+     * @param args The command-line arguments (unused in this context).
+     */
     public static void main(String[] args) {
 
         // Create the main components
