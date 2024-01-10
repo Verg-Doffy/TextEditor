@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Invoker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.packageV1</a> &gt; <span class="el_source">Invoker.java</span></div><h1>Invoker.java</h1><pre class="source lang-java linenums">package com.fane.packageV1; 
+//import com.fane.packageV0.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * The {@code Invoker} class represents an invoker that manages commands and their execution.
+ * 
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 1.0
+ */
+
+<span class="fc" id="L14">public class Invoker {</span>
+<span class="fc" id="L15">    private Map&lt;String, Command&gt; commands = new HashMap&lt;&gt;();</span>
+    private String text;
+    private int newBeginIndex;
+    private int newEndIndex;
+
+    /**
+     * Adds a command with the specified key to the invoker.
+     *
+     * @param key     The key associated with the command.
+     * @param command The command to be added.
+     */
+    public void addCommand(String key, Command command) {
+<span class="fc" id="L27">        commands.put(key, command);</span>
+<span class="fc" id="L28">    }</span>
+
+    /**
+     * Executes the command associated with the given key.
+     *
+     * @param key The key of the command to be executed.
+     */
+    public void executeCommand(String key) {
+<span class="fc" id="L36">        Command command = commands.get(key);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (command != null) {</span>
+<span class="fc" id="L38">            command.execute();</span>
+        }
+<span class="fc" id="L40">    }</span>
+
+    /**
+     * Gets the text associated with the invoker.
+     *
+     * @return The text.
+     */
+    public String getText() {
+<span class="fc" id="L48">        return text;</span>
+    }
+
+    /**
+     * Sets the text associated with the invoker.
+     *
+     * @param text The text to be set.
+     */
+    public void setText(String text) {
+<span class="fc" id="L57">        this.text = text;</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Gets the beginning index associated with the invoker.
+     *
+     * @return The beginning index.
+     */
+    public int getBeginIndex() {
+<span class="fc" id="L66">        return newBeginIndex;</span>
+    }
+
+    /**
+     * Gets the ending index associated with the invoker.
+     *
+     * @return The ending index.
+     */
+    public int getEndIndex() {
+<span class="fc" id="L75">        return newEndIndex;</span>
+    }
+
+    /**
+     * Sets the beginning index associated with the invoker.
+     *
+     * @param beginIndex The beginning index to be set.
+     */
+    public void setBeginIndex(int beginIndex) {
+<span class="fc" id="L84">        this.newBeginIndex = beginIndex;</span>
+<span class="fc" id="L85">    }</span>
+
+    /**
+     * Sets the ending index associated with the invoker.
+     *
+     * @param endIndex The ending index to be set.
+     */
+    public void setEndIndex(int endIndex) {
+<span class="fc" id="L93">        this.newEndIndex = endIndex;</span>
+<span class="fc" id="L94">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

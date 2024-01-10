@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainTest_V0.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.packageV0</a> &gt; <span class="el_source">MainTest_V0.java</span></div><h1>MainTest_V0.java</h1><pre class="source lang-java linenums">package com.fane.packageV0;
+
+
+/**
+ * The {@code MainTest_V0} class serves as a test program for the functionality of {@link EngineImpl}
+ * and related classes in the Back_End module for The V0 of the project.
+ *
+ * This class demonstrates the usage of an {@link EngineImpl} instance to perform various text operations,
+ * such as inserting, selecting, copying, cutting, pasting, and deleting text.
+ *
+ * Additionally, it includes a section for testing exceptions by attempting to perform operations
+ * with invalid selection indices.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 1.0
+ */
+
+<span class="nc" id="L18">public class MainTest_V0 {</span>
+
+    /**
+     * The main method that serves as the entry point for the test program.
+     *
+     * @param args The command-line arguments (unused in this context).
+     */
+    public static void main(String[] args) {
+        // Crée une instance de EngineImpl
+<span class="nc" id="L27">        Engine engine = new EngineImpl();</span>
+
+        // Insère du texte dans le buffer
+<span class="nc" id="L30">        engine.insert(&quot;Hello, World!&quot;);</span>
+<span class="nc" id="L31">        System.out.println(&quot;Buffer Contents: &quot; + engine.getBufferContents());</span>
+
+        // Sélectionne une partie du texte
+<span class="nc" id="L34">        Selection selection = engine.getSelection();</span>
+<span class="nc" id="L35">        selection.setBeginIndex(0);</span>
+<span class="nc" id="L36">        selection.setEndIndex(5);</span>
+
+        // Copie le texte sélectionné dans le clipboard
+<span class="nc" id="L39">        engine.copySelectedText();</span>
+<span class="nc" id="L40">        System.out.println(&quot;Clipboard Contents: &quot; + engine.getClipboardContents());</span>
+
+        // Coupe le texte sélectionné
+<span class="nc" id="L43">        engine.cutSelectedText();</span>
+<span class="nc" id="L44">        System.out.println(&quot;Buffer Contents after Cut: &quot; + engine.getBufferContents());</span>
+<span class="nc" id="L45">        System.out.println(&quot;Clipboard Contents after Cut: &quot; + engine.getClipboardContents());</span>
+
+        // Insère du texte depuis le clipboard
+<span class="nc" id="L48">        System.out.println(selection.getBeginIndex());</span>
+<span class="nc" id="L49">        System.out.println(selection.getEndIndex());</span>
+<span class="nc" id="L50">        selection.setEndIndex(1);</span>
+<span class="nc" id="L51">        selection.setBeginIndex(1);</span>
+<span class="nc" id="L52">        engine.pasteClipboard();</span>
+<span class="nc" id="L53">        System.out.println(&quot;Buffer Contents after Paste: &quot; + engine.getBufferContents());</span>
+
+        // Supprime le texte sélectionné
+<span class="nc" id="L56">        engine.delete();</span>
+<span class="nc" id="L57">        System.out.println(&quot;Buffer Contents after Delete: &quot; + engine.getBufferContents());</span>
+
+        /****************************************************
+         * Testing of Exception *
+         **************************************************** *
+         */
+
+<span class="nc" id="L64">        System.out.println(&quot;Buffer Contents: &quot; + engine.getBufferContents());</span>
+
+        // Sélectionne une partie du texte
+<span class="nc" id="L67">        Selection selection2 = engine.getSelection();</span>
+<span class="nc" id="L68">        selection2.setBeginIndex(6);</span>
+<span class="nc" id="L69">        selection2.setEndIndex(3);</span>
+
+        // Copie le texte sélectionné dans le clipboard
+<span class="nc" id="L72">        engine.copySelectedText();</span>
+<span class="nc" id="L73">        System.out.println(&quot;Clipboard Contents: &quot; + engine.getClipboardContents());</span>
+
+<span class="nc" id="L75">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

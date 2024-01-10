@@ -3,7 +3,7 @@ package com.fane.packageV0;
 /**
  * Main API for the text editing engine
  *
- * @author plouzeau
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
  */
 

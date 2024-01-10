@@ -1,0 +1,14 @@
+com\fane\packageV0\MainTest_V0.class
+com\fane\packageV0\SelectionImpl.class
+com\fane\packageV1\ChangeSelectionCommand.class
+com\fane\packageV1\PasteCommand.class
+com\fane\packageV1\CopyCommand.class
+com\fane\packageV1\DeleteCommand.class
+com\fane\packageV1\MainTest_V1.class
+com\fane\packageV1\CutCommand.class
+com\fane\packageV0\Selection.class
+com\fane\packageV0\EngineImpl.class
+com\fane\packageV0\Engine.class
+com\fane\packageV1\Command.class
+com\fane\packageV1\InsertCommand.class
+com\fane\packageV1\Invoker.class

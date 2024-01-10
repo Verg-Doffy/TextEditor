@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+demo,com.fane.packageV1,InsertCommand,0,16,0,0,0,6,0,2,0,2
+demo,com.fane.packageV1,ChangeSelectionCommand,0,47,0,2,0,10,0,3,0,2
+demo,com.fane.packageV1,CutCommand,0,10,0,0,0,5,0,2,0,2
+demo,com.fane.packageV1,CopyCommand,0,10,0,0,0,5,0,2,0,2
+demo,com.fane.packageV1,Invoker,0,47,1,1,0,17,1,9,0,9
+demo,com.fane.packageV1,MainTest_V1,156,0,0,0,38,0,2,0,2,0
+demo,com.fane.packageV1,DeleteCommand,0,10,0,0,0,5,0,2,0,2
+demo,com.fane.packageV1,PasteCommand,0,10,0,0,0,5,0,2,0,2
+demo,com.fane.packageV0,SelectionImpl,9,63,1,9,2,18,2,10,1,6
+demo,com.fane.packageV0,MainTest_V0,93,0,0,0,27,0,2,0,2,0
+demo,com.fane.packageV0,EngineImpl,0,151,2,2,0,36,2,9,0,9

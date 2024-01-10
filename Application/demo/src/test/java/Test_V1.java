@@ -5,10 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.fane.packageV0.*; 
 import com.fane.packageV1.*; 
 
+/**
+ * The {@code Test_V1} class contains JUnit tests for various commands
+ * using the {@link EngineImpl} and {@link Invoker} with different command implementations.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 1.0
+ */
+
 public class Test_V1 {
     private EngineImpl engine;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating an EngineImpl and an Invoker
+     * with various command implementations.
+     */
     @BeforeEach
     public void setUp() {
         engine = new EngineImpl();
@@ -23,6 +35,9 @@ public class Test_V1 {
         invoker.addCommand("changeSelection", new ChangeSelectionCommand(engine, invoker));
     }
 
+    /**
+     * Test the InsertCommand by inserting a specific text and checking if the buffer contents match.
+     */
     @Test
     public void testInsertCommand() {
         invoker.setText("Bonjour, Comment ça va?");
@@ -30,6 +45,9 @@ public class Test_V1 {
         assertEquals("Bonjour, Comment ça va?", engine.getBufferContents());
     }
 
+    /**
+     * Test the CopyCommand by copying a specific range of text and checking if the clipboard contents match.
+     */
     @Test
     public void testCopyCommand() {
         invoker.setText("Hello World");
@@ -42,6 +60,9 @@ public class Test_V1 {
         assertEquals("Hello World", engine.getBufferContents());
     }
 
+    /**
+     * Test the PasteCommand by simulating a cut operation and pasting the contents at a specific index.
+     */
     @Test
     public void testPasteCommand1() {
         invoker.setText("Hello World");
@@ -57,6 +78,9 @@ public class Test_V1 {
         assertEquals("WorldHello ", engine.getBufferContents());
     }
 
+    /**
+     * Test the PasteCommand by simulating a cut operation and pasting the contents at the end of the buffer.
+     */
     @Test
     public void testPasteCommand2() {
         invoker.setText("Bonjour, Comment ça va?");
@@ -72,6 +96,9 @@ public class Test_V1 {
         assertEquals("Comment ça va?Bonjour, ", engine.getBufferContents());
     }
 
+    /**
+     * Test the DeleteCommand by deleting a specific range of text and checking if the buffer contents match.
+     */
     @Test
     public void testDeleteCommand() {
         invoker.setText("Bonjour, Comment ça va?");
@@ -83,6 +110,9 @@ public class Test_V1 {
         assertEquals("Comment ça va?", engine.getBufferContents());
     }
 
+    /**
+     * Test the CutCommand by cutting a specific range of text and checking if the buffer and clipboard contents match.
+     */
     @Test
     public void testCutCommand() {
         invoker.setText("Bonjour, Comment ça va?");

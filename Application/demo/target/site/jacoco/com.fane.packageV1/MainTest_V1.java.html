@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainTest_V1.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.packageV1</a> &gt; <span class="el_source">MainTest_V1.java</span></div><h1>MainTest_V1.java</h1><pre class="source lang-java linenums">package com.fane.packageV1; 
+import com.fane.packageV0.*;
+
+/**
+ * The {@code MainTest_V1} class is a test program demonstrating the usage of commands
+ * with the Engine, Invoker, and various command implementations.
+ * 
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 1.0
+ */
+
+<span class="nc" id="L12">public class MainTest_V1 {</span>
+        /**
+         * The main method serves as the entry point for the test program.
+         *
+         * @param args The command-line arguments (unused in this context).
+         */
+        public static void main(String[] args) {
+                // Create the engine and invoker                
+<span class="nc" id="L20">                Engine engine = new EngineImpl();</span>
+<span class="nc" id="L21">                Invoker invoker = new Invoker();</span>
+
+                // Add some commands to the invoker
+<span class="nc" id="L24">                invoker.addCommand(&quot;cut&quot;, new CutCommand(engine));</span>
+<span class="nc" id="L25">                invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine));</span>
+<span class="nc" id="L26">                invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine));</span>
+<span class="nc" id="L27">                invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker));</span>
+<span class="nc" id="L28">                invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine));</span>
+<span class="nc" id="L29">                invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker));</span>
+
+                // Simulate some operations
+
+                // Insert initial text
+<span class="nc" id="L34">                invoker.setText(&quot;Bonjour, Comment ça va?&quot;);</span>
+<span class="nc" id="L35">                invoker.executeCommand(&quot;insert&quot;);</span>
+<span class="nc" id="L36">                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, Comment ça va?&quot;</span>
+
+                // Cut text
+<span class="nc" id="L39">                invoker.setBeginIndex(9);</span>
+<span class="nc" id="L40">                invoker.setEndIndex(16);</span>
+<span class="nc" id="L41">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L42">                invoker.executeCommand(&quot;cut&quot;);</span>
+
+                // Verification
+<span class="nc" id="L45">                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?&quot;</span>
+
+                // Paste the previously cut text at the end
+<span class="nc" id="L48">                invoker.setBeginIndex(engine.getBufferContents().length());</span>
+<span class="nc" id="L49">                invoker.setEndIndex(engine.getBufferContents().length());</span>
+<span class="nc" id="L50">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L51">                invoker.executeCommand(&quot;paste&quot;);</span>
+
+                // Verification
+<span class="nc" id="L54">                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?Comment&quot;</span>
+
+                // Test for CopyCommand
+<span class="nc" id="L57">                invoker.setBeginIndex(0);</span>
+<span class="nc" id="L58">                invoker.setEndIndex(7);</span>
+<span class="nc" id="L59">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L60">                invoker.executeCommand(&quot;copy&quot;);</span>
+<span class="nc" id="L61">                System.out.println(engine.getClipboardContents()); // Should print &quot;Bonjour&quot;</span>
+
+                // Test for PasteCommand
+<span class="nc" id="L64">                invoker.setBeginIndex(engine.getBufferContents().length());</span>
+<span class="nc" id="L65">                invoker.setEndIndex(engine.getBufferContents().length());</span>
+<span class="nc" id="L66">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L67">                invoker.executeCommand(&quot;paste&quot;);</span>
+<span class="nc" id="L68">                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?CommentBonjour&quot;</span>
+
+                // Test for DeleteCommand
+<span class="nc" id="L71">                invoker.setBeginIndex(16);</span>
+<span class="nc" id="L72">                invoker.setEndIndex(engine.getBufferContents().length());</span>
+<span class="nc" id="L73">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L74">                invoker.executeCommand(&quot;delete&quot;);</span>
+<span class="nc" id="L75">                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?&quot;</span>
+
+<span class="nc" id="L77">        }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChangeSelectionCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.packageV1</a> &gt; <span class="el_source">ChangeSelectionCommand.java</span></div><h1>ChangeSelectionCommand.java</h1><pre class="source lang-java linenums">package com.fane.packageV1;
+
+import com.fane.packageV0.*;
+
+/**
+ * The {@code ChangeSelectionCommand} class implements the {@link Command} interface and represents a command
+ * for changing the selection in the {@link Engine}.
+ * 
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 1.0
+ */
+
+public class ChangeSelectionCommand implements Command {
+    private Engine engine;
+    private Invoker inv;
+
+    /**
+     * Constructs a {@code ChangeSelectionCommand} with the specified {@link Engine} and {@link Invoker}.
+     *
+     * @param engine The engine on which the command operates.
+     * @param inv    The invoker that controls the command.
+     */
+<span class="fc" id="L23">    public ChangeSelectionCommand(Engine engine, Invoker inv) {</span>
+<span class="fc" id="L24">        this.engine = engine;</span>
+<span class="fc" id="L25">        this.inv = inv;</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Executes the change selection command.
+     * If the end index from the invoker is greater than or equal to the current selection's begin index,
+     * set the selection's end index to the invoker's end index and the begin index to the invoker's begin index.
+     * Otherwise, set the begin index to the invoker's begin index and the end index to the invoker's end index.
+     */
+    @Override
+    public void execute() {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (inv.getEndIndex() &gt;= engine.getSelection().getBeginIndex()) {</span>
+<span class="fc" id="L37">            engine.getSelection().setEndIndex(inv.getEndIndex());</span>
+<span class="fc" id="L38">            engine.getSelection().setBeginIndex(inv.getBeginIndex());</span>
+        } else {
+<span class="fc" id="L40">            engine.getSelection().setBeginIndex(inv.getBeginIndex());</span>
+<span class="fc" id="L41">            engine.getSelection().setEndIndex(inv.getEndIndex());</span>
+        }
+<span class="fc" id="L43">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
