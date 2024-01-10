@@ -23,28 +23,28 @@
      * @param args The command-line arguments (unused in this context).
      */
     public static void main(String[] args) {
-        // Crée une instance de EngineImpl
+        // Create an instance of EngineImpl
 <span class="nc" id="L27">        Engine engine = new EngineImpl();</span>
 
-        // Insère du texte dans le buffer
+        // Insert text into the buffer
 <span class="nc" id="L30">        engine.insert(&quot;Hello, World!&quot;);</span>
 <span class="nc" id="L31">        System.out.println(&quot;Buffer Contents: &quot; + engine.getBufferContents());</span>
 
-        // Sélectionne une partie du texte
+        // Select a part of the text
 <span class="nc" id="L34">        Selection selection = engine.getSelection();</span>
 <span class="nc" id="L35">        selection.setBeginIndex(0);</span>
 <span class="nc" id="L36">        selection.setEndIndex(5);</span>
 
-        // Copie le texte sélectionné dans le clipboard
+        // Copy the selected text to the clipboard
 <span class="nc" id="L39">        engine.copySelectedText();</span>
 <span class="nc" id="L40">        System.out.println(&quot;Clipboard Contents: &quot; + engine.getClipboardContents());</span>
 
-        // Coupe le texte sélectionné
+        // Cut the selected text
 <span class="nc" id="L43">        engine.cutSelectedText();</span>
 <span class="nc" id="L44">        System.out.println(&quot;Buffer Contents after Cut: &quot; + engine.getBufferContents());</span>
 <span class="nc" id="L45">        System.out.println(&quot;Clipboard Contents after Cut: &quot; + engine.getClipboardContents());</span>
 
-        // Insère du texte depuis le clipboard
+        // Insert text from the clipboard
 <span class="nc" id="L48">        System.out.println(selection.getBeginIndex());</span>
 <span class="nc" id="L49">        System.out.println(selection.getEndIndex());</span>
 <span class="nc" id="L50">        selection.setEndIndex(1);</span>
@@ -52,7 +52,7 @@
 <span class="nc" id="L52">        engine.pasteClipboard();</span>
 <span class="nc" id="L53">        System.out.println(&quot;Buffer Contents after Paste: &quot; + engine.getBufferContents());</span>
 
-        // Supprime le texte sélectionné
+        // Delete the selected text
 <span class="nc" id="L56">        engine.delete();</span>
 <span class="nc" id="L57">        System.out.println(&quot;Buffer Contents after Delete: &quot; + engine.getBufferContents());</span>
 
@@ -63,16 +63,17 @@
 
 <span class="nc" id="L64">        System.out.println(&quot;Buffer Contents: &quot; + engine.getBufferContents());</span>
 
-        // Sélectionne une partie du texte
+        // Select a part of the text
 <span class="nc" id="L67">        Selection selection2 = engine.getSelection();</span>
 <span class="nc" id="L68">        selection2.setBeginIndex(6);</span>
 <span class="nc" id="L69">        selection2.setEndIndex(3);</span>
 
-        // Copie le texte sélectionné dans le clipboard
+        // Copy the selected text to the clipboard
 <span class="nc" id="L72">        engine.copySelectedText();</span>
 <span class="nc" id="L73">        System.out.println(&quot;Clipboard Contents: &quot; + engine.getClipboardContents());</span>
 
 <span class="nc" id="L75">    }</span>
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
