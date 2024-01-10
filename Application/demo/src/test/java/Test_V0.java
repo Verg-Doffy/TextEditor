@@ -7,6 +7,9 @@ import com.fane.packageV0.*;
 
 /**
  * JUnit tests for the {@link Engine} class in the {@code com.fane.packageV0} package.
+* 
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 0.0
  */
 class Test_V0 {
 
