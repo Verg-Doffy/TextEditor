@@ -1,2 +1,2 @@
-Ceci est le readme de notre projet intitulé : TEXTEDITOR V2
-Je suis fane et je vais essayer de commit cette modification
+This application is a Master's project in Computer Science supervisend by Adrient LE ROCH & Nöel PLOUZEAU as part of the ACO module.
+
