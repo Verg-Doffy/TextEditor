@@ -4,7 +4,7 @@ package com.fane.Back_End.packageV0;
  * Provides access to selection control operations
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 
 public class SelectionImpl implements Selection {

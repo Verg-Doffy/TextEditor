@@ -10,7 +10,7 @@ import com.fane.Back_End.packageV1.*;
  * indicating that recording should cease, and subsequent commands will not be captured.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 public class StopCommand implements Command {
 

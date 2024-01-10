@@ -12,7 +12,7 @@ import com.fane.Back_End.packageV2.*;
  * the state of the selection during the execution of the paste command.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 public class PasteCommand implements Recordable {
 

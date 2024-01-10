@@ -7,15 +7,26 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for version 2 (V2) of the text editor application.
+ * This class focuses on testing the behavior of the InsertCommand and its replaying functionality
+ * in coordination with the Invoker, Engine, and Recorder components.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 2.0
+ */
 public class V2_InsertCommandReplayingTest {
 
     private Engine engine;
     private Recorder recorder;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating the main components - Engine, Recorder, and Invoker.
+     * Add commands to the invoker for testing.
+     */
     @BeforeEach
     void setUp() {
-
         // Create the main components
         engine = new EngineImpl();
         recorder = new Recorder(engine);
@@ -33,6 +44,11 @@ public class V2_InsertCommandReplayingTest {
         invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
+    /**
+     * Test the InsertCommand and its replaying functionality.
+     * It covers scenarios where text is inserted into the buffer before, during, and after recording,
+     * and verifies the correctness of the buffer content after replay.
+     */
     @Test
     void testInsertCommand() {
         // Insert text into the buffer before recording starts

@@ -7,11 +7,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for version 2 (V2) of the text editor application.
+ * This class focuses on testing the behavior of the CopyCommand and its replaying functionality
+ * in coordination with the Invoker, Engine, and Recorder components.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 2.0
+ */
 public class V2_CopyCommandReplayingTest {
     private Engine engine;
     private Recorder recorder;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating the main components - Engine, Recorder, and Invoker.
+     * Add commands to the invoker for testing.
+     */
     @BeforeEach
     void setUp() {
 
@@ -32,6 +44,11 @@ public class V2_CopyCommandReplayingTest {
         invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
+    /**
+     * Test the CopyCommand and its replaying functionality.
+     * It covers scenarios where text is copied to the clipboard before, during, and after recording,
+     * and verifies the correctness of the clipboard content after replay.
+     */
     @Test
     void testCopyCommand() {
         // Insert some text into the buffer
@@ -68,6 +85,7 @@ public class V2_CopyCommandReplayingTest {
         invoker.setEndIndex(7);
         invoker.executeCommand("changeSelection");
         invoker.executeCommand("copy");
+
         // Check if the clipboard contains the newly copied text
         assertEquals("blag", engine.getClipboardContents(),
                 "Clipboard should contain 'Blag' after copy during recording.");

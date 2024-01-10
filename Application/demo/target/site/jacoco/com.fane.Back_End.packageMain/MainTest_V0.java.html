@@ -15,7 +15,7 @@ import com.fane.Back_End.packageV2.*;
  * with invalid selection indices.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 
 <span class="nc" id="L21">public class MainTest_V0 {</span>
@@ -26,28 +26,28 @@ import com.fane.Back_End.packageV2.*;
      * @param args The command-line arguments (unused in this context).
      */
     public static void main(String[] args) {
-        // Crée une instance de EngineImpl
+        // Create an instance of EngineImpl
 <span class="nc" id="L30">        Engine engine = new EngineImpl();</span>
 
-        // Insère du texte dans le buffer
+        // Insert text into the buffer
 <span class="nc" id="L33">        engine.insert(&quot;Hello, World!&quot;);</span>
 <span class="nc" id="L34">        System.out.println(&quot;Buffer Contents: &quot; + engine.getBufferContents());</span>
 
-        // Sélectionne une partie du texte
+        // Select a part of the text
 <span class="nc" id="L37">        Selection selection = engine.getSelection();</span>
 <span class="nc" id="L38">        selection.setBeginIndex(0);</span>
 <span class="nc" id="L39">        selection.setEndIndex(5);</span>
 
-        // Copie le texte sélectionné dans le clipboard
+        // Copy the selected text to the clipboard
 <span class="nc" id="L42">        engine.copySelectedText();</span>
 <span class="nc" id="L43">        System.out.println(&quot;Clipboard Contents: &quot; + engine.getClipboardContents());</span>
 
-        // Coupe le texte sélectionné
+        // Cut the selected text
 <span class="nc" id="L46">        engine.cutSelectedText();</span>
 <span class="nc" id="L47">        System.out.println(&quot;Buffer Contents after Cut: &quot; + engine.getBufferContents());</span>
 <span class="nc" id="L48">        System.out.println(&quot;Clipboard Contents after Cut: &quot; + engine.getClipboardContents());</span>
 
-        // Insère du texte depuis le clipboard
+        // Insert text from the clipboard
 <span class="nc" id="L51">        System.out.println(selection.getBeginIndex());</span>
 <span class="nc" id="L52">        System.out.println(selection.getEndIndex());</span>
 <span class="nc" id="L53">        selection.setEndIndex(1);</span>
@@ -55,7 +55,7 @@ import com.fane.Back_End.packageV2.*;
 <span class="nc" id="L55">        engine.pasteClipboard();</span>
 <span class="nc" id="L56">        System.out.println(&quot;Buffer Contents after Paste: &quot; + engine.getBufferContents());</span>
 
-        // Supprime le texte sélectionné
+        // Delete the selected text
 <span class="nc" id="L59">        engine.delete();</span>
 <span class="nc" id="L60">        System.out.println(&quot;Buffer Contents after Delete: &quot; + engine.getBufferContents());</span>
 
@@ -66,12 +66,12 @@ import com.fane.Back_End.packageV2.*;
 
 <span class="nc" id="L67">        System.out.println(&quot;Buffer Contents: &quot; + engine.getBufferContents());</span>
 
-        // Sélectionne une partie du texte
+        // Select a part of the text
 <span class="nc" id="L70">        Selection selection2 = engine.getSelection();</span>
 <span class="nc" id="L71">        selection2.setBeginIndex(6);</span>
 <span class="nc" id="L72">        selection2.setEndIndex(3);</span>
 
-        // Copie le texte sélectionné dans le clipboard
+        // Copy the selected text to the clipboard
 <span class="nc" id="L75">        engine.copySelectedText();</span>
 <span class="nc" id="L76">        System.out.println(&quot;Clipboard Contents: &quot; + engine.getClipboardContents());</span>
 

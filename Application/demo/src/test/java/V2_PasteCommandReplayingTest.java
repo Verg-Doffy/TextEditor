@@ -7,14 +7,26 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for version 2 (V2) of the text editor application.
+ * This class focuses on testing the behavior of the PasteCommand and its replaying functionality
+ * in coordination with the Invoker, Engine, and Recorder components.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 2.0
+ */
+
 public class V2_PasteCommandReplayingTest {
     private Engine engine;
     private Recorder recorder;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating the main components - Engine, Recorder, and Invoker.
+     * Add commands to the invoker for testing.
+     */
     @BeforeEach
     void setUp() {
-
         // Create the main components
         engine = new EngineImpl();
         recorder = new Recorder(engine);
@@ -32,6 +44,11 @@ public class V2_PasteCommandReplayingTest {
         invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
+    /**
+     * Test the PasteCommand and its replaying functionality.
+     * It covers scenarios where text is copied and pasted before, during, and after recording,
+     * and verifies the correctness of the buffer content after replay.
+     */
     @Test
     void testPasteAndReplay() {
         invoker.setText("Helloworld");

@@ -6,11 +6,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for version 2 (V2) of the text editor application.
+ * This class focuses on testing the behavior of the CutCommand and its replaying functionality
+ * in coordination with the Invoker, Engine, and Recorder components.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 2.0
+ */
+
 public class V2_CutCommandReplayingTest {
     private Engine engine;
     private Recorder recorder;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating the main components - Engine, Recorder, and Invoker.
+     * Add commands to the invoker for testing.
+     */
     @BeforeEach
     void setUp() {
         // Initialize the main components of the editor
@@ -30,6 +43,11 @@ public class V2_CutCommandReplayingTest {
         invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
+    /**
+     * Test the CutCommand and its replaying functionality.
+     * It covers scenarios where text is cut from the buffer before, during, and after recording,
+     * and verifies the correctness of the buffer and clipboard content after replay.
+     */
     @Test
     public void testCutCommandAndReplay() {
         // Insert initial text and verify

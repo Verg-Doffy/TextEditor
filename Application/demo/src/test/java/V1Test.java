@@ -6,12 +6,25 @@ import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
 
+/**
+ * Test class for version 1 (V1) of the text editor application.
+ * This class tests the integration of main commands using the Invoker, Engine, and Recorder components.
+ * It focuses on the functionality of commands such as insert, changeSelection, copy, cut, paste, delete,
+ * start, stop, and replay.
+ *
+ * @author Mohamed AL AFTAN Djakaridja Fane
+ * @version 2.0
+ */
 public class V1Test {
 
     private Engine engine;
     private Recorder recorder;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating the main components - Engine, Recorder, and Invoker.
+     * Add commands to the invoker for testing.
+     */
     @BeforeEach
     void setUp() {
 
@@ -32,6 +45,10 @@ public class V1Test {
         invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
+    /**
+     * Test the main commands in version 1 (V1) of the text editor application.
+     * Commands include start, insert, changeSelection, cut, paste, delete, stop, and replay.
+     */
     @Test
     public void testMainCommandsV2() {
         invoker.executeCommand("start");

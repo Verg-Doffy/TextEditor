@@ -11,7 +11,7 @@ import com.fane.Back_End.packageV2.*;
  * and saves itself using a {@link Recorder}.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 public class CopyCommand implements Recordable {
 

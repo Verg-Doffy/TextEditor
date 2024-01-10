@@ -7,11 +7,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/** 
+ * Test class for version 2 (V2) of the text editor application.
+ * This class focuses on testing the behavior of the ChangeSelectionCommand and its replaying functionality
+ * in coordination with the Invoker, Engine, and Recorder components.
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 2.0
+ */
+
 public class V2_ChangeSelectionCommandReplayingTest {
     private Engine engine;
     private Recorder recorder;
     private Invoker invoker;
 
+    /**
+     * Set up the test environment by creating the main components - Engine, Recorder, and Invoker.
+     * Add commands to the invoker for testing.
+     */
     @BeforeEach
     void setUp() {
 
@@ -32,6 +45,11 @@ public class V2_ChangeSelectionCommandReplayingTest {
         invoker.addCommand("replay", new ReplayCommand(recorder));
     }
 
+    /**
+     * Test the ChangeSelectionCommand and its replaying functionality.
+     * It covers scenarios where the selection changes before recording, during recording, after recording,
+     * and replays to verify the correct selection indices.
+     */
     @Test
     void testChangeSelectionAndReplay() {
         // Insert text

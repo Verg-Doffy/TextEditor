@@ -13,7 +13,7 @@ import com.fane.Back_End.packageV2.*;
  * operations such as text insertion, cutting, pasting, copying, and deleting.
  *
  * @author Mohamed AL AFTAN  Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 
 
@@ -25,73 +25,66 @@ import com.fane.Back_End.packageV2.*;
          * @param args The command-line arguments (unused in this context).
          */
         /**
-         * public static void main(String[] args) {
-         * // Création de l'engine et de l'invocateur
-         * Engine engine = new EngineImpl();
-         * Invoker invoker = new Invoker();
-         * 
-         * // Ajout de quelques commandes à l'invocateur
-         * invoker.addCommand(&quot;cut&quot;, new CutCommand(engine));
-         * invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine));
-         * invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine));
-         * invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker));
-         * invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine));
-         * invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine,
-         * invoker));
-         * 
-         * // Simulons quelques opérations
-         * 
-         * // Insérer un texte initial
-         * invoker.setText(&quot;Bonjour, Comment ça va?&quot;);
-         * invoker.executeCommand(&quot;insert&quot;);
-         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
-         * Comment ça va?&quot;
-         * 
-         * // Couper du texte
-         * invoker.setBeginIndex(9);
-         * invoker.setEndIndex(16);
-         * invoker.executeCommand(&quot;changeSelection&quot;);
-         * invoker.executeCommand(&quot;cut&quot;);
-         * 
-         * // Vérification
-         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
-         * ça va?&quot;
-         * 
-         * // Coller le texte précédemment coupé à la fin
-         * invoker.setBeginIndex(engine.getBufferContents().length());
-         * invoker.setEndIndex(engine.getBufferContents().length());
-         * invoker.executeCommand(&quot;changeSelection&quot;);
-         * invoker.executeCommand(&quot;paste&quot;);
-         * 
-         * // Vérification
-         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
-         * ça va?Comment&quot;
-         * 
-         * // Test pour CopyCommand
-         * invoker.setBeginIndex(0);
-         * invoker.setEndIndex(7);
-         * invoker.executeCommand(&quot;changeSelection&quot;);
-         * invoker.executeCommand(&quot;copy&quot;);
-         * System.out.println(engine.getClipboardContents()); // Devrait afficher
-         * &quot;Bonjour&quot;
-         * 
-         * // Test pour PasteCommand
-         * invoker.setBeginIndex(engine.getBufferContents().length());
-         * invoker.setEndIndex(engine.getBufferContents().length());
-         * invoker.executeCommand(&quot;changeSelection&quot;);
-         * invoker.executeCommand(&quot;paste&quot;);
-         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
-         * ça va?CommentBonjour&quot;
-         * 
-         * // Test pour DeleteCommand
-         * invoker.setBeginIndex(16);
-         * invoker.setEndIndex(engine.getBufferContents().length());
-         * invoker.executeCommand(&quot;changeSelection&quot;);
-         * invoker.executeCommand(&quot;delete&quot;);
-         * System.out.println(engine.getBufferContents()); // Devrait afficher &quot;Bonjour,
-         * ça va?&quot;
-         * 
-         * }
+         public static void main(String[] args) {
+                // Create the engine and invoker                
+                Engine engine = new EngineImpl();
+                Invoker invoker = new Invoker();
+
+                // Add some commands to the invoker
+                invoker.addCommand(&quot;cut&quot;, new CutCommand(engine));
+                invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine));
+                invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine));
+                invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker));
+                invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine));
+                invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker));
+
+                // Simulate some operations
+
+                // Insert initial text
+                invoker.setText(&quot;Bonjour, Comment ça va?&quot;);
+                invoker.executeCommand(&quot;insert&quot;);
+                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, Comment ça va?&quot;
+
+                // Cut text
+                invoker.setBeginIndex(9);
+                invoker.setEndIndex(16);
+                invoker.executeCommand(&quot;changeSelection&quot;);
+                invoker.executeCommand(&quot;cut&quot;);
+
+                // Verification
+                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?&quot;
+
+                // Paste the previously cut text at the end
+                invoker.setBeginIndex(engine.getBufferContents().length());
+                invoker.setEndIndex(engine.getBufferContents().length());
+                invoker.executeCommand(&quot;changeSelection&quot;);
+                invoker.executeCommand(&quot;paste&quot;);
+
+                // Verification
+                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?Comment&quot;
+
+                // Test for CopyCommand
+                invoker.setBeginIndex(0);
+                invoker.setEndIndex(7);
+                invoker.executeCommand(&quot;changeSelection&quot;);
+                invoker.executeCommand(&quot;copy&quot;);
+                System.out.println(engine.getClipboardContents()); // Should print &quot;Bonjour&quot;
+
+                // Test for PasteCommand
+                invoker.setBeginIndex(engine.getBufferContents().length());
+                invoker.setEndIndex(engine.getBufferContents().length());
+                invoker.executeCommand(&quot;changeSelection&quot;);
+                invoker.executeCommand(&quot;paste&quot;);
+                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?CommentBonjour&quot;
+
+                // Test for DeleteCommand
+                invoker.setBeginIndex(16);
+                invoker.setEndIndex(engine.getBufferContents().length());
+                invoker.executeCommand(&quot;changeSelection&quot;);
+                invoker.executeCommand(&quot;delete&quot;);
+                System.out.println(engine.getBufferContents()); // Should print &quot;Bonjour, ça va?&quot;
+
+        }
          */
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

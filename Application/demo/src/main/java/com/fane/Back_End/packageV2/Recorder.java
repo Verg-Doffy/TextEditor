@@ -16,7 +16,7 @@ import java.util.List;
  * It also provides functionality to start and stop recording, replay the recorded commands, and save commands during recording.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 public class Recorder {
 

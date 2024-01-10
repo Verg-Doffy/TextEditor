@@ -10,7 +10,7 @@ import com.fane.Back_End.packageV1.*;
  * allowing the recorder to capture and store subsequent commands in its history.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 public class StartCommand implements Command {
 

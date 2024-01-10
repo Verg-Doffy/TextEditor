@@ -11,7 +11,7 @@ import com.fane.Back_End.packageV1.*;
  * used in the context of the command pattern to support undo and redo operations.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 2.0
  */
 public interface Recordable extends Command, Originator {
 
