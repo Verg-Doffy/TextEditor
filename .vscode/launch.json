@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainTest_V3",
+            "request": "launch",
+            "mainClass": "com.fane.Back_End.packageMain.MainTest_V3",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
             "name": "DpMain",
             "request": "launch",
             "mainClass": "com.fane.DpMain",

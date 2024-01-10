@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Recorder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV2</a> &gt; <span class="el_source">Recorder.java</span></div><h1>Recorder.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV2;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
+import com.fane.Back_End.packageV3.*;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * The {@code Recorder} class is responsible for recording and replaying commands executed on an {@link Engine}.
@@ -16,45 +19,51 @@ import java.util.List;
  * It also provides functionality to start and stop recording, replay the recorded commands, and save commands during recording.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class Recorder {
 
     private List&lt;Pair&lt;Recordable, Memento&gt;&gt; history;
-<span class="fc" id="L24">    private boolean isRecording = false;</span>
-<span class="fc" id="L25">    private boolean isReplaying = false;</span>
+<span class="fc" id="L27">    private boolean isRecording = false;</span>
+<span class="fc" id="L28">    private boolean isReplaying = false;</span>
+<span class="fc" id="L29">    private boolean isUndoing = false;</span>
+<span class="fc" id="L30">    private boolean isRedoing = false;</span>
     private Engine engine;
+    private Stack&lt;Pair&lt;Recordable, Memento&gt;&gt; undoStack;
+    private Stack&lt;Pair&lt;Recordable, Memento&gt;&gt; redoStack;
 
     /**
      * Constructs a {@code Recorder} with the specified {@link Engine}.
      *
      * @param engine The engine to which commands are applied and recorded.
      */
-<span class="fc" id="L33">    public Recorder(Engine engine) {</span>
-<span class="fc" id="L34">        this.history = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L35">        this.engine = engine;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L40">    public Recorder(Engine engine) {</span>
+<span class="fc" id="L41">        this.history = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L42">        this.engine = engine;</span>
+<span class="fc" id="L43">        this.undoStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L44">        this.redoStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L45">    }</span>
 
     /**
      * Starts recording commands. Clears any previous recordings.
      */
     public void start() {
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (!isRecording) {</span>
-<span class="fc" id="L43">            history.clear(); // Clear any previous recordings</span>
-<span class="fc" id="L44">            isRecording = true;</span>
-<span class="fc" id="L45">            System.out.println(&quot;Recording started&quot;);</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (!isRecording) {</span>
+<span class="fc" id="L52">            history.clear(); // Clear any previous recordings</span>
+<span class="fc" id="L53">            isRecording = true;</span>
+<span class="fc" id="L54">            System.out.println(&quot;Recording started&quot;);</span>
         }
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L56">    }</span>
 
     /**
      * Stops recording commands.
      */
     public void stop() {
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (isRecording) {</span>
-<span class="fc" id="L54">            isRecording = false;</span>
-<span class="fc" id="L55">            System.out.println(&quot;Recording stopped&quot;);</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (isRecording) {</span>
+<span class="fc" id="L63">            isRecording = false;</span>
+<span class="fc" id="L64">            System.out.println(&quot;Recording stopped&quot;);</span>
         }
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L66">    }</span>
 
     /**
      * Checks if the recorder is currently in recording mode.
@@ -62,7 +71,7 @@ public class Recorder {
      * @return {@code true} if recording, {@code false} otherwise.
      */
     public boolean isRecording() {
-<span class="fc" id="L65">        return isRecording;</span>
+<span class="fc" id="L74">        return isRecording;</span>
     }
 
     /**
@@ -71,36 +80,97 @@ public class Recorder {
      * @return {@code true} if replaying, {@code false} otherwise.
      */
     public boolean isReplaying() {
-<span class="nc" id="L74">        return isReplaying;</span>
+<span class="fc" id="L83">        return isReplaying;</span>
+    }
+
+    /**
+     * Checks if the recorder is currently in undoing mode.
+     *
+     * @return {@code true} if undoing, {@code false} otherwise.
+     */
+    public boolean isUndoing() {
+<span class="fc" id="L92">        return isUndoing;</span>
+    }
+
+    /**
+     * Checks if the recorder is currently in redoing mode.
+     *
+     * @return {@code true} if redoing, {@code false} otherwise.
+     */
+    public boolean isRedoing() {
+<span class="fc" id="L101">        return isRedoing;</span>
     }
 
     /**
      * Replays the recorded commands and updates the state of the engine accordingly.
      */
     public void replay() {
-<span class="fc" id="L81">        System.out.println(&quot;Current State before Replay: &quot; + engine.getBufferContents());</span>
-<span class="fc" id="L82">        isReplaying = true;</span>
+<span class="fc" id="L108">        System.out.println(&quot;Current State before Replay: &quot; + engine.getBufferContents());</span>
+<span class="fc" id="L109">        isReplaying = true;</span>
 
-<span class="fc bfc" id="L84" title="All 2 branches covered.">        for (Pair&lt;Recordable, Memento&gt; pair : history) {</span>
-<span class="fc" id="L85">            Recordable command = pair.getLeft();</span>
-<span class="fc" id="L86">            command.setMemento(pair.getRight());</span>
-<span class="fc" id="L87">            command.execute();</span>
-<span class="fc" id="L88">        }</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (Pair&lt;Recordable, Memento&gt; pair : history) {</span>
+<span class="fc" id="L112">            Recordable command = pair.getLeft();</span>
+<span class="fc" id="L113">            command.setMemento(pair.getRight());</span>
+<span class="fc" id="L114">            command.execute();</span>
+<span class="fc" id="L115">        }</span>
 
-<span class="fc" id="L90">        isReplaying = false;</span>
-<span class="fc" id="L91">        System.out.println(&quot;New State after Replay: &quot; + engine.getBufferContents());</span>
-<span class="fc" id="L92">        System.out.println(&quot;Clipboard content after Replay: &quot; + engine.getClipboardContents());</span>
-<span class="fc" id="L93">    }</span>
+<span class="fc" id="L117">        isReplaying = false;</span>
+<span class="fc" id="L118">        System.out.println(&quot;New State after Replay: &quot; + engine.getBufferContents());</span>
+<span class="fc" id="L119">        System.out.println(&quot;Clipboard content after Replay: &quot; + engine.getClipboardContents());</span>
+<span class="fc" id="L120">    }</span>
 
     /**
      * Saves the provided command along with its memento to the history during recording.
      *
      * @param command The command to be saved.
      */
-    public void save(Recordable command) {
-<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (isRecording) {</span>
-<span class="fc" id="L102">            history.add(Pair.of(command, command.getMemento()));</span>
+    public void saveForReplay(Recordable command) {
+        // Only save for replay if we're recording and not undoing, redoing, or
+        // replaying
+<span class="pc bpc" id="L130" title="3 of 8 branches missed.">        if (isRecording &amp;&amp; !isUndoing &amp;&amp; !isRedoing &amp;&amp; !isReplaying) {</span>
+<span class="fc" id="L131">            history.add(Pair.of(command, command.getMemento()));</span>
         }
-<span class="fc" id="L104">    }</span>
+<span class="fc" id="L133">    }</span>
+
+    /**
+     * Saves the provided command along with its memento to the undo stack.
+     *
+     * @param command The command to be saved.
+     */
+    public void save(Recordable command) {
+        // Only save if we're not undoing, redoing, or replaying
+<span class="pc bpc" id="L142" title="1 of 6 branches missed.">        if (!isUndoing &amp;&amp; !isRedoing &amp;&amp; !isReplaying) {</span>
+<span class="fc" id="L143">            undoStack.push(Pair.of(command, command.getMemento()));</span>
+<span class="fc" id="L144">            redoStack.clear(); // Clear redo stack whenever a new command is executed</span>
+        }
+<span class="fc" id="L146">    }</span>
+
+    /**
+     * Undoes the last recorded command.
+     */
+    public void undo() {
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (!undoStack.isEmpty()) {</span>
+<span class="fc" id="L153">            isUndoing = true; // Set isUndoing to true before undo operation</span>
+<span class="fc" id="L154">            Pair&lt;Recordable, Memento&gt; lastCommand = undoStack.pop();</span>
+<span class="fc" id="L155">            lastCommand.getLeft().setMemento(lastCommand.getRight());</span>
+<span class="fc" id="L156">            lastCommand.getLeft().undo();</span>
+<span class="fc" id="L157">            redoStack.push(lastCommand);</span>
+<span class="fc" id="L158">            isUndoing = false; // Reset isUndoing after undo operation</span>
+        }
+<span class="fc" id="L160">    }</span>
+
+    /**
+     * Redoes the last undone command.
+     */
+    public void redo() {
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (!redoStack.isEmpty()) {</span>
+<span class="fc" id="L167">            isRedoing = true; // Set isRedoing to true before redo operation</span>
+<span class="fc" id="L168">            Pair&lt;Recordable, Memento&gt; lastUndoneCommand = redoStack.pop();</span>
+<span class="fc" id="L169">            lastUndoneCommand.getLeft().setMemento(lastUndoneCommand.getRight());</span>
+<span class="fc" id="L170">            lastUndoneCommand.getLeft().execute();</span>
+<span class="fc" id="L171">            undoStack.push(lastUndoneCommand);</span>
+<span class="fc" id="L172">            isRedoing = false; // Reset isRedoing after redo operation</span>
+        }
+<span class="fc" id="L174">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

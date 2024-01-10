@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChangeSelectionMemento.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV2</a> &gt; <span class="el_source">ChangeSelectionMemento.java</span></div><h1>ChangeSelectionMemento.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV2;
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
+import com.fane.Back_End.packageV3.*;
+
 
 /**
  * The {@code ChangeSelectionMemento} class represents a memento object used to store the state of a selection change
@@ -10,7 +12,7 @@ import com.fane.Back_End.packageV1.*;
  * It is typically used in the context of the command pattern to support undo and redo operations.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class ChangeSelectionMemento implements Memento {
 
@@ -23,10 +25,10 @@ public class ChangeSelectionMemento implements Memento {
      * @param beginIndex The starting index of the selection.
      * @param endIndex   The ending index of the selection.
      */
-<span class="fc" id="L26">    public ChangeSelectionMemento(int beginIndex, int endIndex) {</span>
-<span class="fc" id="L27">        this.beginIndex = beginIndex;</span>
-<span class="fc" id="L28">        this.endIndex = endIndex;</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L28">    public ChangeSelectionMemento(int beginIndex, int endIndex) {</span>
+<span class="fc" id="L29">        this.beginIndex = beginIndex;</span>
+<span class="fc" id="L30">        this.endIndex = endIndex;</span>
+<span class="fc" id="L31">    }</span>
 
     /**
      * Gets the beginning index of the selection stored in this memento.
@@ -34,7 +36,7 @@ public class ChangeSelectionMemento implements Memento {
      * @return The beginning index of the selection.
      */
     public int getBeginIndex() {
-<span class="fc" id="L37">        return beginIndex;</span>
+<span class="fc" id="L39">        return beginIndex;</span>
     }
 
     /**
@@ -43,7 +45,7 @@ public class ChangeSelectionMemento implements Memento {
      * @return The ending index of the selection.
      */
     public int getEndIndex() {
-<span class="fc" id="L46">        return endIndex;</span>
+<span class="fc" id="L48">        return endIndex;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

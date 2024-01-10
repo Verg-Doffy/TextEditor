@@ -2,6 +2,8 @@ package com.fane.Back_End.packageV1;
 
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +59,7 @@ public class Invoker {
         Command command = commands.get(key);
         if (command != null) {
             if (command instanceof Recordable && recorder.isRecording()) {
-                recorder.save((Recordable) command);
+                recorder.saveForReplay((Recordable) command);
             }
             command.execute();
         }

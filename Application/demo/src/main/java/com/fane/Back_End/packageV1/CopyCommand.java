@@ -1,7 +1,10 @@
 package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
 
 /**
  * The {@code CopyCommand} class represents a command for copying selected text using an {@link Engine}.
@@ -17,6 +20,8 @@ public class CopyCommand implements Recordable {
 
     private Engine engine;
     private Recorder recorder;
+    private Stack<String> clipboardBeforeCopyStack;
+
 
     /**
      * Constructs a {@code CopyCommand} with references to the specified {@link Engine} and {@link Recorder}.
@@ -27,16 +32,30 @@ public class CopyCommand implements Recordable {
     public CopyCommand(Engine engine, Recorder recorder) {
         this.engine = engine;
         this.recorder = recorder;
+        this.clipboardBeforeCopyStack = new Stack<>();
     }
 
     /**
-     * Executes the copy operation by invoking the {@code copySelectedText()} method on the associated engine.
-     * Additionally, saves the command using the recorder to support recording functionality.
+     * Executes the copy command, capturing the current selection in the engine, performing the copy operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
+        clipboardBeforeCopyStack.push(engine.getClipboardContents());
         engine.copySelectedText();
+
+        // Save for undo and redo functionalities
         recorder.save(this);
+    }
+
+    /**
+     * Undoes the copy command by restoring the clipboard to its state before the copy operation.
+     */
+    @Override
+    public void undo() {
+        if (!clipboardBeforeCopyStack.isEmpty()) {
+            engine.setClipboardContents(clipboardBeforeCopyStack.pop());
+        }
     }
 
     /**

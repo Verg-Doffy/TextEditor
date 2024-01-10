@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CopyCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">CopyCommand.java</span></div><h1>CopyCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
 
 /**
  * The {@code CopyCommand} class represents a command for copying selected text using an {@link Engine}.
@@ -11,12 +14,14 @@ import com.fane.Back_End.packageV2.*;
  * and saves itself using a {@link Recorder}.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class CopyCommand implements Recordable {
 
     private Engine engine;
     private Recorder recorder;
+    private Stack&lt;String&gt; clipboardBeforeCopyStack;
+
 
     /**
      * Constructs a {@code CopyCommand} with references to the specified {@link Engine} and {@link Recorder}.
@@ -24,20 +29,34 @@ public class CopyCommand implements Recordable {
      * @param engine   The engine responsible for text operations.
      * @param recorder The recorder used to save the command execution.
      */
-<span class="fc" id="L27">    public CopyCommand(Engine engine, Recorder recorder) {</span>
-<span class="fc" id="L28">        this.engine = engine;</span>
-<span class="fc" id="L29">        this.recorder = recorder;</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L32">    public CopyCommand(Engine engine, Recorder recorder) {</span>
+<span class="fc" id="L33">        this.engine = engine;</span>
+<span class="fc" id="L34">        this.recorder = recorder;</span>
+<span class="fc" id="L35">        this.clipboardBeforeCopyStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L36">    }</span>
 
     /**
-     * Executes the copy operation by invoking the {@code copySelectedText()} method on the associated engine.
-     * Additionally, saves the command using the recorder to support recording functionality.
+     * Executes the copy command, capturing the current selection in the engine, performing the copy operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
-<span class="fc" id="L38">        engine.copySelectedText();</span>
-<span class="fc" id="L39">        recorder.save(this);</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L44">        clipboardBeforeCopyStack.push(engine.getClipboardContents());</span>
+<span class="fc" id="L45">        engine.copySelectedText();</span>
+
+        // Save for undo and redo functionalities
+<span class="fc" id="L48">        recorder.save(this);</span>
+<span class="fc" id="L49">    }</span>
+
+    /**
+     * Undoes the copy command by restoring the clipboard to its state before the copy operation.
+     */
+    @Override
+    public void undo() {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (!clipboardBeforeCopyStack.isEmpty()) {</span>
+<span class="fc" id="L57">            engine.setClipboardContents(clipboardBeforeCopyStack.pop());</span>
+        }
+<span class="fc" id="L59">    }</span>
 
     /**
      * Retrieves a memento representing the state of the selection in the associated engine.
@@ -46,8 +65,8 @@ public class CopyCommand implements Recordable {
      */
     @Override
     public Memento getMemento() {
-<span class="fc" id="L49">        Selection selection = engine.getSelection();</span>
-<span class="fc" id="L50">        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());</span>
+<span class="fc" id="L68">        Selection selection = engine.getSelection();</span>
+<span class="fc" id="L69">        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());</span>
     }
 
     /**
@@ -58,19 +77,19 @@ public class CopyCommand implements Recordable {
      */
     @Override
     public void setMemento(Memento memento) {
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
-<span class="fc" id="L62">            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;</span>
-<span class="fc" id="L63">            int currentBufferLength = engine.getBufferContents().length();</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
+<span class="fc" id="L81">            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;</span>
+<span class="fc" id="L82">            int currentBufferLength = engine.getBufferContents().length();</span>
 
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">            if ((selectionMemento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
-<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                    &amp;&amp; (selectionMemento.getEndIndex() &lt;= currentBufferLength)) {</span>
-<span class="fc" id="L67">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
-<span class="fc" id="L68">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">            } else if (selectionMemento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
-<span class="nc" id="L70">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
-<span class="nc" id="L71">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">            if ((selectionMemento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">                    &amp;&amp; (selectionMemento.getEndIndex() &lt;= currentBufferLength)) {</span>
+<span class="fc" id="L86">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
+<span class="fc" id="L87">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            } else if (selectionMemento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
+<span class="nc" id="L89">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
+<span class="nc" id="L90">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
             }
         }
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L93">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -4,7 +4,7 @@
  * Main API for the text editing engine
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 
 public class EngineImpl implements Engine {
@@ -120,6 +120,20 @@ public class EngineImpl implements Engine {
 <span class="fc" id="L120">            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text</span>
         }
 <span class="fc" id="L122">    }</span>
+
+    /**
+     * Sets the contents of the clipboard.
+     * This method updates the internal clipboard with the specified text.
+     * It can be used to programmatically change the contents of the clipboard,
+     * which is particularly useful for undo/redo operations that involve clipboard
+     * manipulation.
+     *
+     * @param clipboardContent The text to be set as the new clipboard content.
+     */
+    @Override
+    public void setClipboardContents(String clipboardContent) {
+<span class="fc" id="L135">        this.clipboard = clipboardContent;</span>
+<span class="fc" id="L136">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

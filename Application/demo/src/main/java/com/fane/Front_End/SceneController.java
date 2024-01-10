@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
@@ -24,6 +23,8 @@ import java.util.Optional;
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.RedoCommand;
+import com.fane.Back_End.packageV3.UndoCommand;
 
 /**
  * The {@code SceneController} class manages the interaction between the graphical user interface (GUI) components
@@ -115,6 +116,8 @@ public class SceneController {
         invoker.addCommand("start", new StartCommand(recorder));
         invoker.addCommand("stop", new StopCommand(recorder));
         invoker.addCommand("replay", new ReplayCommand(recorder));
+        invoker.addCommand("undo", new UndoCommand(recorder));
+        invoker.addCommand("redo", new RedoCommand(recorder));
     }
 
     /**
@@ -237,18 +240,26 @@ public class SceneController {
         // Add the insert command to the invoker
         addCommand();
 
-        // Obtain user input for start and end indices
-        String[] valeursIndex = SelectAction("From which index do you want to start to insert the text? (Enter a number)", "From which index do you want to finish to insert the text? (Enter a number)", "The first value of the insert must be less than or equal to the second value of the insert.");
-        String value1 = valeursIndex[0];
-        String value2 = valeursIndex[1];
+        int intValue1 = 0;
+        int intValue2 = 0;
+
+        String value1 = "0";
+        String value2 = "0";
+
+        if(engine.getBufferContents().length() != 0) {
+            // Obtain user input for start and end indices
+            String[] valeursIndex = SelectAction("From which index do you want to start to insert the text? (Enter a number)", "From which index do you want to finish to insert the text? (Enter a number)", "The first value of the insert must be less than or equal to the second value of the insert.");
+            value1 = valeursIndex[0];
+            value2 = valeursIndex[1];
+        }
 
         // Obtain user input for the text to insert
         String valueText = showInputDialog("Enter the text to insert");
 
         try {
             // Convert input values to integers
-            int intValue1 = Integer.parseInt(value1);
-            int intValue2 = Integer.parseInt(value2);
+            intValue1 = Integer.parseInt(value1);
+            intValue2 = Integer.parseInt(value2);
 
             // Set the begin and end indices and execute changeSelection command
             invoker.setBeginIndex(intValue1);
@@ -288,15 +299,23 @@ public class SceneController {
         // Add the copy command to the invoker
         addCommand();
 
-        // Obtain user input for start and end indices
-        String[] valeursIndex = SelectAction("From which index do you want to start to copy the text? (Enter a number)", "From which index do you want to finish to copy the text? (Enter a number)", "The first value of the copy must be less than or equal to the second value of the copy.");
-        String value1 = valeursIndex[0];
-        String value2 = valeursIndex[1];
+        int intValue1 = 0;
+        int intValue2 = 0;
+
+        String value1 = "0";
+        String value2 = "0";
+
+        if(engine.getBufferContents().length() != 0) {
+            // Obtain user input for start and end indices
+            String[] valeursIndex = SelectAction("From which index do you want to start to copy the text? (Enter a number)", "From which index do you want to finish to insert the text? (Enter a number)", "The first value of the insert must be less than or equal to the second value of the insert.");
+            value1 = valeursIndex[0];
+            value2 = valeursIndex[1];
+        }
 
         try {
             // Convert input values to integers
-            int intValue1 = Integer.parseInt(value1);
-            int intValue2 = Integer.parseInt(value2);
+            intValue1 = Integer.parseInt(value1);
+            intValue2 = Integer.parseInt(value2);
 
             // Set the begin and end indices and execute changeSelection command
             invoker.setBeginIndex(intValue1);
@@ -335,15 +354,23 @@ public class SceneController {
         // Add the paste command to the invoker
         addCommand();
 
-        // Obtain user input for start and end indices
-        String[] valeursIndex = SelectAction("From which index do you want to start to paste the text? (Enter a number)", "From which index do you want to finish to paste the text? (Enter a number)", "The first value of the paste must be less than or equal to the second value of the paste.");
-        String value1 = valeursIndex[0];
-        String value2 = valeursIndex[1];
+        int intValue1 = 0;
+        int intValue2 = 0;
+
+        String value1 = "0";
+        String value2 = "0";
+
+        if(engine.getBufferContents().length() != 0) {
+            // Obtain user input for start and end indices
+            String[] valeursIndex = SelectAction("From which index do you want to start to paste the text? (Enter a number)", "From which index do you want to finish to insert the text? (Enter a number)", "The first value of the insert must be less than or equal to the second value of the insert.");
+            value1 = valeursIndex[0];
+            value2 = valeursIndex[1];
+        }
 
         try {
             // Convert input values to integers
-            int intValue1 = Integer.parseInt(value1);
-            int intValue2 = Integer.parseInt(value2);
+            intValue1 = Integer.parseInt(value1);
+            intValue2 = Integer.parseInt(value2);
 
             // Set the begin and end indices and execute changeSelection command
             invoker.setBeginIndex(intValue1);
@@ -381,15 +408,23 @@ public class SceneController {
         // Add the cut command to the invoker
         addCommand();
 
-        // Obtain user input for start and end indices
-        String[] valeursIndex = SelectAction("From which index do you want to start to cut the text? (Enter a number)", "From which index do you want to finish to cut the text? (Enter a number)", "The first value of the cut must be less than or equal to the second value of the cut.");
-        String value1 = valeursIndex[0];
-        String value2 = valeursIndex[1];
+        int intValue1 = 0;
+        int intValue2 = 0;
+
+        String value1 = "0";
+        String value2 = "0";
+
+        if(engine.getBufferContents().length() != 0) {
+            // Obtain user input for start and end indices
+            String[] valeursIndex = SelectAction("From which index do you want to start to cut the text? (Enter a number)", "From which index do you want to finish to insert the text? (Enter a number)", "The first value of the insert must be less than or equal to the second value of the insert.");
+            value1 = valeursIndex[0];
+            value2 = valeursIndex[1];
+        }
 
         try {
             // Convert input values to integers
-            int intValue1 = Integer.parseInt(value1);
-            int intValue2 = Integer.parseInt(value2);
+            intValue1 = Integer.parseInt(value1);
+            intValue2 = Integer.parseInt(value2);
 
             // Set the begin and end indices and execute changeSelection command
             invoker.setBeginIndex(intValue1);
@@ -428,15 +463,23 @@ public class SceneController {
         // Add the delete command to the invoker
         addCommand();
 
-        // Obtain user input for start and end indices
-        String[] valeursIndex = SelectAction("From which index do you want to start to delete the text? (Enter a number)", "From which index do you want to finish to delete the text? (Enter a number)", "The first value of the delete must be less than or equal to the second value of the delete.");
-        String value1 = valeursIndex[0];
-        String value2 = valeursIndex[1];
+        int intValue1 = 0;
+        int intValue2 = 0;
+
+        String value1 = "0";
+        String value2 = "0";
+
+        if(engine.getBufferContents().length() != 0) {
+            // Obtain user input for start and end indices
+            String[] valeursIndex = SelectAction("From which index do you want to start to delete the text? (Enter a number)", "From which index do you want to finish to insert the text? (Enter a number)", "The first value of the insert must be less than or equal to the second value of the insert.");
+            value1 = valeursIndex[0];
+            value2 = valeursIndex[1];
+        }
 
         try {
             // Convert input values to integers
-            int intValue1 = Integer.parseInt(value1);
-            int intValue2 = Integer.parseInt(value2);
+            intValue1 = Integer.parseInt(value1);
+            intValue2 = Integer.parseInt(value2);
 
             // Set the begin and end indices and execute changeSelection command
             invoker.setBeginIndex(intValue1);
@@ -579,5 +622,53 @@ public class SceneController {
         }
     }
 
+    /**
+     * Handles the action triggered by the undo button. Adds the replay command to the invoker,
+     * executes the "undo" command, and updates the editor's text field with the current buffer contents.
+     *
+     * @param event The ActionEvent triggered by the undo button.
+     */
+    public void UndoAction(ActionEvent event) {
 
+        // Add the undo command to the invoker
+        addCommand();
+
+        try {
+            // Execute the undo command (one for the selection command, and the other for the action command)
+            invoker.executeCommand("undo");
+            invoker.executeCommand("undo");
+
+            // Update the editor's text field with the buffer contents
+            updateTextField(engine.getBufferContents());
+
+        } catch (NumberFormatException e) {
+            // Handle conversion errors
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Handles the action triggered by the redo button. Adds the replay command to the invoker,
+     * executes the "redo" command, and updates the editor's text field with the current buffer contents.
+     *
+     * @param event The ActionEvent triggered by the redo button.
+     */
+    public void RedoAction(ActionEvent event) {
+
+        // Add the redo command to the invoker
+        addCommand();
+
+        try {
+            // Execute the redo command twice (one for the selection command, and the other for the action command)
+            invoker.executeCommand("redo");
+            invoker.executeCommand("redo");
+
+            // Update the editor's text field with the buffer contents
+            updateTextField(engine.getBufferContents());
+
+        } catch (NumberFormatException e) {
+            // Handle conversion errors
+            e.printStackTrace();
+        }
+    }
 }

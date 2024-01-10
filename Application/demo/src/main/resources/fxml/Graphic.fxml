@@ -54,12 +54,12 @@
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="270.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="UNDO">
+      <Button layoutX="484.0" layoutY="270.0" mnemonicParsing="false" onAction="#UndoAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="UNDO">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>
       </Button>
-      <Button layoutX="484.0" layoutY="334.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REDO">
+      <Button layoutX="484.0" layoutY="334.0" mnemonicParsing="false" onAction="#RedoAction" prefHeight="50.0" prefWidth="115.0" stylesheets="@../css/style_button_edit_right.css" text="REDO">
          <font>
             <Font name="Agency FB" size="22.0" />
          </font>

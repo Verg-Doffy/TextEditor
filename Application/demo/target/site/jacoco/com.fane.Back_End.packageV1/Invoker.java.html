@@ -2,6 +2,8 @@
 
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +19,11 @@ import java.util.Map;
  * implement the {@link Recordable} interface.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class Invoker {
 
-<span class="fc" id="L24">    private Map&lt;String, Command&gt; commands = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L26">    private Map&lt;String, Command&gt; commands = new HashMap&lt;&gt;();</span>
     private Recorder recorder; // we need a reference to the Recorder
     private String text;
     private int newBeginIndex;
@@ -32,9 +34,9 @@ public class Invoker {
      *
      * @param recorder The recorder to be associated with this invoker.
      */
-<span class="fc" id="L35">    public Invoker(Recorder recorder) {</span>
-<span class="fc" id="L36">        this.recorder = recorder;</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L37">    public Invoker(Recorder recorder) {</span>
+<span class="fc" id="L38">        this.recorder = recorder;</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * Adds a command to the invoker's collection with the specified key.
@@ -43,8 +45,8 @@ public class Invoker {
      * @param command The command to be added.
      */
     public void addCommand(String key, Command command) {
-<span class="fc" id="L46">        commands.put(key, command);</span>
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L48">        commands.put(key, command);</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * Executes the command associated with the specified key.
@@ -54,14 +56,14 @@ public class Invoker {
      * @param key The key associated with the command to be executed.
      */
     public void executeCommand(String key) {
-<span class="fc" id="L57">        Command command = commands.get(key);</span>
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (command != null) {</span>
-<span class="fc bfc" id="L59" title="All 4 branches covered.">            if (command instanceof Recordable &amp;&amp; recorder.isRecording()) {</span>
-<span class="fc" id="L60">                recorder.save((Recordable) command);</span>
+<span class="fc" id="L59">        Command command = commands.get(key);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (command != null) {</span>
+<span class="fc bfc" id="L61" title="All 4 branches covered.">            if (command instanceof Recordable &amp;&amp; recorder.isRecording()) {</span>
+<span class="fc" id="L62">                recorder.saveForReplay((Recordable) command);</span>
             }
-<span class="fc" id="L62">            command.execute();</span>
+<span class="fc" id="L64">            command.execute();</span>
         }
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L66">    }</span>
 
     /**
      * Gets the current text content managed by the invoker.
@@ -69,7 +71,7 @@ public class Invoker {
      * @return The current text content.
      */
     public String getText() {
-<span class="fc" id="L72">        return text;</span>
+<span class="fc" id="L74">        return text;</span>
     }
 
     /**
@@ -78,8 +80,8 @@ public class Invoker {
      * @param text The new text content.
      */
     public void setText(String text) {
-<span class="fc" id="L81">        this.text = text;</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L83">        this.text = text;</span>
+<span class="fc" id="L84">    }</span>
 
     /**
      * Gets the current beginning index for text manipulation.
@@ -87,7 +89,7 @@ public class Invoker {
      * @return The current beginning index.
      */
     public int getBeginIndex() {
-<span class="fc" id="L90">        return newBeginIndex;</span>
+<span class="fc" id="L92">        return newBeginIndex;</span>
     }
 
     /**
@@ -96,7 +98,7 @@ public class Invoker {
      * @return The current ending index.
      */
     public int getEndIndex() {
-<span class="fc" id="L99">        return newEndIndex;</span>
+<span class="fc" id="L101">        return newEndIndex;</span>
     }
 
     /**
@@ -105,8 +107,8 @@ public class Invoker {
      * @param beginIndex The new beginning index.
      */
     public void setBeginIndex(int beginIndex) {
-<span class="fc" id="L108">        this.newBeginIndex = beginIndex;</span>
-<span class="fc" id="L109">    }</span>
+<span class="fc" id="L110">        this.newBeginIndex = beginIndex;</span>
+<span class="fc" id="L111">    }</span>
 
     /**
      * Sets the ending index for text manipulation.
@@ -114,7 +116,7 @@ public class Invoker {
      * @param endIndex The new ending index.
      */
     public void setEndIndex(int endIndex) {
-<span class="fc" id="L117">        this.newEndIndex = endIndex;</span>
-<span class="fc" id="L118">    }</span>
+<span class="fc" id="L119">        this.newEndIndex = endIndex;</span>
+<span class="fc" id="L120">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -121,4 +121,18 @@ public class EngineImpl implements Engine {
         }
     }
 
+    /**
+     * Sets the contents of the clipboard.
+     * This method updates the internal clipboard with the specified text.
+     * It can be used to programmatically change the contents of the clipboard,
+     * which is particularly useful for undo/redo operations that involve clipboard
+     * manipulation.
+     *
+     * @param clipboardContent The text to be set as the new clipboard content.
+     */
+    @Override
+    public void setClipboardContents(String clipboardContent) {
+        this.clipboard = clipboardContent;
+    }
+
 }

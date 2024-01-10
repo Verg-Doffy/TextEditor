@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
@@ -24,6 +23,8 @@ import java.util.Optional;
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.RedoCommand;
+import com.fane.Back_End.packageV3.UndoCommand;
 
 /**
  * The {@code SceneController} class manages the interaction between the graphical user interface (GUI) components
@@ -33,19 +34,19 @@ import com.fane.Back_End.packageV2.*;
  * This class is part of the Front_End package and serves as the controller for the GUI scenes.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 3.0
  */
 
-<span class="nc" id="L39">public class SceneController {</span>
+<span class="nc" id="L40">public class SceneController {</span>
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-<span class="nc" id="L44">    private Image appIcon = new Image(getClass().getResourceAsStream(&quot;/img/logo_app.png&quot;));</span>
+<span class="nc" id="L45">    private Image appIcon = new Image(getClass().getResourceAsStream(&quot;/img/logo_app.png&quot;));</span>
 
-<span class="nc" id="L46">    private Engine engine = new EngineImpl();</span>
-<span class="nc" id="L47">    private Recorder recorder = new Recorder(engine);</span>
-<span class="nc" id="L48">    private Invoker invoker = new Invoker(recorder);</span>
+<span class="nc" id="L47">    private Engine engine = new EngineImpl();</span>
+<span class="nc" id="L48">    private Recorder recorder = new Recorder(engine);</span>
+<span class="nc" id="L49">    private Invoker invoker = new Invoker(recorder);</span>
 
     @FXML
     private TextArea textArea;
@@ -58,12 +59,12 @@ import com.fane.Back_End.packageV2.*;
      * @throws IOException If an I/O error occurs during loading the new scene.
      */
     public void switchToEditFile(ActionEvent event) throws IOException {
-<span class="nc" id="L61">        root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Graphic.fxml&quot;));</span>
-<span class="nc" id="L62">        stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
-<span class="nc" id="L63">        scene = new Scene(root);</span>
-<span class="nc" id="L64">        stage.setScene(scene);</span>
-<span class="nc" id="L65">        stage.show();</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L62">        root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Graphic.fxml&quot;));</span>
+<span class="nc" id="L63">        stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L64">        scene = new Scene(root);</span>
+<span class="nc" id="L65">        stage.setScene(scene);</span>
+<span class="nc" id="L66">        stage.show();</span>
+<span class="nc" id="L67">    }</span>
 
     /**
      * Switches the current scene to the &quot;Main Menu&quot; scene.
@@ -73,12 +74,12 @@ import com.fane.Back_End.packageV2.*;
      * @throws IOException If an I/O error occurs during loading the new scene.
      */
     public void switchToMainMenu(ActionEvent event) throws IOException {
-<span class="nc" id="L76">        root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Main_Menu.fxml&quot;));</span>
-<span class="nc" id="L77">        stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
-<span class="nc" id="L78">        scene = new Scene(root);</span>
-<span class="nc" id="L79">        stage.setScene(scene);</span>
-<span class="nc" id="L80">        stage.show();</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L77">        root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Main_Menu.fxml&quot;));</span>
+<span class="nc" id="L78">        stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L79">        scene = new Scene(root);</span>
+<span class="nc" id="L80">        stage.setScene(scene);</span>
+<span class="nc" id="L81">        stage.show();</span>
+<span class="nc" id="L82">    }</span>
 
     /**
      * Switches the current scene to the &quot;Credits&quot; scene.
@@ -88,12 +89,12 @@ import com.fane.Back_End.packageV2.*;
      * @throws IOException If an I/O error occurs during loading the new scene.
      */
     public void switchToCredits(ActionEvent event) throws IOException {
-<span class="nc" id="L91">        root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Credits.fxml&quot;));</span>
-<span class="nc" id="L92">        stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
-<span class="nc" id="L93">        scene = new Scene(root);</span>
-<span class="nc" id="L94">        stage.setScene(scene);</span>
-<span class="nc" id="L95">        stage.show();</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L92">        root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Credits.fxml&quot;));</span>
+<span class="nc" id="L93">        stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L94">        scene = new Scene(root);</span>
+<span class="nc" id="L95">        stage.setScene(scene);</span>
+<span class="nc" id="L96">        stage.show();</span>
+<span class="nc" id="L97">    }</span>
 
     /**
      * Adds predefined commands to the invoker for handling text editing operations.
@@ -106,16 +107,18 @@ import com.fane.Back_End.packageV2.*;
      * Note: Make sure to call this method before attempting to execute any of the added commands.
      */
     private void addCommand(){
-<span class="nc" id="L109">        invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker, recorder));</span>
-<span class="nc" id="L110">        invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker, recorder));</span>
-<span class="nc" id="L111">        invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine, recorder));</span>
-<span class="nc" id="L112">        invoker.addCommand(&quot;cut&quot;, new CutCommand(engine, recorder));</span>
-<span class="nc" id="L113">        invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine, recorder));</span>
-<span class="nc" id="L114">        invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine, recorder));</span>
-<span class="nc" id="L115">        invoker.addCommand(&quot;start&quot;, new StartCommand(recorder));</span>
-<span class="nc" id="L116">        invoker.addCommand(&quot;stop&quot;, new StopCommand(recorder));</span>
-<span class="nc" id="L117">        invoker.addCommand(&quot;replay&quot;, new ReplayCommand(recorder));</span>
-<span class="nc" id="L118">    }</span>
+<span class="nc" id="L110">        invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker, recorder));</span>
+<span class="nc" id="L111">        invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker, recorder));</span>
+<span class="nc" id="L112">        invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine, recorder));</span>
+<span class="nc" id="L113">        invoker.addCommand(&quot;cut&quot;, new CutCommand(engine, recorder));</span>
+<span class="nc" id="L114">        invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine, recorder));</span>
+<span class="nc" id="L115">        invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine, recorder));</span>
+<span class="nc" id="L116">        invoker.addCommand(&quot;start&quot;, new StartCommand(recorder));</span>
+<span class="nc" id="L117">        invoker.addCommand(&quot;stop&quot;, new StopCommand(recorder));</span>
+<span class="nc" id="L118">        invoker.addCommand(&quot;replay&quot;, new ReplayCommand(recorder));</span>
+<span class="nc" id="L119">        invoker.addCommand(&quot;undo&quot;, new UndoCommand(recorder));</span>
+<span class="nc" id="L120">        invoker.addCommand(&quot;redo&quot;, new RedoCommand(recorder));</span>
+<span class="nc" id="L121">    }</span>
 
     /**
      * Checks the validity of input values by attempting to parse them as integers
@@ -128,32 +131,32 @@ import com.fane.Back_End.packageV2.*;
      */
     private boolean isValidInput(String value1, String value2) {
         try {
-<span class="nc" id="L131">            int intValue1 = Integer.parseInt(value1);</span>
-<span class="nc" id="L132">            int intValue2 = Integer.parseInt(value2);</span>
-<span class="nc bnc" id="L133" title="All 2 branches missed.">            return intValue1 &lt;= intValue2;</span>
-<span class="nc" id="L134">        } catch (NumberFormatException e) {</span>
-<span class="nc" id="L135">            return false; </span>
+<span class="nc" id="L134">            int intValue1 = Integer.parseInt(value1);</span>
+<span class="nc" id="L135">            int intValue2 = Integer.parseInt(value2);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">            return intValue1 &lt;= intValue2;</span>
+<span class="nc" id="L137">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L138">            return false; </span>
         }
     }
 
     private String showInputDialog(String prompt) {
-<span class="nc" id="L140">        TextInputDialog dialog = new TextInputDialog();</span>
-<span class="nc" id="L141">        dialog.setTitle(&quot;Action request&quot;);</span>
-<span class="nc" id="L142">        dialog.setHeaderText(null);</span>
-<span class="nc" id="L143">        dialog.setContentText(prompt);</span>
+<span class="nc" id="L143">        TextInputDialog dialog = new TextInputDialog();</span>
+<span class="nc" id="L144">        dialog.setTitle(&quot;Action request&quot;);</span>
+<span class="nc" id="L145">        dialog.setHeaderText(null);</span>
+<span class="nc" id="L146">        dialog.setContentText(prompt);</span>
 
         // Add the &quot;OK&quot; button to the dialog box
-<span class="nc" id="L146">        dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK);</span>
+<span class="nc" id="L149">        dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK);</span>
 
         // Add application logo to dialog box
-<span class="nc" id="L149">        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();</span>
-<span class="nc" id="L150">        stage.getIcons().add(appIcon);</span>
+<span class="nc" id="L152">        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();</span>
+<span class="nc" id="L153">        stage.getIcons().add(appIcon);</span>
 
         // Get dialog result
-<span class="nc" id="L153">        Optional&lt;String&gt; result = dialog.showAndWait();</span>
+<span class="nc" id="L156">        Optional&lt;String&gt; result = dialog.showAndWait();</span>
 
         // Return value if present, otherwise an empty string
-<span class="nc" id="L156">        return result.orElse(&quot;&quot;);</span>
+<span class="nc" id="L159">        return result.orElse(&quot;&quot;);</span>
     }
 
     /**
@@ -164,20 +167,20 @@ import com.fane.Back_End.packageV2.*;
      */
     private void showAlert(String title, String content) {
         // Afficher une boîte de dialogue d'alerte
-<span class="nc" id="L167">        Alert alert = new Alert(Alert.AlertType.ERROR);</span>
-<span class="nc" id="L168">        alert.setTitle(title);</span>
-<span class="nc" id="L169">        alert.setHeaderText(null);</span>
-<span class="nc" id="L170">        alert.setContentText(content);</span>
+<span class="nc" id="L170">        Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L171">        alert.setTitle(title);</span>
+<span class="nc" id="L172">        alert.setHeaderText(null);</span>
+<span class="nc" id="L173">        alert.setContentText(content);</span>
 
         // Ajouter le bouton &quot;OK&quot; à la boîte de dialogue
-<span class="nc" id="L173">        alert.getButtonTypes().setAll(ButtonType.OK);</span>
+<span class="nc" id="L176">        alert.getButtonTypes().setAll(ButtonType.OK);</span>
 
         // Ajouter le logo de l'application à la boîte de dialogue
-<span class="nc" id="L176">        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();</span>
-<span class="nc" id="L177">        stage.getIcons().add(appIcon);</span>
+<span class="nc" id="L179">        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();</span>
+<span class="nc" id="L180">        stage.getIcons().add(appIcon);</span>
 
-<span class="nc" id="L179">        alert.showAndWait();</span>
-<span class="nc" id="L180">    }</span>
+<span class="nc" id="L182">        alert.showAndWait();</span>
+<span class="nc" id="L183">    }</span>
 
     /**
      * Updates the content of the associated TextArea with the provided text.
@@ -186,14 +189,14 @@ import com.fane.Back_End.packageV2.*;
      */
     public void updateTextField(String text) {
         // Set the content of the TextArea
-<span class="nc" id="L189">        textArea.setText(text);</span>
+<span class="nc" id="L192">        textArea.setText(text);</span>
         
         // Enable automatic line wrapping
-<span class="nc" id="L192">        textArea.setWrapText(true);</span>
+<span class="nc" id="L195">        textArea.setWrapText(true);</span>
         
         // Set the preferred number of rows in the TextArea
-<span class="nc" id="L195">        textArea.setPrefRowCount(10);</span>
-<span class="nc" id="L196">    }</span>
+<span class="nc" id="L198">        textArea.setPrefRowCount(10);</span>
+<span class="nc" id="L199">    }</span>
 
     /**
      * Displays input dialogs to obtain two numerical values from the user, ensuring the validity of the inputs.
@@ -208,18 +211,18 @@ import com.fane.Back_End.packageV2.*;
 
         do {
             // Show input dialogs to obtain values from the user
-<span class="nc" id="L211">            value1 = showInputDialog(messageDialog1);</span>
-<span class="nc" id="L212">            value2 = showInputDialog(messageDialog2);</span>
+<span class="nc" id="L214">            value1 = showInputDialog(messageDialog1);</span>
+<span class="nc" id="L215">            value2 = showInputDialog(messageDialog2);</span>
 
             // Check the validity of the inputs
-<span class="nc bnc" id="L215" title="All 2 branches missed.">            if (!isValidInput(value1, value2)) {</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">            if (!isValidInput(value1, value2)) {</span>
                 // Show an error alert if inputs are invalid
-<span class="nc" id="L217">                showAlert(&quot;Error&quot;, messageError);</span>
+<span class="nc" id="L220">                showAlert(&quot;Error&quot;, messageError);</span>
             }
-<span class="nc bnc" id="L219" title="All 2 branches missed.">        } while (!isValidInput(value1, value2));</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        } while (!isValidInput(value1, value2));</span>
 
         // Return the validated numerical input values as an array
-<span class="nc" id="L222">        return new String[]{value1, value2};</span>
+<span class="nc" id="L225">        return new String[]{value1, value2};</span>
     }
 
     
@@ -235,43 +238,51 @@ import com.fane.Back_End.packageV2.*;
     public void InsertAction(ActionEvent event) {
 
         // Add the insert command to the invoker
-<span class="nc" id="L238">        addCommand();</span>
+<span class="nc" id="L241">        addCommand();</span>
 
-        // Obtain user input for start and end indices
-<span class="nc" id="L241">        String[] valeursIndex = SelectAction(&quot;From which index do you want to start to insert the text? (Enter a number)&quot;, &quot;From which index do you want to finish to insert the text? (Enter a number)&quot;, &quot;The first value of the insert must be less than or equal to the second value of the insert.&quot;);</span>
-<span class="nc" id="L242">        String value1 = valeursIndex[0];</span>
-<span class="nc" id="L243">        String value2 = valeursIndex[1];</span>
+<span class="nc" id="L243">        int intValue1 = 0;</span>
+<span class="nc" id="L244">        int intValue2 = 0;</span>
+
+<span class="nc" id="L246">        String value1 = &quot;0&quot;;</span>
+<span class="nc" id="L247">        String value2 = &quot;0&quot;;</span>
+
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        if(engine.getBufferContents().length() != 0) {</span>
+            // Obtain user input for start and end indices
+<span class="nc" id="L251">            String[] valeursIndex = SelectAction(&quot;From which index do you want to start to insert the text? (Enter a number)&quot;, &quot;From which index do you want to finish to insert the text? (Enter a number)&quot;, &quot;The first value of the insert must be less than or equal to the second value of the insert.&quot;);</span>
+<span class="nc" id="L252">            value1 = valeursIndex[0];</span>
+<span class="nc" id="L253">            value2 = valeursIndex[1];</span>
+        }
 
         // Obtain user input for the text to insert
-<span class="nc" id="L246">        String valueText = showInputDialog(&quot;Enter the text to insert&quot;);</span>
+<span class="nc" id="L257">        String valueText = showInputDialog(&quot;Enter the text to insert&quot;);</span>
 
         try {
             // Convert input values to integers
-<span class="nc" id="L250">            int intValue1 = Integer.parseInt(value1);</span>
-<span class="nc" id="L251">            int intValue2 = Integer.parseInt(value2);</span>
+<span class="nc" id="L261">            intValue1 = Integer.parseInt(value1);</span>
+<span class="nc" id="L262">            intValue2 = Integer.parseInt(value2);</span>
 
             // Set the begin and end indices and execute changeSelection command
-<span class="nc" id="L254">            invoker.setBeginIndex(intValue1);</span>
-<span class="nc" id="L255">            invoker.setEndIndex(intValue2);</span>
-<span class="nc" id="L256">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L265">            invoker.setBeginIndex(intValue1);</span>
+<span class="nc" id="L266">            invoker.setEndIndex(intValue2);</span>
+<span class="nc" id="L267">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
 
             // Set the text to insert and execute insert command
-<span class="nc" id="L259">            invoker.setText(valueText);</span>
-<span class="nc" id="L260">            invoker.executeCommand(&quot;insert&quot;);</span>
+<span class="nc" id="L270">            invoker.setText(valueText);</span>
+<span class="nc" id="L271">            invoker.executeCommand(&quot;insert&quot;);</span>
 
             // Display information about the insert operation
-<span class="nc" id="L263">            System.out.println(&quot;--&gt; Case of Insert&quot;);</span>
-<span class="nc" id="L264">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
-<span class="nc" id="L265">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
+<span class="nc" id="L274">            System.out.println(&quot;--&gt; Case of Insert&quot;);</span>
+<span class="nc" id="L275">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
+<span class="nc" id="L276">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
 
             // Update the editor's text field with the buffer contents
-<span class="nc" id="L268">            updateTextField(engine.getBufferContents());</span>
+<span class="nc" id="L279">            updateTextField(engine.getBufferContents());</span>
 
-<span class="nc" id="L270">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L281">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L272">            e.printStackTrace();</span>
-<span class="nc" id="L273">        }</span>
-<span class="nc" id="L274">    }</span>
+<span class="nc" id="L283">            e.printStackTrace();</span>
+<span class="nc" id="L284">        }</span>
+<span class="nc" id="L285">    }</span>
 
 
     /**
@@ -286,39 +297,47 @@ import com.fane.Back_End.packageV2.*;
     public void CopyAction(ActionEvent event) {
 
         // Add the copy command to the invoker
-<span class="nc" id="L289">        addCommand();</span>
+<span class="nc" id="L300">        addCommand();</span>
 
-        // Obtain user input for start and end indices
-<span class="nc" id="L292">        String[] valeursIndex = SelectAction(&quot;From which index do you want to start to copy the text? (Enter a number)&quot;, &quot;From which index do you want to finish to copy the text? (Enter a number)&quot;, &quot;The first value of the copy must be less than or equal to the second value of the copy.&quot;);</span>
-<span class="nc" id="L293">        String value1 = valeursIndex[0];</span>
-<span class="nc" id="L294">        String value2 = valeursIndex[1];</span>
+<span class="nc" id="L302">        int intValue1 = 0;</span>
+<span class="nc" id="L303">        int intValue2 = 0;</span>
+
+<span class="nc" id="L305">        String value1 = &quot;0&quot;;</span>
+<span class="nc" id="L306">        String value2 = &quot;0&quot;;</span>
+
+<span class="nc bnc" id="L308" title="All 2 branches missed.">        if(engine.getBufferContents().length() != 0) {</span>
+            // Obtain user input for start and end indices
+<span class="nc" id="L310">            String[] valeursIndex = SelectAction(&quot;From which index do you want to start to copy the text? (Enter a number)&quot;, &quot;From which index do you want to finish to insert the text? (Enter a number)&quot;, &quot;The first value of the insert must be less than or equal to the second value of the insert.&quot;);</span>
+<span class="nc" id="L311">            value1 = valeursIndex[0];</span>
+<span class="nc" id="L312">            value2 = valeursIndex[1];</span>
+        }
 
         try {
             // Convert input values to integers
-<span class="nc" id="L298">            int intValue1 = Integer.parseInt(value1);</span>
-<span class="nc" id="L299">            int intValue2 = Integer.parseInt(value2);</span>
+<span class="nc" id="L317">            intValue1 = Integer.parseInt(value1);</span>
+<span class="nc" id="L318">            intValue2 = Integer.parseInt(value2);</span>
 
             // Set the begin and end indices and execute changeSelection command
-<span class="nc" id="L302">            invoker.setBeginIndex(intValue1);</span>
-<span class="nc" id="L303">            invoker.setEndIndex(intValue2);</span>
-<span class="nc" id="L304">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L321">            invoker.setBeginIndex(intValue1);</span>
+<span class="nc" id="L322">            invoker.setEndIndex(intValue2);</span>
+<span class="nc" id="L323">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
 
             // Execute the copy command
-<span class="nc" id="L307">            invoker.executeCommand(&quot;copy&quot;);</span>
+<span class="nc" id="L326">            invoker.executeCommand(&quot;copy&quot;);</span>
 
             // Display information about the copy operation
-<span class="nc" id="L310">            System.out.println(&quot;--&gt; Case of Copy&quot;);</span>
-<span class="nc" id="L311">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
-<span class="nc" id="L312">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
+<span class="nc" id="L329">            System.out.println(&quot;--&gt; Case of Copy&quot;);</span>
+<span class="nc" id="L330">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
+<span class="nc" id="L331">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
 
             // Update the editor's text field with the buffer contents
-<span class="nc" id="L315">            updateTextField(engine.getBufferContents());</span>
+<span class="nc" id="L334">            updateTextField(engine.getBufferContents());</span>
 
-<span class="nc" id="L317">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L336">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L319">            e.printStackTrace();</span>
-<span class="nc" id="L320">        }</span>
-<span class="nc" id="L321">    }</span>
+<span class="nc" id="L338">            e.printStackTrace();</span>
+<span class="nc" id="L339">        }</span>
+<span class="nc" id="L340">    }</span>
 
 
     /**
@@ -333,39 +352,47 @@ import com.fane.Back_End.packageV2.*;
     public void PasteAction(ActionEvent event) {
 
         // Add the paste command to the invoker
-<span class="nc" id="L336">        addCommand();</span>
+<span class="nc" id="L355">        addCommand();</span>
 
-        // Obtain user input for start and end indices
-<span class="nc" id="L339">        String[] valeursIndex = SelectAction(&quot;From which index do you want to start to paste the text? (Enter a number)&quot;, &quot;From which index do you want to finish to paste the text? (Enter a number)&quot;, &quot;The first value of the paste must be less than or equal to the second value of the paste.&quot;);</span>
-<span class="nc" id="L340">        String value1 = valeursIndex[0];</span>
-<span class="nc" id="L341">        String value2 = valeursIndex[1];</span>
+<span class="nc" id="L357">        int intValue1 = 0;</span>
+<span class="nc" id="L358">        int intValue2 = 0;</span>
+
+<span class="nc" id="L360">        String value1 = &quot;0&quot;;</span>
+<span class="nc" id="L361">        String value2 = &quot;0&quot;;</span>
+
+<span class="nc bnc" id="L363" title="All 2 branches missed.">        if(engine.getBufferContents().length() != 0) {</span>
+            // Obtain user input for start and end indices
+<span class="nc" id="L365">            String[] valeursIndex = SelectAction(&quot;From which index do you want to start to paste the text? (Enter a number)&quot;, &quot;From which index do you want to finish to insert the text? (Enter a number)&quot;, &quot;The first value of the insert must be less than or equal to the second value of the insert.&quot;);</span>
+<span class="nc" id="L366">            value1 = valeursIndex[0];</span>
+<span class="nc" id="L367">            value2 = valeursIndex[1];</span>
+        }
 
         try {
             // Convert input values to integers
-<span class="nc" id="L345">            int intValue1 = Integer.parseInt(value1);</span>
-<span class="nc" id="L346">            int intValue2 = Integer.parseInt(value2);</span>
+<span class="nc" id="L372">            intValue1 = Integer.parseInt(value1);</span>
+<span class="nc" id="L373">            intValue2 = Integer.parseInt(value2);</span>
 
             // Set the begin and end indices and execute changeSelection command
-<span class="nc" id="L349">            invoker.setBeginIndex(intValue1);</span>
-<span class="nc" id="L350">            invoker.setEndIndex(intValue2);</span>
-<span class="nc" id="L351">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L376">            invoker.setBeginIndex(intValue1);</span>
+<span class="nc" id="L377">            invoker.setEndIndex(intValue2);</span>
+<span class="nc" id="L378">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
 
             // Execute the paste command
-<span class="nc" id="L354">            invoker.executeCommand(&quot;paste&quot;);</span>
+<span class="nc" id="L381">            invoker.executeCommand(&quot;paste&quot;);</span>
 
             // Display information about the paste operation
-<span class="nc" id="L357">            System.out.println(&quot;--&gt; Case of Paste&quot;);</span>
-<span class="nc" id="L358">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
-<span class="nc" id="L359">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
+<span class="nc" id="L384">            System.out.println(&quot;--&gt; Case of Paste&quot;);</span>
+<span class="nc" id="L385">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
+<span class="nc" id="L386">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
 
             // Update the editor's text field with the buffer contents
-<span class="nc" id="L362">            updateTextField(engine.getBufferContents());</span>
+<span class="nc" id="L389">            updateTextField(engine.getBufferContents());</span>
 
-<span class="nc" id="L364">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L391">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L366">            e.printStackTrace();</span>
-<span class="nc" id="L367">        }</span>
-<span class="nc" id="L368">    }</span>
+<span class="nc" id="L393">            e.printStackTrace();</span>
+<span class="nc" id="L394">        }</span>
+<span class="nc" id="L395">    }</span>
 
     /**
      * Executes the cut action, prompting the user for input and updating the editor accordingly.
@@ -379,39 +406,47 @@ import com.fane.Back_End.packageV2.*;
     public void CutAction(ActionEvent event) {
 
         // Add the cut command to the invoker
-<span class="nc" id="L382">        addCommand();</span>
+<span class="nc" id="L409">        addCommand();</span>
 
-        // Obtain user input for start and end indices
-<span class="nc" id="L385">        String[] valeursIndex = SelectAction(&quot;From which index do you want to start to cut the text? (Enter a number)&quot;, &quot;From which index do you want to finish to cut the text? (Enter a number)&quot;, &quot;The first value of the cut must be less than or equal to the second value of the cut.&quot;);</span>
-<span class="nc" id="L386">        String value1 = valeursIndex[0];</span>
-<span class="nc" id="L387">        String value2 = valeursIndex[1];</span>
+<span class="nc" id="L411">        int intValue1 = 0;</span>
+<span class="nc" id="L412">        int intValue2 = 0;</span>
+
+<span class="nc" id="L414">        String value1 = &quot;0&quot;;</span>
+<span class="nc" id="L415">        String value2 = &quot;0&quot;;</span>
+
+<span class="nc bnc" id="L417" title="All 2 branches missed.">        if(engine.getBufferContents().length() != 0) {</span>
+            // Obtain user input for start and end indices
+<span class="nc" id="L419">            String[] valeursIndex = SelectAction(&quot;From which index do you want to start to cut the text? (Enter a number)&quot;, &quot;From which index do you want to finish to insert the text? (Enter a number)&quot;, &quot;The first value of the insert must be less than or equal to the second value of the insert.&quot;);</span>
+<span class="nc" id="L420">            value1 = valeursIndex[0];</span>
+<span class="nc" id="L421">            value2 = valeursIndex[1];</span>
+        }
 
         try {
             // Convert input values to integers
-<span class="nc" id="L391">            int intValue1 = Integer.parseInt(value1);</span>
-<span class="nc" id="L392">            int intValue2 = Integer.parseInt(value2);</span>
+<span class="nc" id="L426">            intValue1 = Integer.parseInt(value1);</span>
+<span class="nc" id="L427">            intValue2 = Integer.parseInt(value2);</span>
 
             // Set the begin and end indices and execute changeSelection command
-<span class="nc" id="L395">            invoker.setBeginIndex(intValue1);</span>
-<span class="nc" id="L396">            invoker.setEndIndex(intValue2);</span>
-<span class="nc" id="L397">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L430">            invoker.setBeginIndex(intValue1);</span>
+<span class="nc" id="L431">            invoker.setEndIndex(intValue2);</span>
+<span class="nc" id="L432">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
 
             // Execute the cut command
-<span class="nc" id="L400">            invoker.executeCommand(&quot;cut&quot;);</span>
+<span class="nc" id="L435">            invoker.executeCommand(&quot;cut&quot;);</span>
 
             // Display information about the cut operation
-<span class="nc" id="L403">            System.out.println(&quot;--&gt; Case of Cut&quot;);</span>
-<span class="nc" id="L404">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
-<span class="nc" id="L405">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
+<span class="nc" id="L438">            System.out.println(&quot;--&gt; Case of Cut&quot;);</span>
+<span class="nc" id="L439">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
+<span class="nc" id="L440">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
 
             // Update the editor's text field with the buffer contents
-<span class="nc" id="L408">            updateTextField(engine.getBufferContents());</span>
+<span class="nc" id="L443">            updateTextField(engine.getBufferContents());</span>
 
-<span class="nc" id="L410">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L445">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L412">            e.printStackTrace();</span>
-<span class="nc" id="L413">        }</span>
-<span class="nc" id="L414">    }</span>
+<span class="nc" id="L447">            e.printStackTrace();</span>
+<span class="nc" id="L448">        }</span>
+<span class="nc" id="L449">    }</span>
 
 
     /**
@@ -426,39 +461,47 @@ import com.fane.Back_End.packageV2.*;
     public void DeleteAction(ActionEvent event) {
 
         // Add the delete command to the invoker
-<span class="nc" id="L429">        addCommand();</span>
+<span class="nc" id="L464">        addCommand();</span>
 
-        // Obtain user input for start and end indices
-<span class="nc" id="L432">        String[] valeursIndex = SelectAction(&quot;From which index do you want to start to delete the text? (Enter a number)&quot;, &quot;From which index do you want to finish to delete the text? (Enter a number)&quot;, &quot;The first value of the delete must be less than or equal to the second value of the delete.&quot;);</span>
-<span class="nc" id="L433">        String value1 = valeursIndex[0];</span>
-<span class="nc" id="L434">        String value2 = valeursIndex[1];</span>
+<span class="nc" id="L466">        int intValue1 = 0;</span>
+<span class="nc" id="L467">        int intValue2 = 0;</span>
+
+<span class="nc" id="L469">        String value1 = &quot;0&quot;;</span>
+<span class="nc" id="L470">        String value2 = &quot;0&quot;;</span>
+
+<span class="nc bnc" id="L472" title="All 2 branches missed.">        if(engine.getBufferContents().length() != 0) {</span>
+            // Obtain user input for start and end indices
+<span class="nc" id="L474">            String[] valeursIndex = SelectAction(&quot;From which index do you want to start to delete the text? (Enter a number)&quot;, &quot;From which index do you want to finish to insert the text? (Enter a number)&quot;, &quot;The first value of the insert must be less than or equal to the second value of the insert.&quot;);</span>
+<span class="nc" id="L475">            value1 = valeursIndex[0];</span>
+<span class="nc" id="L476">            value2 = valeursIndex[1];</span>
+        }
 
         try {
             // Convert input values to integers
-<span class="nc" id="L438">            int intValue1 = Integer.parseInt(value1);</span>
-<span class="nc" id="L439">            int intValue2 = Integer.parseInt(value2);</span>
+<span class="nc" id="L481">            intValue1 = Integer.parseInt(value1);</span>
+<span class="nc" id="L482">            intValue2 = Integer.parseInt(value2);</span>
 
             // Set the begin and end indices and execute changeSelection command
-<span class="nc" id="L442">            invoker.setBeginIndex(intValue1);</span>
-<span class="nc" id="L443">            invoker.setEndIndex(intValue2);</span>
-<span class="nc" id="L444">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L485">            invoker.setBeginIndex(intValue1);</span>
+<span class="nc" id="L486">            invoker.setEndIndex(intValue2);</span>
+<span class="nc" id="L487">            invoker.executeCommand(&quot;changeSelection&quot;);</span>
 
             // Execute the delete command
-<span class="nc" id="L447">            invoker.executeCommand(&quot;delete&quot;);</span>
+<span class="nc" id="L490">            invoker.executeCommand(&quot;delete&quot;);</span>
 
             // Display information about the delete operation
-<span class="nc" id="L450">            System.out.println(&quot;--&gt; Case of Delete&quot;);</span>
-<span class="nc" id="L451">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
-<span class="nc" id="L452">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
+<span class="nc" id="L493">            System.out.println(&quot;--&gt; Case of Delete&quot;);</span>
+<span class="nc" id="L494">            System.out.println(&quot;Clipboard Content : &quot; + engine.getClipboardContents());</span>
+<span class="nc" id="L495">            System.out.println(&quot;Buffer Content    : &quot; + engine.getBufferContents());</span>
 
             // Update the editor's text field with the buffer contents
-<span class="nc" id="L455">            updateTextField(engine.getBufferContents());</span>
+<span class="nc" id="L498">            updateTextField(engine.getBufferContents());</span>
 
-<span class="nc" id="L457">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L500">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L459">            e.printStackTrace();</span>
-<span class="nc" id="L460">        }</span>
-<span class="nc" id="L461">    }</span>
+<span class="nc" id="L502">            e.printStackTrace();</span>
+<span class="nc" id="L503">        }</span>
+<span class="nc" id="L504">    }</span>
 
     /**
      * Displays a confirmation popup with the given message.
@@ -470,21 +513,21 @@ import com.fane.Back_End.packageV2.*;
      * @param confirmation The message to display in the confirmation popup.
      */
     private void ConfirmationPopup(String confirmation) {
-<span class="nc" id="L473">        Alert alert = new Alert(AlertType.CONFIRMATION);</span>
-<span class="nc" id="L474">        alert.setTitle(&quot;Confirmation&quot;);</span>
-<span class="nc" id="L475">        alert.setHeaderText(&quot;Execution succeeded!&quot;);</span>
-<span class="nc" id="L476">        alert.setContentText(confirmation);</span>
+<span class="nc" id="L516">        Alert alert = new Alert(AlertType.CONFIRMATION);</span>
+<span class="nc" id="L517">        alert.setTitle(&quot;Confirmation&quot;);</span>
+<span class="nc" id="L518">        alert.setHeaderText(&quot;Execution succeeded!&quot;);</span>
+<span class="nc" id="L519">        alert.setContentText(confirmation);</span>
 
         // Add the application logo to the dialog box
-<span class="nc" id="L479">        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();</span>
-<span class="nc" id="L480">        stage.getIcons().add(appIcon);</span>
+<span class="nc" id="L522">        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();</span>
+<span class="nc" id="L523">        stage.getIcons().add(appIcon);</span>
 
         // Set the OK button for the dialog
-<span class="nc" id="L483">        alert.getButtonTypes().setAll(ButtonType.OK);</span>
+<span class="nc" id="L526">        alert.getButtonTypes().setAll(ButtonType.OK);</span>
 
         // Wait for user confirmation
-<span class="nc" id="L486">        alert.showAndWait();</span>
-<span class="nc" id="L487">    }</span>
+<span class="nc" id="L529">        alert.showAndWait();</span>
+<span class="nc" id="L530">    }</span>
 
     
     /**
@@ -498,25 +541,25 @@ import com.fane.Back_End.packageV2.*;
     public void StartAction(ActionEvent event) {
 
         // Add the start command to the invoker
-<span class="nc" id="L501">        addCommand();</span>
+<span class="nc" id="L544">        addCommand();</span>
 
         try {
-<span class="nc bnc" id="L504" title="All 2 branches missed.">            if(recorder.isRecording() == false) {</span>
+<span class="nc bnc" id="L547" title="All 2 branches missed.">            if(recorder.isRecording() == false) {</span>
                 // Execute the start command
-<span class="nc" id="L506">                invoker.executeCommand(&quot;start&quot;);</span>
+<span class="nc" id="L549">                invoker.executeCommand(&quot;start&quot;);</span>
                 // Display a confirmation popup for the user
-<span class="nc" id="L508">                ConfirmationPopup(&quot;The editor starts recording your actions&quot;);</span>
+<span class="nc" id="L551">                ConfirmationPopup(&quot;The editor starts recording your actions&quot;);</span>
             }
             else{
                 // Display a alrt popup for the user
-<span class="nc" id="L512">                showAlert(&quot;Error&quot;, &quot;The editor has already started saving the actions&quot;);</span>
+<span class="nc" id="L555">                showAlert(&quot;Error&quot;, &quot;The editor has already started saving the actions&quot;);</span>
             }
 
-<span class="nc" id="L515">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L558">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L517">            e.printStackTrace();</span>
-<span class="nc" id="L518">        }</span>
-<span class="nc" id="L519">    }</span>
+<span class="nc" id="L560">            e.printStackTrace();</span>
+<span class="nc" id="L561">        }</span>
+<span class="nc" id="L562">    }</span>
 
     /**
      * Stops the recording of user actions in the editor.
@@ -529,25 +572,25 @@ import com.fane.Back_End.packageV2.*;
     public void StopAction(ActionEvent event) {
 
         // Add the stop command to the invoker
-<span class="nc" id="L532">        addCommand();</span>
+<span class="nc" id="L575">        addCommand();</span>
 
         try {
-<span class="nc bnc" id="L535" title="All 2 branches missed.">            if(recorder.isRecording() == true) {</span>
+<span class="nc bnc" id="L578" title="All 2 branches missed.">            if(recorder.isRecording() == true) {</span>
                 // Execute the stop command
-<span class="nc" id="L537">                invoker.executeCommand(&quot;stop&quot;);</span>
+<span class="nc" id="L580">                invoker.executeCommand(&quot;stop&quot;);</span>
                 // Display a confirmation popup for the user
-<span class="nc" id="L539">                ConfirmationPopup(&quot;The editor stops recording your actions&quot;);</span>
+<span class="nc" id="L582">                ConfirmationPopup(&quot;The editor stops recording your actions&quot;);</span>
             }
             else{
                 // Display a alert popup for the user
-<span class="nc" id="L543">                showAlert(&quot;Error&quot;, &quot;The editor doesn't recording your actions&quot;);</span>
+<span class="nc" id="L586">                showAlert(&quot;Error&quot;, &quot;The editor doesn't recording your actions&quot;);</span>
             }
 
-<span class="nc" id="L546">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L589">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L548">            e.printStackTrace();</span>
-<span class="nc" id="L549">        }</span>
-<span class="nc" id="L550">    }</span>
+<span class="nc" id="L591">            e.printStackTrace();</span>
+<span class="nc" id="L592">        }</span>
+<span class="nc" id="L593">    }</span>
 
     /**
      * Replays the recorded actions saved in the editor.
@@ -561,24 +604,72 @@ import com.fane.Back_End.packageV2.*;
     public void ReplayAction(ActionEvent event) {
 
         // Add the replay command to the invoker
-<span class="nc" id="L564">        addCommand();</span>
+<span class="nc" id="L607">        addCommand();</span>
 
         try {
             // Execute the replay command
-<span class="nc" id="L568">            invoker.executeCommand(&quot;replay&quot;);</span>
+<span class="nc" id="L611">            invoker.executeCommand(&quot;replay&quot;);</span>
 
             // Display a confirmation popup for the user
-<span class="nc" id="L571">            ConfirmationPopup(&quot;The save is replayed&quot;);</span>
+<span class="nc" id="L614">            ConfirmationPopup(&quot;The save is replayed&quot;);</span>
 
             // Update the editor's text field with the buffer contents
-<span class="nc" id="L574">            updateTextField(engine.getBufferContents());</span>
+<span class="nc" id="L617">            updateTextField(engine.getBufferContents());</span>
 
-<span class="nc" id="L576">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L619">        } catch (NumberFormatException e) {</span>
             // Handle conversion errors
-<span class="nc" id="L578">            e.printStackTrace();</span>
-<span class="nc" id="L579">        }</span>
-<span class="nc" id="L580">    }</span>
+<span class="nc" id="L621">            e.printStackTrace();</span>
+<span class="nc" id="L622">        }</span>
+<span class="nc" id="L623">    }</span>
 
+    /**
+     * Handles the action triggered by the undo button. Adds the replay command to the invoker,
+     * executes the &quot;undo&quot; command, and updates the editor's text field with the current buffer contents.
+     *
+     * @param event The ActionEvent triggered by the undo button.
+     */
+    public void UndoAction(ActionEvent event) {
 
+        // Add the undo command to the invoker
+<span class="nc" id="L634">        addCommand();</span>
+
+        try {
+            // Execute the undo command (one for the selection command, and the other for the action command)
+<span class="nc" id="L638">            invoker.executeCommand(&quot;undo&quot;);</span>
+<span class="nc" id="L639">            invoker.executeCommand(&quot;undo&quot;);</span>
+
+            // Update the editor's text field with the buffer contents
+<span class="nc" id="L642">            updateTextField(engine.getBufferContents());</span>
+
+<span class="nc" id="L644">        } catch (NumberFormatException e) {</span>
+            // Handle conversion errors
+<span class="nc" id="L646">            e.printStackTrace();</span>
+<span class="nc" id="L647">        }</span>
+<span class="nc" id="L648">    }</span>
+
+    /**
+     * Handles the action triggered by the redo button. Adds the replay command to the invoker,
+     * executes the &quot;redo&quot; command, and updates the editor's text field with the current buffer contents.
+     *
+     * @param event The ActionEvent triggered by the redo button.
+     */
+    public void RedoAction(ActionEvent event) {
+
+        // Add the redo command to the invoker
+<span class="nc" id="L659">        addCommand();</span>
+
+        try {
+            // Execute the redo command twice (one for the selection command, and the other for the action command)
+<span class="nc" id="L663">            invoker.executeCommand(&quot;redo&quot;);</span>
+<span class="nc" id="L664">            invoker.executeCommand(&quot;redo&quot;);</span>
+
+            // Update the editor's text field with the buffer contents
+<span class="nc" id="L667">            updateTextField(engine.getBufferContents());</span>
+
+<span class="nc" id="L669">        } catch (NumberFormatException e) {</span>
+            // Handle conversion errors
+<span class="nc" id="L671">            e.printStackTrace();</span>
+<span class="nc" id="L672">        }</span>
+<span class="nc" id="L673">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

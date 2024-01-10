@@ -1,11 +1,14 @@
 package com.fane.Back_End.packageV2;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
+import com.fane.Back_End.packageV3.*;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * The {@code Recorder} class is responsible for recording and replaying commands executed on an {@link Engine}.
@@ -23,7 +26,11 @@ public class Recorder {
     private List<Pair<Recordable, Memento>> history;
     private boolean isRecording = false;
     private boolean isReplaying = false;
+    private boolean isUndoing = false;
+    private boolean isRedoing = false;
     private Engine engine;
+    private Stack<Pair<Recordable, Memento>> undoStack;
+    private Stack<Pair<Recordable, Memento>> redoStack;
 
     /**
      * Constructs a {@code Recorder} with the specified {@link Engine}.
@@ -33,6 +40,8 @@ public class Recorder {
     public Recorder(Engine engine) {
         this.history = new ArrayList<>();
         this.engine = engine;
+        this.undoStack = new Stack<>();
+        this.redoStack = new Stack<>();
     }
 
     /**
@@ -75,6 +84,24 @@ public class Recorder {
     }
 
     /**
+     * Checks if the recorder is currently in undoing mode.
+     *
+     * @return {@code true} if undoing, {@code false} otherwise.
+     */
+    public boolean isUndoing() {
+        return isUndoing;
+    }
+
+    /**
+     * Checks if the recorder is currently in redoing mode.
+     *
+     * @return {@code true} if redoing, {@code false} otherwise.
+     */
+    public boolean isRedoing() {
+        return isRedoing;
+    }
+
+    /**
      * Replays the recorded commands and updates the state of the engine accordingly.
      */
     public void replay() {
@@ -97,9 +124,52 @@ public class Recorder {
      *
      * @param command The command to be saved.
      */
-    public void save(Recordable command) {
-        if (isRecording) {
+    public void saveForReplay(Recordable command) {
+        // Only save for replay if we're recording and not undoing, redoing, or
+        // replaying
+        if (isRecording && !isUndoing && !isRedoing && !isReplaying) {
             history.add(Pair.of(command, command.getMemento()));
+        }
+    }
+
+    /**
+     * Saves the provided command along with its memento to the undo stack.
+     *
+     * @param command The command to be saved.
+     */
+    public void save(Recordable command) {
+        // Only save if we're not undoing, redoing, or replaying
+        if (!isUndoing && !isRedoing && !isReplaying) {
+            undoStack.push(Pair.of(command, command.getMemento()));
+            redoStack.clear(); // Clear redo stack whenever a new command is executed
+        }
+    }
+
+    /**
+     * Undoes the last recorded command.
+     */
+    public void undo() {
+        if (!undoStack.isEmpty()) {
+            isUndoing = true; // Set isUndoing to true before undo operation
+            Pair<Recordable, Memento> lastCommand = undoStack.pop();
+            lastCommand.getLeft().setMemento(lastCommand.getRight());
+            lastCommand.getLeft().undo();
+            redoStack.push(lastCommand);
+            isUndoing = false; // Reset isUndoing after undo operation
+        }
+    }
+
+    /**
+     * Redoes the last undone command.
+     */
+    public void redo() {
+        if (!redoStack.isEmpty()) {
+            isRedoing = true; // Set isRedoing to true before redo operation
+            Pair<Recordable, Memento> lastUndoneCommand = redoStack.pop();
+            lastUndoneCommand.getLeft().setMemento(lastUndoneCommand.getRight());
+            lastUndoneCommand.getLeft().execute();
+            undoStack.push(lastUndoneCommand);
+            isRedoing = false; // Reset isRedoing after redo operation
         }
     }
 }

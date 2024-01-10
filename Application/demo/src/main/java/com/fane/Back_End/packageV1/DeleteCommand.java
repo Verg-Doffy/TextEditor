@@ -1,7 +1,11 @@
 package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
+
 
 /**
  * The {@code DeleteCommand} class represents a command for deleting selected text using an {@link Engine}.
@@ -18,6 +22,8 @@ public class DeleteCommand implements Recordable {
 
     private Engine engine;
     private Recorder recorder;
+    private Stack<ChangeSelectionMemento> selectionStack;
+    private Stack<String> deletedTextStack;
 
     /**
      * Constructs a {@code DeleteCommand} with references to the specified {@link Engine} and {@link Recorder}.
@@ -28,16 +34,45 @@ public class DeleteCommand implements Recordable {
     public DeleteCommand(Engine engine, Recorder recorder) {
         this.engine = engine;
         this.recorder = recorder;
+        this.selectionStack = new Stack<>();
+        this.deletedTextStack = new Stack<>();
     }
 
     /**
-     * Executes the delete operation by invoking the {@code delete()} method on the associated engine.
-     * Additionally, saves the command using the recorder to support recording functionality.
+     * Executes the delete command, capturing the current selection in the engine, performing the delete operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
+        if (!recorder.isReplaying() && !recorder.isUndoing() && !recorder.isRedoing() && !recorder.isRecording()) {
+            ChangeSelectionMemento currentSelection = new ChangeSelectionMemento(
+                    engine.getSelection().getBeginIndex(),
+                    engine.getSelection().getEndIndex());
+            selectionStack.push(currentSelection);
+            deletedTextStack.push(engine.getBufferContents().substring(engine.getSelection().getBeginIndex(),
+                    engine.getSelection().getEndIndex()));
+        }
         engine.delete();
+        recorder.saveForReplay(this);
         recorder.save(this);
+    }
+
+    /**
+     * Undoes the delete command by restoring the selection and inserting the deleted text back to the buffer.
+     */
+    @Override
+    public void undo() {
+        if (!selectionStack.isEmpty() && !deletedTextStack.isEmpty()) {
+            ChangeSelectionMemento prevSelection = selectionStack.pop();
+            engine.getSelection().setBeginIndex(prevSelection.getBeginIndex());
+            engine.getSelection().setEndIndex(prevSelection.getBeginIndex());
+
+            engine.insert(deletedTextStack.pop());
+
+            // Restore the selection state
+            engine.getSelection().setBeginIndex(prevSelection.getBeginIndex());
+            engine.getSelection().setEndIndex(prevSelection.getEndIndex());
+        }
     }
 
     /**

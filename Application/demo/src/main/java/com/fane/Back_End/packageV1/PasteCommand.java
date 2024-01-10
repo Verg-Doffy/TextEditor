@@ -1,7 +1,11 @@
 package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
+
 
 /**
  * The {@code PasteCommand} class represents a command for pasting content from the clipboard into an {@link Engine}.
@@ -18,6 +22,9 @@ public class PasteCommand implements Recordable {
 
     private Engine engine;
     private Recorder recorder;
+    private Stack<ChangeSelectionMemento> selectionStack;
+    private Stack<String> clipboardBeforePasteStack;
+    private Stack<Integer> pastedTextLengthStack;
 
     /**
      * Constructs a {@code PasteCommand} with references to the specified {@link Engine} and {@link Recorder}.
@@ -28,16 +35,53 @@ public class PasteCommand implements Recordable {
     public PasteCommand(Engine engine, Recorder recorder) {
         this.engine = engine;
         this.recorder = recorder;
+        this.selectionStack = new Stack<>();
+        this.clipboardBeforePasteStack = new Stack<>();
+        this.pastedTextLengthStack = new Stack<>();
     }
 
     /**
-     * Executes the paste operation by invoking the {@code pasteClipboard()} method on the associated engine.
-     * Additionally, saves the command using the recorder to support recording functionality.
+     * Executes the paste command, capturing the current state before pasting, performing the paste operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
+        // Save the current state before pasting unless replaying, undoing, redoing, or
+        // recording
+        if (!recorder.isReplaying() && !recorder.isUndoing() && !recorder.isRedoing() && !recorder.isRecording()) {
+            Selection selection = engine.getSelection();
+            selectionStack.push(new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex()));
+            clipboardBeforePasteStack.push(engine.getClipboardContents());
+        }
+
+        // Perform the paste operation
+        int selectionStart = engine.getSelection().getBeginIndex();
         engine.pasteClipboard();
+        int selectionEnd = engine.getSelection().getEndIndex();
+        pastedTextLengthStack.push(selectionEnd - selectionStart);
+
+        recorder.saveForReplay(this);
         recorder.save(this);
+    }
+
+    /**
+     * Undoes the paste command by restoring the previous state and deleting the pasted text.
+     */
+    @Override
+    public void undo() {
+        if (!selectionStack.isEmpty() && !clipboardBeforePasteStack.isEmpty() && !pastedTextLengthStack.isEmpty()) {
+            ChangeSelectionMemento prevSelection = selectionStack.pop();
+            engine.getSelection().setBeginIndex(prevSelection.getBeginIndex());
+            engine.getSelection().setEndIndex(prevSelection.getEndIndex());
+
+            int pastedTextLength = pastedTextLengthStack.pop();
+            int pasteStartPosition = prevSelection.getBeginIndex();
+            engine.getSelection().setBeginIndex(pasteStartPosition);
+            engine.getSelection().setEndIndex(pasteStartPosition + pastedTextLength);
+            engine.delete();
+
+            engine.setClipboardContents(clipboardBeforePasteStack.pop());
+        }
     }
 
     /**

@@ -1,11 +1,13 @@
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\PasteCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\ChangeSelectionCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\Command.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV3\UndoCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_CutCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV0\SelectionImpl.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Recordable.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\StartCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV3\RedoCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\InsertMemento.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_Command.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_InsertCommand.java
@@ -15,6 +17,7 @@ C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Ap
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V1.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V2_PasteCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\CopyCommand.java
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V3.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageMain\MainTest_V0.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV1\CutCommand.java
 C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java\com\fane\Back_End\packageV2\Recorder.java

@@ -29,6 +29,7 @@ com.fane.Back_End.packageMain
 com.fane.Back_End.packageV0
 com.fane.Back_End.packageV1
 com.fane.Back_End.packageV2
+com.fane.Back_End.packageV3
 com.fane.Front_End
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageMain/MainTest_V0.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageMain/MainTest_V1.java'
@@ -39,6 +40,7 @@ com.fane.Front_End
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageMain/MainTest_V2_DeleteCommand.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageMain/MainTest_V2_InsertCommand.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageMain/MainTest_V2_PasteCommand.java'
+'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageMain/MainTest_V3.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV0/Engine.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV0/EngineImpl.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV0/Selection.java'
@@ -60,6 +62,8 @@ com.fane.Front_End
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV2/ReplayCommand.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV2/StartCommand.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV2/StopCommand.java'
+'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV3/RedoCommand.java'
+'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Back_End/packageV3/UndoCommand.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Front_End/SceneController.java'
 'C:/Users/moham/Desktop/MASTER MIAGE/1er Semestre/ACO/GithubCleanV1/TextEditor/Application/demo/src/main/java/com/fane/Front_End/Text_Editor.java'
 C:\Users\moham\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar = 1696334010542
@@ -77,24 +81,24 @@ C:\Users\moham\.m2\repository\org\openjfx\javafx-swing\21.0.1\javafx-swing-21.0.
 C:\Users\moham\.m2\repository\org\openjfx\javafx-swing\21.0.1\javafx-swing-21.0.1-win.jar = 1704311159103
 C:\Users\moham\.m2\repository\org\openjfx\javafx-web\21.0.1\javafx-web-21.0.1.jar = 1704311159091
 C:\Users\moham\.m2\repository\org\openjfx\javafx-web\21.0.1\javafx-web-21.0.1-win.jar = 1704311160003
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java = 1704854386692
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\allclasses-index.html = 1704855086956
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\allpackages-index.html = 1704855086967
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\copy.svg = 1704855087294
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\element-list = 1704855085475
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\help-doc.html = 1704855087246
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\index-all.html = 1704855087211
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\index.html = 1704855086793
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\link.svg = 1704855087308
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\member-search-index.js = 1704855087020
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\module-search-index.js = 1704855086974
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\overview-summary.html = 1704855087232
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\overview-tree.html = 1704855086775
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\package-search-index.js = 1704855086980
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\script.js = 1704855087288
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\search-page.js = 1704855087337
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\search.html = 1704855087222
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\search.js = 1704855087329
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\stylesheet.css = 1704855087265
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\tag-search-index.js = 1704855087028
-C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\type-search-index.js = 1704855087000
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\src\main\java = 1704855759034
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\allclasses-index.html = 1704866471168
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\allpackages-index.html = 1704866471181
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\copy.svg = 1704866471357
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\element-list = 1704866470522
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\help-doc.html = 1704866471330
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\index-all.html = 1704866471298
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\index.html = 1704866471118
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\link.svg = 1704866471374
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\member-search-index.js = 1704866471201
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\module-search-index.js = 1704866471185
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\overview-summary.html = 1704866471316
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\overview-tree.html = 1704866471109
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\package-search-index.js = 1704866471189
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\script.js = 1704866471351
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\search-page.js = 1704866471392
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\search.html = 1704866471303
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\search.js = 1704866471385
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\stylesheet.css = 1704866471345
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\tag-search-index.js = 1704866471204
+C:\Users\moham\Desktop\MASTER MIAGE\1er Semestre\ACO\GithubCleanV1\TextEditor\Application\demo\target\site\apidocs\type-search-index.js = 1704866471193

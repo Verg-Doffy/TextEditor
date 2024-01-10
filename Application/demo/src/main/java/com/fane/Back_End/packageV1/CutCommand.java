@@ -1,7 +1,10 @@
 package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
 
 /**
  * The {@code CutCommand} class represents a command for cutting selected text using an {@link Engine}.
@@ -18,7 +21,9 @@ public class CutCommand implements Recordable {
 
     private Engine engine;
     private Recorder recorder;
-    private ChangeSelectionMemento memento;
+    private Stack<ChangeSelectionMemento> selectionStack;
+    private Stack<String> removedTextStack;
+    private Stack<String> clipboardBeforeCutStack;
 
     /**
      * Constructs a {@code CutCommand} with references to the specified {@link Engine} and {@link Recorder}.
@@ -29,16 +34,47 @@ public class CutCommand implements Recordable {
     public CutCommand(Engine engine, Recorder recorder) {
         this.engine = engine;
         this.recorder = recorder;
+        this.selectionStack = new Stack<>();
+        this.removedTextStack = new Stack<>();
+        this.clipboardBeforeCutStack = new Stack<>();
     }
 
     /**
-     * Executes the cut operation by invoking the {@code cutSelectedText()} method on the associated engine.
-     * Additionally, saves the command using the recorder to support recording functionality.
+     * Executes the cut command, capturing the current selection in the engine, performing the cut operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
+        if (!recorder.isReplaying() && !recorder.isUndoing() && !recorder.isRedoing() && !recorder.isRecording()) {
+            Selection selection = engine.getSelection();
+            selectionStack.push(new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex()));
+            removedTextStack
+                    .push(engine.getBufferContents().substring(selection.getBeginIndex(), selection.getEndIndex()));
+            clipboardBeforeCutStack.push(engine.getClipboardContents());
+        }
         engine.cutSelectedText();
+        recorder.saveForReplay(this);
         recorder.save(this);
+    }
+
+    /**
+     * Undoes the cut command by restoring the selection, inserting the removed text back to the buffer,
+     * and restoring the clipboard to its state before the cut operation.
+     */
+    @Override
+    public void undo() {
+        if (!selectionStack.isEmpty() && !removedTextStack.isEmpty() && !clipboardBeforeCutStack.isEmpty()) {
+            ChangeSelectionMemento prevSelection = selectionStack.pop();
+            engine.getSelection().setBeginIndex(prevSelection.getBeginIndex());
+            engine.getSelection().setEndIndex(prevSelection.getEndIndex());
+
+            engine.insert(removedTextStack.pop());
+            engine.setClipboardContents(clipboardBeforeCutStack.pop());
+
+            // Restore the selection state
+            engine.getSelection().setBeginIndex(prevSelection.getBeginIndex());
+            engine.getSelection().setEndIndex(prevSelection.getEndIndex());
+        }
     }
 
     /**
@@ -48,8 +84,8 @@ public class CutCommand implements Recordable {
      */
     @Override
     public Memento getMemento() {
-        // Return the stored memento
-        return this.memento;
+        Selection selection = engine.getSelection();
+        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());
     }
 
     /**
@@ -61,17 +97,16 @@ public class CutCommand implements Recordable {
     @Override
     public void setMemento(Memento memento) {
         if (memento instanceof ChangeSelectionMemento) {
-            this.memento = (ChangeSelectionMemento) memento;
+            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;
             int currentBufferLength = engine.getBufferContents().length();
 
-            // Use the memento's begin and end indices to set the selection in the engine
-            if ((this.memento.getEndIndex() >= engine.getSelection().getBeginIndex())
-                    && (this.memento.getEndIndex() <= currentBufferLength)) {
-                engine.getSelection().setEndIndex(this.memento.getEndIndex());
-                engine.getSelection().setBeginIndex(this.memento.getBeginIndex());
-            } else if (this.memento.getEndIndex() < engine.getSelection().getBeginIndex()) {
-                engine.getSelection().setBeginIndex(this.memento.getBeginIndex());
-                engine.getSelection().setEndIndex(this.memento.getEndIndex());
+            if ((selectionMemento.getEndIndex() >= engine.getSelection().getBeginIndex())
+                    && (selectionMemento.getEndIndex() <= currentBufferLength)) {
+                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());
+                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());
+            } else if (selectionMemento.getEndIndex() < engine.getSelection().getBeginIndex()) {
+                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());
+                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());
             }
         }
     }

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InsertCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">InsertCommand.java</span></div><h1>InsertCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
+
 
 /**
  * The {@code InsertCommand} class represents a command for inserting text into an {@link Engine}.
@@ -13,13 +17,16 @@ import com.fane.Back_End.packageV2.*;
  * of the insert command.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class InsertCommand implements Recordable {
 
     private Engine engine;
     private Invoker inv;
     private Recorder recorder;
+    private Stack&lt;ChangeSelectionMemento&gt; selectionStack; // Utiliser une pile pour stocker les mementos
+    private Stack&lt;String&gt; clipboardStack; // Utiliser une pile pour stocker les états précédents du presse-papiers
+    private Stack&lt;String&gt; textToInsertStack; // Utiliser une pile pour stocker les textes à insérer
 
     /**
      * Constructs an {@code InsertCommand} with references to the specified {@link Engine}, {@link Invoker},
@@ -29,22 +36,71 @@ public class InsertCommand implements Recordable {
      * @param inv      The invoker providing the text to be inserted.
      * @param recorder The recorder used to save the command execution.
      */
-<span class="fc" id="L32">    public InsertCommand(Engine engine, Invoker inv, Recorder recorder) {</span>
-<span class="fc" id="L33">        this.engine = engine;</span>
-<span class="fc" id="L34">        this.inv = inv;</span>
-<span class="fc" id="L35">        this.recorder = recorder;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L39">    public InsertCommand(Engine engine, Invoker inv, Recorder recorder) {</span>
+<span class="fc" id="L40">        this.engine = engine;</span>
+<span class="fc" id="L41">        this.inv = inv;</span>
+<span class="fc" id="L42">        this.recorder = recorder;</span>
+<span class="fc" id="L43">        this.selectionStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L44">        this.clipboardStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L45">        this.textToInsertStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L46">    }</span>
 
     /**
-     * Executes the insert operation by invoking the {@code insert()} method on the associated engine
-     * with the text provided by the invoker. Additionally, saves the command using the recorder
-     * to support recording functionality.
+     * Executes the insert command, capturing the current state before insertion, performing the insert operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
-<span class="fc" id="L45">        engine.insert(inv.getText());</span>
-<span class="fc" id="L46">        recorder.save(this);</span>
-<span class="fc" id="L47">    }</span>
+<span class="pc bpc" id="L54" title="1 of 8 branches missed.">        if (!recorder.isReplaying() &amp;&amp; !recorder.isUndoing() &amp;&amp; !recorder.isRedoing() &amp;&amp; !recorder.isRecording()) {</span>
+            // Save the current state before insertion
+<span class="fc" id="L56">            ChangeSelectionMemento currentSelection = new ChangeSelectionMemento(</span>
+<span class="fc" id="L57">                    engine.getSelection().getBeginIndex(),</span>
+<span class="fc" id="L58">                    engine.getSelection().getEndIndex());</span>
+<span class="fc" id="L59">            selectionStack.push(currentSelection); // Push the memento</span>
+<span class="fc" id="L60">            clipboardStack.push(engine.getClipboardContents()); // Push the current clipboard state</span>
+<span class="fc" id="L61">            textToInsertStack.push(inv.getText()); // Push the text to be inserted</span>
+        }
+
+        // Perform the insertion
+<span class="fc" id="L65">        engine.insert(inv.getText());</span>
+
+        // Save the state for replay functionality
+<span class="fc" id="L68">        recorder.saveForReplay(this);</span>
+
+        // Save the state for undo and redo functionalities
+<span class="fc" id="L71">        recorder.save(this);</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Undoes the insert command by restoring the previous state and deleting the inserted text.
+     */
+    @Override
+    public void undo() {
+
+<span class="pc bpc" id="L80" title="2 of 6 branches missed.">        if (!selectionStack.isEmpty() &amp;&amp; !clipboardStack.isEmpty() &amp;&amp; !textToInsertStack.isEmpty()) {</span>
+            // Restore the previous state
+<span class="fc" id="L82">            ChangeSelectionMemento previousSelection = selectionStack.pop();</span>
+<span class="fc" id="L83">            String previousClipboardContent = clipboardStack.pop();</span>
+<span class="fc" id="L84">            String previousTextToInsert = textToInsertStack.pop();</span>
+
+            // Restore the clipboard state
+<span class="fc" id="L87">            engine.setClipboardContents(previousClipboardContent);</span>
+
+            // Perform the deletion
+<span class="fc" id="L90">            int insertPosition = previousSelection.getBeginIndex();</span>
+<span class="fc" id="L91">            int bufferLength = engine.getBufferContents().length();</span>
+<span class="fc" id="L92">            int insertedTextLength = previousTextToInsert.length();</span>
+<span class="fc" id="L93">            int endPosition = Math.min(insertPosition + insertedTextLength, bufferLength);</span>
+
+<span class="fc" id="L95">            engine.getSelection().setBeginIndex(insertPosition);</span>
+<span class="fc" id="L96">            engine.getSelection().setEndIndex(endPosition);</span>
+<span class="fc" id="L97">            engine.delete();</span>
+
+            // Restore the selection state
+<span class="fc" id="L100">            engine.getSelection().setBeginIndex(previousSelection.getBeginIndex());</span>
+<span class="fc" id="L101">            engine.getSelection().setEndIndex(previousSelection.getEndIndex());</span>
+        }
+<span class="fc" id="L103">    }</span>
 
     /**
      * Retrieves a memento representing the state of the text to be inserted.
@@ -53,7 +109,7 @@ public class InsertCommand implements Recordable {
      */
     @Override
     public Memento getMemento() {
-<span class="fc" id="L56">        return new InsertMemento(inv.getText());</span>
+<span class="fc" id="L112">        return new InsertMemento(inv.getText());</span>
     }
 
     /**
@@ -64,10 +120,10 @@ public class InsertCommand implements Recordable {
      */
     @Override
     public void setMemento(Memento memento) {
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (memento instanceof InsertMemento) {</span>
-<span class="fc" id="L68">            InsertMemento insertMemento = (InsertMemento) memento;</span>
-<span class="fc" id="L69">            inv.setText(insertMemento.getTextToInsert());</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        if (memento instanceof InsertMemento) {</span>
+<span class="fc" id="L124">            InsertMemento insertMemento = (InsertMemento) memento;</span>
+<span class="fc" id="L125">            inv.setText(insertMemento.getTextToInsert());</span>
         }
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L127">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,6 +1,8 @@
 package com.fane.Back_End.packageV2;
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV1.*;
+import com.fane.Back_End.packageV3.*;
+
 
 /**
  * The {@code Recordable} interface represents an entity that can be recorded, undoable, and redoable.
@@ -18,4 +20,10 @@ public interface Recordable extends Command, Originator {
     // This interface will inherit execute from Command
     // and getMemento, setMemento from Originator.
 
+    /*
+     * Reverses the effects of the command execution by
+     * bringing the application back to the state before the command was executed.
+     **/
+
+     void undo();
 }

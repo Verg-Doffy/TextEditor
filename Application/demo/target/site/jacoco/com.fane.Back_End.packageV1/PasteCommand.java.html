@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PasteCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.fane.Back_End.packageV1</a> &gt; <span class="el_source">PasteCommand.java</span></div><h1>PasteCommand.java</h1><pre class="source lang-java linenums">package com.fane.Back_End.packageV1;
 
+import java.util.Stack;
+
 import com.fane.Back_End.packageV0.*;
 import com.fane.Back_End.packageV2.*;
+import com.fane.Back_End.packageV3.*;
+
 
 /**
  * The {@code PasteCommand} class represents a command for pasting content from the clipboard into an {@link Engine}.
@@ -12,12 +16,15 @@ import com.fane.Back_End.packageV2.*;
  * the state of the selection during the execution of the paste command.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class PasteCommand implements Recordable {
 
     private Engine engine;
     private Recorder recorder;
+    private Stack&lt;ChangeSelectionMemento&gt; selectionStack;
+    private Stack&lt;String&gt; clipboardBeforePasteStack;
+    private Stack&lt;Integer&gt; pastedTextLengthStack;
 
     /**
      * Constructs a {@code PasteCommand} with references to the specified {@link Engine} and {@link Recorder}.
@@ -25,20 +32,57 @@ public class PasteCommand implements Recordable {
      * @param engine   The engine responsible for text operations.
      * @param recorder The recorder used to save the command execution.
      */
-<span class="fc" id="L28">    public PasteCommand(Engine engine, Recorder recorder) {</span>
-<span class="fc" id="L29">        this.engine = engine;</span>
-<span class="fc" id="L30">        this.recorder = recorder;</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L35">    public PasteCommand(Engine engine, Recorder recorder) {</span>
+<span class="fc" id="L36">        this.engine = engine;</span>
+<span class="fc" id="L37">        this.recorder = recorder;</span>
+<span class="fc" id="L38">        this.selectionStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L39">        this.clipboardBeforePasteStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L40">        this.pastedTextLengthStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L41">    }</span>
 
     /**
-     * Executes the paste operation by invoking the {@code pasteClipboard()} method on the associated engine.
-     * Additionally, saves the command using the recorder to support recording functionality.
+     * Executes the paste command, capturing the current state before pasting, performing the paste operation,
+     * and saving the command for undo and redo functionalities.
      */
     @Override
     public void execute() {
-<span class="fc" id="L39">        engine.pasteClipboard();</span>
-<span class="fc" id="L40">        recorder.save(this);</span>
-<span class="fc" id="L41">    }</span>
+        // Save the current state before pasting unless replaying, undoing, redoing, or
+        // recording
+<span class="pc bpc" id="L51" title="2 of 8 branches missed.">        if (!recorder.isReplaying() &amp;&amp; !recorder.isUndoing() &amp;&amp; !recorder.isRedoing() &amp;&amp; !recorder.isRecording()) {</span>
+<span class="fc" id="L52">            Selection selection = engine.getSelection();</span>
+<span class="fc" id="L53">            selectionStack.push(new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex()));</span>
+<span class="fc" id="L54">            clipboardBeforePasteStack.push(engine.getClipboardContents());</span>
+        }
+
+        // Perform the paste operation
+<span class="fc" id="L58">        int selectionStart = engine.getSelection().getBeginIndex();</span>
+<span class="fc" id="L59">        engine.pasteClipboard();</span>
+<span class="fc" id="L60">        int selectionEnd = engine.getSelection().getEndIndex();</span>
+<span class="fc" id="L61">        pastedTextLengthStack.push(selectionEnd - selectionStart);</span>
+
+<span class="fc" id="L63">        recorder.saveForReplay(this);</span>
+<span class="fc" id="L64">        recorder.save(this);</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Undoes the paste command by restoring the previous state and deleting the pasted text.
+     */
+    @Override
+    public void undo() {
+<span class="nc bnc" id="L72" title="All 6 branches missed.">        if (!selectionStack.isEmpty() &amp;&amp; !clipboardBeforePasteStack.isEmpty() &amp;&amp; !pastedTextLengthStack.isEmpty()) {</span>
+<span class="nc" id="L73">            ChangeSelectionMemento prevSelection = selectionStack.pop();</span>
+<span class="nc" id="L74">            engine.getSelection().setBeginIndex(prevSelection.getBeginIndex());</span>
+<span class="nc" id="L75">            engine.getSelection().setEndIndex(prevSelection.getEndIndex());</span>
+
+<span class="nc" id="L77">            int pastedTextLength = pastedTextLengthStack.pop();</span>
+<span class="nc" id="L78">            int pasteStartPosition = prevSelection.getBeginIndex();</span>
+<span class="nc" id="L79">            engine.getSelection().setBeginIndex(pasteStartPosition);</span>
+<span class="nc" id="L80">            engine.getSelection().setEndIndex(pasteStartPosition + pastedTextLength);</span>
+<span class="nc" id="L81">            engine.delete();</span>
+
+<span class="nc" id="L83">            engine.setClipboardContents(clipboardBeforePasteStack.pop());</span>
+        }
+<span class="nc" id="L85">    }</span>
 
     /**
      * Retrieves a memento representing the state of the selection in the associated engine.
@@ -47,8 +91,8 @@ public class PasteCommand implements Recordable {
      */
     @Override
     public Memento getMemento() {
-<span class="fc" id="L50">        Selection selection = engine.getSelection();</span>
-<span class="fc" id="L51">        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());</span>
+<span class="fc" id="L94">        Selection selection = engine.getSelection();</span>
+<span class="fc" id="L95">        return new ChangeSelectionMemento(selection.getBeginIndex(), selection.getEndIndex());</span>
     }
 
     /**
@@ -59,20 +103,20 @@ public class PasteCommand implements Recordable {
      */
     @Override
     public void setMemento(Memento memento) {
-<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
-<span class="fc" id="L63">            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;</span>
-<span class="fc" id="L64">            int currentBufferLength = engine.getBufferContents().length();</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (memento instanceof ChangeSelectionMemento) {</span>
+<span class="fc" id="L107">            ChangeSelectionMemento selectionMemento = (ChangeSelectionMemento) memento;</span>
+<span class="fc" id="L108">            int currentBufferLength = engine.getBufferContents().length();</span>
 
             // Use the memento's begin and end indices to set the selection in the engine
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">            if ((selectionMemento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
-<span class="pc bpc" id="L68" title="1 of 2 branches missed.">                    &amp;&amp; (selectionMemento.getEndIndex() &lt;= currentBufferLength)) {</span>
-<span class="fc" id="L69">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
-<span class="fc" id="L70">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">            } else if (selectionMemento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
-<span class="nc" id="L72">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
-<span class="nc" id="L73">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if ((selectionMemento.getEndIndex() &gt;= engine.getSelection().getBeginIndex())</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">                    &amp;&amp; (selectionMemento.getEndIndex() &lt;= currentBufferLength)) {</span>
+<span class="fc" id="L113">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
+<span class="fc" id="L114">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            } else if (selectionMemento.getEndIndex() &lt; engine.getSelection().getBeginIndex()) {</span>
+<span class="nc" id="L116">                engine.getSelection().setBeginIndex(selectionMemento.getBeginIndex());</span>
+<span class="nc" id="L117">                engine.getSelection().setEndIndex(selectionMemento.getEndIndex());</span>
             }
         }
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L120">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
