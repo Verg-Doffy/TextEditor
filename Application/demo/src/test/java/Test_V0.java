@@ -5,15 +5,24 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import com.fane.packageV0.*;
 
+/**
+ * JUnit tests for the {@link Engine} class in the {@code com.fane.packageV0} package.
+ */
 class Test_V0 {
 
     private Engine engine;
 
+    /**
+     * Set up the test environment before each test.
+     */
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         engine = new EngineImpl();
     }
 
+    /**
+     * Test case: Buffer must be empty after initialization.
+     */
     @Test
     @DisplayName("Buffer must be empty after initialisation")
     void getSelection() {
@@ -22,12 +31,18 @@ class Test_V0 {
         assertEquals("", engine.getBufferContents());
     }
 
+    /**
+     * Test case: Verify the correct content in the buffer after insertion.
+     */
     @Test
     void getBufferContents() {
         engine.insert("Hello, World!");
         assertEquals("Hello, World!", engine.getBufferContents());
     }
 
+    /**
+     * Test case: Verify the clipboard content after a cut operation.
+     */
     @Test
     void getClipboardContents() {
         // Cut text to clipboard
@@ -38,6 +53,9 @@ class Test_V0 {
         assertEquals("Hello", engine.getClipboardContents());
     }
 
+    /**
+     * Test case: Verify the correct buffer content after a cut operation.
+     */
     @Test
     void cutSelectedText() {
         engine.insert("Hello, World!");
@@ -47,6 +65,9 @@ class Test_V0 {
         assertEquals(", World!", engine.getBufferContents());
     }
 
+    /**
+     * Test case: Verify the correct behavior of copying selected text.
+     */
     @Test
     void copySelectedText() {
         engine.insert("Hello, World!");
@@ -57,6 +78,9 @@ class Test_V0 {
         assertEquals("Hello", engine.getClipboardContents()); // Clipboard should contain copied text
     }
 
+    /**
+     * Test case: Verify the correct behavior of pasting from the clipboard.
+     */
     @Test
     void pasteClipboard() {
         engine.insert("Hello, World!");
@@ -69,6 +93,9 @@ class Test_V0 {
         assertEquals("WorldHello, !", engine.getBufferContents());
     }
 
+    /**
+     * Test case: Verify the correct buffer content after a delete operation.
+     */
     @Test
     void deleteSelectedText() {
         // Cut text to clipboard
@@ -80,6 +107,9 @@ class Test_V0 {
         // vérifier que l'index a été mis a jour
     }
 
+    /**
+     * Test case: Verify that setting beginIndex to an invalid value throws IndexOutOfBoundsException.
+     */
     @Test
     @DisplayName("setBeginIndex should throw IndexOutOfBoundsException when set to less than bufferBeginIndex")
     void testSetBeginIndex_LessThanBufferBeginIndex() {
@@ -89,6 +119,9 @@ class Test_V0 {
         });
     }
 
+    /**
+     * Test case: Verify that setting beginIndex to an invalid value throws IndexOutOfBoundsException.
+     */
     @Test
     @DisplayName("setBeginIndex should throw IndexOutOfBoundsException when set to more than endIndex")
     void testSetBeginIndex_MoreThanEndIndex() {
@@ -99,6 +132,9 @@ class Test_V0 {
         });
     }
 
+    /**
+     * Test case: Verify that setting endIndex to an invalid value throws IndexOutOfBoundsException.
+     */
     @Test
     @DisplayName("setEndIndex should throw IndexOutOfBoundsException when set to less than bufferBeginIndex")
     void testSetEndIndex_LessThanBufferBeginIndex() {
@@ -108,6 +144,9 @@ class Test_V0 {
         });
     }
 
+    /**
+     * Test case: Verify that setting endIndex to an invalid value throws IndexOutOfBoundsException.
+     */
     @Test
     @DisplayName("setEndIndex should throw IndexOutOfBoundsException when set to less than beginIndex")
     void testSetEndIndex_LessThanBeginIndex() {

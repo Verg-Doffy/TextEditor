@@ -1,12 +1,21 @@
 package com.fane.packageV0;
 
+/**
+ * Main API for the text editing engine
+ *
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 0.0
+ */
+
 public class EngineImpl implements Engine {
 
     private Selection selection;
     private String clipboard;
     private StringBuilder buffer = new StringBuilder();
 
-    // Constructors
+    /**
+     * Constructor method of the class EngineImpl
+     */
     public EngineImpl() {
         this.selection = new SelectionImpl(buffer);
         this.clipboard = "";
@@ -51,10 +60,11 @@ public class EngineImpl implements Engine {
     public void cutSelectedText() {
         int beginIndex = selection.getBeginIndex();
         int endIndex = selection.getEndIndex();
-        // valid
-        clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard
-        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer
-        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
+        if (beginIndex != endIndex) {
+            clipboard = buffer.substring(beginIndex, endIndex); // Copy selected text to clipboard
+            buffer.delete(beginIndex, endIndex); // Remove selected text from buffer
+            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
+        }
     }
 
     /**
@@ -105,8 +115,10 @@ public class EngineImpl implements Engine {
     public void delete() {
         int beginIndex = selection.getBeginIndex();
         int endIndex = selection.getEndIndex();
-        buffer.delete(beginIndex, endIndex); // Remove selected text from buffer
-        selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
-
+        if (beginIndex != endIndex) {
+            buffer.delete(beginIndex, endIndex); // Remove selected text from buffer
+            selection.setEndIndex(beginIndex); // Move selection to the beginning of the removed text
+        }
     }
+
 }

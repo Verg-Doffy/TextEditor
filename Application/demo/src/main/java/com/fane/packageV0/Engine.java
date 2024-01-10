@@ -3,8 +3,8 @@ package com.fane.packageV0;
 /**
  * Main API for the text editing engine
  *
- * @author plouzeau
- * @version 1.0
+ * @author Mohamed AL AFTAN Djakaridja FANE
+ * @version 0.0
  */
 
 public interface Engine {
@@ -61,4 +61,5 @@ public interface Engine {
      * Removes the contents of the selection in the buffer
      */
     void delete();
+
 }
