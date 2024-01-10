@@ -14,14 +14,11 @@ import com.fane.Back_End.packageV2.*;
  * copy, and finally replaying the recorded actions. The program outputs the clipboard contents
  * at different stages to verify the effectiveness of the CopyCommand.
  *
- * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see com.fane.Back_End.packageV2
  */
 
-<span class="nc" id="L24">public class MainTest_V2_CopyCommand {</span>
+<span class="nc" id="L21">public class MainTest_V2_CopyCommand {</span>
         /**
          * The main method that serves as the entry point for the test program.
          *
@@ -31,65 +28,65 @@ import com.fane.Back_End.packageV2.*;
 
                 // Create the main components
 
-<span class="nc" id="L34">                Engine engine = new EngineImpl();</span>
-<span class="nc" id="L35">                Recorder recorder = new Recorder(engine);</span>
-<span class="nc" id="L36">                Invoker invoker = new Invoker(recorder);</span>
+<span class="nc" id="L31">                Engine engine = new EngineImpl();</span>
+<span class="nc" id="L32">                Recorder recorder = new Recorder(engine);</span>
+<span class="nc" id="L33">                Invoker invoker = new Invoker(recorder);</span>
 
                 // Add commands to the invoker
-<span class="nc" id="L39">                invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker, recorder));</span>
-<span class="nc" id="L40">                invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker, recorder));</span>
-<span class="nc" id="L41">                invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine, recorder));</span>
-<span class="nc" id="L42">                invoker.addCommand(&quot;cut&quot;, new CutCommand(engine, recorder));</span>
-<span class="nc" id="L43">                invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine, recorder));</span>
-<span class="nc" id="L44">                invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine, recorder));</span>
-<span class="nc" id="L45">                invoker.addCommand(&quot;start&quot;, new StartCommand(recorder));</span>
-<span class="nc" id="L46">                invoker.addCommand(&quot;stop&quot;, new StopCommand(recorder));</span>
-<span class="nc" id="L47">                invoker.addCommand(&quot;replay&quot;, new ReplayCommand(recorder));</span>
+<span class="nc" id="L36">                invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker, recorder));</span>
+<span class="nc" id="L37">                invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker, recorder));</span>
+<span class="nc" id="L38">                invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine, recorder));</span>
+<span class="nc" id="L39">                invoker.addCommand(&quot;cut&quot;, new CutCommand(engine, recorder));</span>
+<span class="nc" id="L40">                invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine, recorder));</span>
+<span class="nc" id="L41">                invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine, recorder));</span>
+<span class="nc" id="L42">                invoker.addCommand(&quot;start&quot;, new StartCommand(recorder));</span>
+<span class="nc" id="L43">                invoker.addCommand(&quot;stop&quot;, new StopCommand(recorder));</span>
+<span class="nc" id="L44">                invoker.addCommand(&quot;replay&quot;, new ReplayCommand(recorder));</span>
 
                 // Step 1: Put something in the buffer
-<span class="nc" id="L50">                invoker.setText(&quot;GlablagBlag&quot;);</span>
-<span class="nc" id="L51">                invoker.executeCommand(&quot;insert&quot;);</span>
-<span class="nc" id="L52">                System.out.println(&quot;Buffer after initial insert: &quot; + engine.getBufferContents()); // expected output:</span>
+<span class="nc" id="L47">                invoker.setText(&quot;GlablagBlag&quot;);</span>
+<span class="nc" id="L48">                invoker.executeCommand(&quot;insert&quot;);</span>
+<span class="nc" id="L49">                System.out.println(&quot;Buffer after initial insert: &quot; + engine.getBufferContents()); // expected output:</span>
                                                                                                   // GlablagBlag
 
-<span class="nc" id="L55">                invoker.setBeginIndex(0);</span>
-<span class="nc" id="L56">                invoker.setEndIndex(3);</span>
-<span class="nc" id="L57">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
-<span class="nc" id="L58">                invoker.executeCommand(&quot;copy&quot;);</span>
-<span class="nc" id="L59">                System.out.println(&quot;Clipboard content after not recorded copy: &quot; +</span>
-<span class="nc" id="L60">                                engine.getClipboardContents());</span>
+<span class="nc" id="L52">                invoker.setBeginIndex(0);</span>
+<span class="nc" id="L53">                invoker.setEndIndex(3);</span>
+<span class="nc" id="L54">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L55">                invoker.executeCommand(&quot;copy&quot;);</span>
+<span class="nc" id="L56">                System.out.println(&quot;Clipboard content after not recorded copy: &quot; +</span>
+<span class="nc" id="L57">                                engine.getClipboardContents());</span>
 
                 // Step 2: Start Recording
-<span class="nc" id="L63">                invoker.executeCommand(&quot;start&quot;);</span>
+<span class="nc" id="L60">                invoker.executeCommand(&quot;start&quot;);</span>
 
                 // Step 3: Perform Actions While Recording
-<span class="nc" id="L66">                invoker.setBeginIndex(7);</span>
-<span class="nc" id="L67">                invoker.setEndIndex(engine.getBufferContents().length());</span>
-<span class="nc" id="L68">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
-<span class="nc" id="L69">                invoker.executeCommand(&quot;copy&quot;);</span>
+<span class="nc" id="L63">                invoker.setBeginIndex(7);</span>
+<span class="nc" id="L64">                invoker.setEndIndex(engine.getBufferContents().length());</span>
+<span class="nc" id="L65">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L66">                invoker.executeCommand(&quot;copy&quot;);</span>
                 /*
                  * System.out.println(&quot;Buffer content after copy: &quot; +
                  * engine.getBufferContents());
                  */
-<span class="nc" id="L74">                System.out.println(&quot;Clipboard content after recorded copy: &quot; +</span>
-<span class="nc" id="L75">                                engine.getClipboardContents());</span>
+<span class="nc" id="L71">                System.out.println(&quot;Clipboard content after recorded copy: &quot; +</span>
+<span class="nc" id="L72">                                engine.getClipboardContents());</span>
 
                 // Step 4: Stop Recording
-<span class="nc" id="L78">                invoker.executeCommand(&quot;stop&quot;);</span>
+<span class="nc" id="L75">                invoker.executeCommand(&quot;stop&quot;);</span>
 
-<span class="nc" id="L80">                invoker.setBeginIndex(3);</span>
-<span class="nc" id="L81">                invoker.setEndIndex(7);</span>
-<span class="nc" id="L82">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
-<span class="nc" id="L83">                invoker.executeCommand(&quot;copy&quot;);</span>
-<span class="nc" id="L84">                System.out.println(&quot;Clipboard content after not recorded copy: &quot; +</span>
-<span class="nc" id="L85">                                engine.getClipboardContents());</span>
+<span class="nc" id="L77">                invoker.setBeginIndex(3);</span>
+<span class="nc" id="L78">                invoker.setEndIndex(7);</span>
+<span class="nc" id="L79">                invoker.executeCommand(&quot;changeSelection&quot;);</span>
+<span class="nc" id="L80">                invoker.executeCommand(&quot;copy&quot;);</span>
+<span class="nc" id="L81">                System.out.println(&quot;Clipboard content after not recorded copy: &quot; +</span>
+<span class="nc" id="L82">                                engine.getClipboardContents());</span>
 
                 // Step 5: Replay Recorded Actions
-<span class="nc" id="L88">                invoker.executeCommand(&quot;replay&quot;);</span>
-<span class="nc" id="L89">                System.out.println(&quot;Clipboard content after replay: &quot; +</span>
-<span class="nc" id="L90">                                engine.getClipboardContents());</span>
+<span class="nc" id="L85">                invoker.executeCommand(&quot;replay&quot;);</span>
+<span class="nc" id="L86">                System.out.println(&quot;Clipboard content after replay: &quot; +</span>
+<span class="nc" id="L87">                                engine.getClipboardContents());</span>
 
-<span class="nc" id="L92">        }</span>
+<span class="nc" id="L89">        }</span>
 
 }
 

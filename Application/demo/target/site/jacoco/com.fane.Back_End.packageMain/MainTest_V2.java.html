@@ -12,79 +12,76 @@ import com.fane.Back_End.packageV2.*;
  * The example showcases the functionality of the implemented classes in the
  * The expected output of each action is also provided in comments for reference.
  * 
- * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0
- * @see com.fane.Back_End.packageV1
- * @see com.fane.Back_End.packageV2
  */
 
-<span class="nc" id="L22">public class MainTest_V2 {</span>
+<span class="nc" id="L19">public class MainTest_V2 {</span>
     public static void main(String[] args) {
         // Create the main components
 
-<span class="nc" id="L26">        Engine engine = new EngineImpl();</span>
-<span class="nc" id="L27">        Recorder recorder = new Recorder(engine);</span>
-<span class="nc" id="L28">        Invoker invoker = new Invoker(recorder);</span>
+<span class="nc" id="L23">        Engine engine = new EngineImpl();</span>
+<span class="nc" id="L24">        Recorder recorder = new Recorder(engine);</span>
+<span class="nc" id="L25">        Invoker invoker = new Invoker(recorder);</span>
 
         // Add commands to the invoker
-<span class="nc" id="L31">        invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker, recorder));</span>
-<span class="nc" id="L32">        invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker, recorder));</span>
-<span class="nc" id="L33">        invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine, recorder));</span>
-<span class="nc" id="L34">        invoker.addCommand(&quot;cut&quot;, new CutCommand(engine, recorder));</span>
-<span class="nc" id="L35">        invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine, recorder));</span>
-<span class="nc" id="L36">        invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine, recorder));</span>
-<span class="nc" id="L37">        invoker.addCommand(&quot;start&quot;, new StartCommand(recorder));</span>
-<span class="nc" id="L38">        invoker.addCommand(&quot;stop&quot;, new StopCommand(recorder));</span>
-<span class="nc" id="L39">        invoker.addCommand(&quot;replay&quot;, new ReplayCommand(recorder));</span>
+<span class="nc" id="L28">        invoker.addCommand(&quot;insert&quot;, new InsertCommand(engine, invoker, recorder));</span>
+<span class="nc" id="L29">        invoker.addCommand(&quot;changeSelection&quot;, new ChangeSelectionCommand(engine, invoker, recorder));</span>
+<span class="nc" id="L30">        invoker.addCommand(&quot;copy&quot;, new CopyCommand(engine, recorder));</span>
+<span class="nc" id="L31">        invoker.addCommand(&quot;cut&quot;, new CutCommand(engine, recorder));</span>
+<span class="nc" id="L32">        invoker.addCommand(&quot;paste&quot;, new PasteCommand(engine, recorder));</span>
+<span class="nc" id="L33">        invoker.addCommand(&quot;delete&quot;, new DeleteCommand(engine, recorder));</span>
+<span class="nc" id="L34">        invoker.addCommand(&quot;start&quot;, new StartCommand(recorder));</span>
+<span class="nc" id="L35">        invoker.addCommand(&quot;stop&quot;, new StopCommand(recorder));</span>
+<span class="nc" id="L36">        invoker.addCommand(&quot;replay&quot;, new ReplayCommand(recorder));</span>
 
         // Example usage
-<span class="nc" id="L42">        System.out.println(&quot;At beginning, Buffer content: &quot; + engine.getBufferContents()); // Expected output: At</span>
+<span class="nc" id="L39">        System.out.println(&quot;At beginning, Buffer content: &quot; + engine.getBufferContents()); // Expected output: At</span>
                                                                                            // beginning, Buffer content:
-<span class="nc" id="L44">        System.out.println(&quot;At beginning, Clipboard content: &quot; + engine.getClipboardContents()); // Expected output: At</span>
+<span class="nc" id="L41">        System.out.println(&quot;At beginning, Clipboard content: &quot; + engine.getClipboardContents()); // Expected output: At</span>
                                                                                                  // beginning, Clipboard
                                                                                                  // content:
 
-<span class="nc" id="L48">        invoker.executeCommand(&quot;start&quot;); // Start recording</span>
+<span class="nc" id="L45">        invoker.executeCommand(&quot;start&quot;); // Start recording</span>
 
-<span class="nc" id="L50">        invoker.setText(&quot;Helloworld&quot;);</span>
-<span class="nc" id="L51">        invoker.executeCommand(&quot;insert&quot;); // Insert &quot;Hello World&quot;</span>
-<span class="nc" id="L52">        System.out.println(&quot;Buffer content after insert: &quot; + engine.getBufferContents());// Expected output: Buffer</span>
+<span class="nc" id="L47">        invoker.setText(&quot;Helloworld&quot;);</span>
+<span class="nc" id="L48">        invoker.executeCommand(&quot;insert&quot;); // Insert &quot;Hello World&quot;</span>
+<span class="nc" id="L49">        System.out.println(&quot;Buffer content after insert: &quot; + engine.getBufferContents());// Expected output: Buffer</span>
                                                                                          // content after insert: Hello
                                                                                          // World
 
-<span class="nc" id="L56">        invoker.setBeginIndex(0);</span>
-<span class="nc" id="L57">        invoker.setEndIndex(5);</span>
-<span class="nc" id="L58">        invoker.executeCommand(&quot;changeSelection&quot;); // Change selection to first 5 chars</span>
+<span class="nc" id="L53">        invoker.setBeginIndex(0);</span>
+<span class="nc" id="L54">        invoker.setEndIndex(5);</span>
+<span class="nc" id="L55">        invoker.executeCommand(&quot;changeSelection&quot;); // Change selection to first 5 chars</span>
 
-<span class="nc" id="L60">        invoker.executeCommand(&quot;cut&quot;); // Copy selection</span>
-<span class="nc" id="L61">        System.out.println(&quot;Clipboard content after cut: &quot; + engine.getClipboardContents());// Expected output:</span>
+<span class="nc" id="L57">        invoker.executeCommand(&quot;cut&quot;); // Copy selection</span>
+<span class="nc" id="L58">        System.out.println(&quot;Clipboard content after cut: &quot; + engine.getClipboardContents());// Expected output:</span>
                                                                                             // Clipboard content after
                                                                                             // cut: Hello
 
-<span class="nc" id="L65">        invoker.setBeginIndex(5);</span>
-<span class="nc" id="L66">        invoker.setEndIndex(5);</span>
-<span class="nc" id="L67">        invoker.executeCommand(&quot;changeSelection&quot;); // Change selection to the buffer length</span>
+<span class="nc" id="L62">        invoker.setBeginIndex(5);</span>
+<span class="nc" id="L63">        invoker.setEndIndex(5);</span>
+<span class="nc" id="L64">        invoker.executeCommand(&quot;changeSelection&quot;); // Change selection to the buffer length</span>
 
-<span class="nc" id="L69">        invoker.executeCommand(&quot;paste&quot;); // Paste the copied text</span>
-<span class="nc" id="L70">        System.out.println(&quot;Buffer content after paste: &quot; + engine.getBufferContents());// Expected output: Buffer</span>
+<span class="nc" id="L66">        invoker.executeCommand(&quot;paste&quot;); // Paste the copied text</span>
+<span class="nc" id="L67">        System.out.println(&quot;Buffer content after paste: &quot; + engine.getBufferContents());// Expected output: Buffer</span>
                                                                                         // content after paste: Hello
                                                                                         // WorldHello
 
-<span class="nc" id="L74">        invoker.setBeginIndex(0);</span>
-<span class="nc" id="L75">        invoker.setEndIndex(5);</span>
-<span class="nc" id="L76">        invoker.executeCommand(&quot;changeSelection&quot;); // Change selection to the buffer length</span>
-<span class="nc" id="L77">        invoker.executeCommand(&quot;delete&quot;);</span>
-<span class="nc" id="L78">        System.out.println(&quot;Buffer content after delete: &quot; + engine.getBufferContents()); // Expected output: Hello</span>
+<span class="nc" id="L71">        invoker.setBeginIndex(0);</span>
+<span class="nc" id="L72">        invoker.setEndIndex(5);</span>
+<span class="nc" id="L73">        invoker.executeCommand(&quot;changeSelection&quot;); // Change selection to the buffer length</span>
+<span class="nc" id="L74">        invoker.executeCommand(&quot;delete&quot;);</span>
+<span class="nc" id="L75">        System.out.println(&quot;Buffer content after delete: &quot; + engine.getBufferContents()); // Expected output: Hello</span>
 
-<span class="nc" id="L80">        invoker.executeCommand(&quot;stop&quot;); // Stop recording</span>
+<span class="nc" id="L77">        invoker.executeCommand(&quot;stop&quot;); // Stop recording</span>
 
         // Print current buffer contents
-<span class="nc" id="L83">        System.out.println(&quot;Current Buffer: &quot; + engine.getBufferContents());// Expected output: Current Buffer: Hello</span>
+<span class="nc" id="L80">        System.out.println(&quot;Current Buffer: &quot; + engine.getBufferContents());// Expected output: Current Buffer: Hello</span>
                                                                             // WorldHello
 
         // Replay the recorded actions
-<span class="nc" id="L87">        invoker.executeCommand(&quot;replay&quot;);</span>
+<span class="nc" id="L84">        invoker.executeCommand(&quot;replay&quot;);</span>
 
         // Explanation: The replay command repeats the actions performed during
         // recording,
@@ -94,7 +91,7 @@ import com.fane.Back_End.packageV2.*;
         // When replaying we performed the same actions, so buffer will contain at the
         // end of replaying &quot;HelloHello&quot;
 
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L94">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

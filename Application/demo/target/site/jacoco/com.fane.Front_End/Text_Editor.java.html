@@ -16,16 +16,10 @@ import javafx.stage.Stage;
  * The Text Editor application provides a graphical user interface for editing and manipulating text.
  * It initializes the main menu GUI using JavaFX and sets up the application window with specified properties.
  *
- * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see javafx.application.Application
- * @see javafx.fxml.FXMLLoader
- * @see javafx.scene.Parent
- * @see javafx.scene.Scene
- * @see javafx.scene.image.Image
- * @see javafx.stage.Stage
  */
-<span class="nc" id="L28">public class Text_Editor extends Application {</span>
+<span class="nc" id="L22">public class Text_Editor extends Application {</span>
 
     /**
      * The main entry point for the Text Editor application.
@@ -35,19 +29,19 @@ import javafx.stage.Stage;
     @Override
     public void start(Stage primaryStage){
         try{
-<span class="nc" id="L38">            Parent principal = FXMLLoader.load(getClass().getResource(&quot;/fxml/Main_Menu.fxml&quot;));</span>
-<span class="nc" id="L39">            Scene scene = new Scene(principal);</span>
-<span class="nc" id="L40">            primaryStage.setScene(scene);</span>
-<span class="nc" id="L41">            primaryStage.setTitle(&quot;Text-Editor&quot;);</span>
-<span class="nc" id="L42">            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(&quot;/img/logo_app.png&quot;)));</span>
+<span class="nc" id="L32">            Parent principal = FXMLLoader.load(getClass().getResource(&quot;/fxml/Main_Menu.fxml&quot;));</span>
+<span class="nc" id="L33">            Scene scene = new Scene(principal);</span>
+<span class="nc" id="L34">            primaryStage.setScene(scene);</span>
+<span class="nc" id="L35">            primaryStage.setTitle(&quot;Text-Editor&quot;);</span>
+<span class="nc" id="L36">            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(&quot;/img/logo_app.png&quot;)));</span>
 
-<span class="nc" id="L44">            primaryStage.setResizable(false);</span>
-<span class="nc" id="L45">            primaryStage.show();</span>
+<span class="nc" id="L38">            primaryStage.setResizable(false);</span>
+<span class="nc" id="L39">            primaryStage.show();</span>
 
-<span class="nc" id="L47">        } catch(Exception e) {</span>
-<span class="nc" id="L48">            e.printStackTrace();</span>
-<span class="nc" id="L49">        }</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L41">        } catch(Exception e) {</span>
+<span class="nc" id="L42">            e.printStackTrace();</span>
+<span class="nc" id="L43">        }</span>
+<span class="nc" id="L44">    }</span>
 
     /**
      * The main method that launches the Text Editor application.
@@ -55,7 +49,7 @@ import javafx.stage.Stage;
      * @param args Command line arguments (not used in this application).
      */
     public static void main(String[] args) {
-<span class="nc" id="L58">        Application.launch(args);</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L52">        Application.launch(args);</span>
+<span class="nc" id="L53">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

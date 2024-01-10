@@ -9,11 +9,8 @@ import com.fane.Back_End.packageV1.*;
  * The replay command executes the replay operation on the associated recorder, updating the state of the engine
  * based on the recorded history of commands.
  *
- * @author Mohamed AL AFTAN &amp; Djakaridja FANE
+ * @author Mohamed AL AFTAN Djakaridja FANE
  * @version 1.0
- * @see com.fane.Back_End.packageV0.Recordable
- * @see com.fane.Back_End.packageV0.Recorder
- * @see com.fane.Back_End.packageV2.Command
  */
 public class ReplayCommand implements Command {
 
@@ -24,9 +21,9 @@ public class ReplayCommand implements Command {
      *
      * @param recorder The recorder associated with this replay command.
      */
-<span class="fc" id="L27">    public ReplayCommand(Recorder recorder) {</span>
-<span class="fc" id="L28">        this.recorder = recorder;</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L24">    public ReplayCommand(Recorder recorder) {</span>
+<span class="fc" id="L25">        this.recorder = recorder;</span>
+<span class="fc" id="L26">    }</span>
 
     /**
      * Executes the replay operation on the associated recorder, updating the state of the engine
@@ -34,7 +31,7 @@ public class ReplayCommand implements Command {
      */
     @Override
     public void execute() {
-<span class="fc" id="L37">        recorder.replay();</span>
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L34">        recorder.replay();</span>
+<span class="fc" id="L35">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
