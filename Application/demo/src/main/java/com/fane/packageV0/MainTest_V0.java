@@ -15,7 +15,7 @@ package com.fane.packageV0;
  * @version 1.0
  */
 
-public class MainTest_V0 {
+ public class MainTest_V0 {
 
     /**
      * The main method that serves as the entry point for the test program.
@@ -23,28 +23,28 @@ public class MainTest_V0 {
      * @param args The command-line arguments (unused in this context).
      */
     public static void main(String[] args) {
-        // Crée une instance de EngineImpl
+        // Create an instance of EngineImpl
         Engine engine = new EngineImpl();
 
-        // Insère du texte dans le buffer
+        // Insert text into the buffer
         engine.insert("Hello, World!");
         System.out.println("Buffer Contents: " + engine.getBufferContents());
 
-        // Sélectionne une partie du texte
+        // Select a part of the text
         Selection selection = engine.getSelection();
         selection.setBeginIndex(0);
         selection.setEndIndex(5);
 
-        // Copie le texte sélectionné dans le clipboard
+        // Copy the selected text to the clipboard
         engine.copySelectedText();
         System.out.println("Clipboard Contents: " + engine.getClipboardContents());
 
-        // Coupe le texte sélectionné
+        // Cut the selected text
         engine.cutSelectedText();
         System.out.println("Buffer Contents after Cut: " + engine.getBufferContents());
         System.out.println("Clipboard Contents after Cut: " + engine.getClipboardContents());
 
-        // Insère du texte depuis le clipboard
+        // Insert text from the clipboard
         System.out.println(selection.getBeginIndex());
         System.out.println(selection.getEndIndex());
         selection.setEndIndex(1);
@@ -52,7 +52,7 @@ public class MainTest_V0 {
         engine.pasteClipboard();
         System.out.println("Buffer Contents after Paste: " + engine.getBufferContents());
 
-        // Supprime le texte sélectionné
+        // Delete the selected text
         engine.delete();
         System.out.println("Buffer Contents after Delete: " + engine.getBufferContents());
 
@@ -63,12 +63,12 @@ public class MainTest_V0 {
 
         System.out.println("Buffer Contents: " + engine.getBufferContents());
 
-        // Sélectionne une partie du texte
+        // Select a part of the text
         Selection selection2 = engine.getSelection();
         selection2.setBeginIndex(6);
         selection2.setEndIndex(3);
 
-        // Copie le texte sélectionné dans le clipboard
+        // Copy the selected text to the clipboard
         engine.copySelectedText();
         System.out.println("Clipboard Contents: " + engine.getClipboardContents());
 
