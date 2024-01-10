@@ -15,7 +15,7 @@ import com.fane.Back_End.packageV2.*;
  * at different stages to verify the effectiveness of the CopyCommand.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 
 public class MainTest_V2_CopyCommand {

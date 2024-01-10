@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * in coordination with the Invoker, Engine, and Recorder components.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class V2_CopyCommandReplayingTest {
     private Engine engine;

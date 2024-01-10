@@ -11,7 +11,7 @@ import com.fane.Back_End.packageV1.*;
  * memento, allowing the object to capture and restore its internal state as needed.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public interface Originator {
 

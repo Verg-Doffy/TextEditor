@@ -12,7 +12,7 @@ import com.fane.Back_End.packageV2.*;
  * the state of the selection during the execution of the cut command.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class CutCommand implements Recordable {
 

@@ -13,7 +13,7 @@ import com.fane.Back_End.packageV2.*;
  * of the selection change command.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class ChangeSelectionCommand implements Recordable {
 

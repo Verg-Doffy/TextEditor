@@ -13,7 +13,7 @@ import com.fane.Back_End.packageV2.*;
  * The expected output of each action is also provided in comments for reference.
  * 
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 
 public class MainTest_V2 {

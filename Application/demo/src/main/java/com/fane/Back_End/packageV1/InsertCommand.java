@@ -13,7 +13,7 @@ import com.fane.Back_End.packageV2.*;
  * of the insert command.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class InsertCommand implements Recordable {
 

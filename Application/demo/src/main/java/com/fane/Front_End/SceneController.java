@@ -33,7 +33,7 @@ import com.fane.Back_End.packageV2.*;
  * This class is part of the Front_End package and serves as the controller for the GUI scenes.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 1.0
+ * @version 3.0
  */
 
 public class SceneController {

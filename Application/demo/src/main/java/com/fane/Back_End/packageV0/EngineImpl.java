@@ -4,7 +4,7 @@ package com.fane.Back_End.packageV0;
  * Main API for the text editing engine
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 
 public class EngineImpl implements Engine {

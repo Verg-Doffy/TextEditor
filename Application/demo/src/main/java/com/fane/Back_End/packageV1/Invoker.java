@@ -17,7 +17,7 @@ import java.util.Map;
  * implement the {@link Recordable} interface.
  *
  * @author Mohamed AL AFTAN Djakaridja FANE
- * @version 2.0
+ * @version 3.0
  */
 public class Invoker {
 
